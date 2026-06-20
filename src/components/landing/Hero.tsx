@@ -1,0 +1,73 @@
+import { Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { APPLY_ANCHOR, CURRICULUM_ANCHOR, COURSE } from "@/lib/landing-data";
+import heroImg from "@/assets/hero-agentic.jpg";
+
+const TRUST = ["Cumhurbaşkanlığı DDO", "Microsoft / BilgeAdam", "Cisco Academy"];
+
+export function Hero() {
+  return (
+    <section id="top" className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
+      <div className="container-page grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <span className="eyebrow">Agentic AI · Uzmanlık Programı</span>
+          <h1 className="display-1 mt-5 text-ink-900 text-balance">
+            Yapay zekayı izleyen değil, <span className="text-brand">kuran</span> taraf olun.
+          </h1>
+          <p className="lead mt-6 max-w-xl text-pretty">
+            Sıfırdan başlayarak gerçek projeler üzerinde çalışın. {COURSE.hours} saatlik uygulamalı
+            eğitimle yapay zekayı işinizde ve kariyerinizde kullanmayı öğrenin.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Button asChild variant="brand" size="xl">
+              <a href={APPLY_ANCHOR}>Başvuru Yap</a>
+            </Button>
+            <Button asChild variant="brandOutline" size="xl">
+              <a href={CURRICULUM_ANCHOR}>Müfredatı İncele</a>
+            </Button>
+          </div>
+
+          <div className="mt-10">
+            <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">
+              Eğitim verdiği kurumlardan bazıları
+            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
+              {TRUST.map((t) => (
+                <span key={t} className="text-sm font-semibold text-ink-700">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="relative">
+          <div className="relative mx-auto aspect-square w-full max-w-md rounded-3xl border border-border bg-secondary/40 p-4">
+            <img
+              src={heroImg}
+              alt="Agentic AI sistem mimarisi: merkezi modeli araçlara bağlayan otonom agent ağı"
+              width={1024}
+              height={1024}
+              className="h-full w-full rounded-2xl object-cover"
+            />
+            {/* Intro video placeholder — Maven/cohort convention. Replace with real intro video embed. */}
+            <button
+              type="button"
+              aria-label="Tanıtım videosunu oynat (yakında)"
+              className="group absolute bottom-7 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-border bg-background/90 py-2 pl-2 pr-5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5 hover:-translate-x-1/2"
+            >
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-brand text-brand-foreground">
+                <Play className="h-4 w-4 fill-current" />
+              </span>
+              <span className="text-left">
+                <span className="block text-sm font-semibold text-ink-900">Cihan'dan 60 sn</span>
+                <span className="block text-xs text-ink-500">Tanıtım videosu</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
