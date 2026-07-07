@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { CalendarDays, Hourglass, Users, CheckCircle2 } from "lucide-react";
+import { CalendarDays, Hourglass, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { COURSE } from "@/lib/landing-data";
@@ -81,19 +81,15 @@ export function FinalCta() {
               <div className="mt-1 text-sm font-semibold">{COURSE.applicationDeadline}</div>
             </div>
             <div className="rounded-xl border border-white/15 bg-white/5 p-4">
-              <Users className="h-5 w-5 text-brand-foreground/80" />
+              <CalendarDays className="h-5 w-5 text-brand-foreground/80" />
               <div className="mt-3 text-xs uppercase tracking-wide text-brand-foreground/60">
-                Kalan Kontenjan
+                Eğitim Günleri
               </div>
               <div className="mt-1 text-sm font-semibold">
-                {COURSE.seatsLeft} / {COURSE.seatsTotal}
+                Salı-Perşembe-Cumartesi 20.00 - 23.00
               </div>
             </div>
           </div>
-
-          <p className="mt-6 text-sm text-brand-foreground/70">
-            Son 30 günde {COURSE.preRegistrations}+ kişi ön kayıt oluşturdu.
-          </p>
         </div>
 
         <div className="rounded-3xl border border-white/15 bg-background p-6 text-foreground shadow-2xl md:p-8">

@@ -32,7 +32,7 @@ export function Footer() {
         </nav>
 
         <p className="text-xs text-ink-500">
-          © {new Date().getFullYear()} Cihan Özhan · Agentic AI Uzmanlık Programı
+          © {new Date().getFullYear()} Cihan Özhan · Agentic AI Masterclass
         </p>
       </div>
     </footer>

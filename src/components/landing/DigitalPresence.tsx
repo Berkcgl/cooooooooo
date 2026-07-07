@@ -8,7 +8,7 @@ export function DigitalPresence() {
         <div className="max-w-2xl">
           <span className="eyebrow">Dijital Varlık</span>
           <h2 className="display-2 mt-4 text-ink-900 text-balance">
-            İçerikleri 150.000+ kişi takip ediyor
+            300.000+ Öğrenci
           </h2>
           <p className="lead mt-4">
             Tek bir kursla değil, yıllara yayılan bir içerik ekosistemiyle karşınızdayım.
