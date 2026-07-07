@@ -2,6 +2,13 @@ import { PlayCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FREE_VIDEOS, YOUTUBE_CHANNEL } from "@/lib/landing-data";
 
+/** Derive a YouTube thumbnail URL from a watch?v= link; null for playlists/other. */
+function youtubeThumb(url: string): string | null {
+  const match = url.match(/[?&]v=([\w-]{11})/);
+  return match ? `https://i.ytimg.com/vi/${match[1]}/hqdefault.jpg` : null;
+}
+
+
 export function FreeLibrary() {
   return (
     <section className="bg-secondary/40 py-20 md:py-28">
