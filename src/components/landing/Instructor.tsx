@@ -14,7 +14,7 @@ export function Instructor() {
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink-900/70 to-transparent p-6">
               <p className="text-lg font-bold text-brand-foreground">Cihan Özhan</p>
               <p className="text-sm text-brand-foreground/80">
-                Offensive AI Security · Araştırmacı &amp; Geliştirici
+                Offensive AI Security · Girişimci &amp; Geliştirici
               </p>
             </div>
           </div>
