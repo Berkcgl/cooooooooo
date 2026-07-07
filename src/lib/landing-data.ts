@@ -47,11 +47,11 @@ export interface Metric {
 }
 
 export const METRICS: Metric[] = [
-  { value: "150.000+", label: "Toplam Takipçi / İzleyici (tüm platformlar)", verify: true },
-  { value: "12.000+", label: "Doğrudan Eğitim Alan Öğrenci", verify: true },
-  { value: "4.000+", label: "Saat Üretilmiş İçerik", verify: true },
-  { value: "5+", label: "Udemy Best Seller Eğitim", verify: true },
-  { value: "100+", label: "Kurumsal Eğitim & Proje", verify: true },
+  { value: "300.000+", label: "Öğrenci", verify: true },
+  { value: "7.000+", label: "Saat Üretilmiş İçerik", verify: true },
+  { value: "250+", label: "Etkinlik, Seminer ve Konferans", verify: true },
+  { value: "10+", label: "Udemy Best Seller Eğitim", verify: true },
+  { value: "250+", label: "Kurumsal Eğitim / Proje / Danışmanlık", verify: true },
   { value: "20+", label: "Yıl Sektör Tecrübesi", verify: true },
   { value: "16+", label: "Yıl Eğitmenlik Tecrübesi", verify: true },
 ];
