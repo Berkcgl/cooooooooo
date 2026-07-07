@@ -26,7 +26,7 @@ export function Curriculum() {
         </div>
 
         <div className="mt-12 rounded-2xl border border-border bg-card px-5 md:px-8">
-          <Accordion type="single" collapsible defaultValue="item-0">
+          <Accordion type="multiple" defaultValue={MODULES.map((_, i) => `item-${i}`)}>
             {MODULES.map((m, i) => (
               <AccordionItem key={m.number} value={`item-${i}`} className="border-border">
                 <AccordionTrigger className="py-6 hover:no-underline">
