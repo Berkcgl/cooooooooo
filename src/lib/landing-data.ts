@@ -280,20 +280,25 @@ export const INSTRUCTOR_TIMELINE: TimelineItem[] = [
   { period: "Konum", text: "İstanbul · New York" },
 ];
 
-/** Organizations associated with Cihan's talks/trainings — confirm usage rights. */
-export const ORGANIZATIONS: string[] = [
-  "Cumhurbaşkanlığı Dijital Dönüşüm Ofisi",
-  "Microsoft",
-  "BilgeAdam",
-  "Cisco Networking Academy",
-  "Google Developer Student Clubs",
-  "Boğaziçi Üniversitesi",
-  "Marmara Üniversitesi",
-  "Yıldız Teknik Üniversitesi",
-  "Bahçeşehir Üniversitesi",
-  "Beykoz Üniversitesi",
-  "Üsküdar Üniversitesi",
-  "İstinye Üniversitesi",
+/** Institutions where training / consulting was delivered — logo strip.
+ *  `logo` is filled in once the client-provided logo files are uploaded as assets. */
+export interface Institution {
+  name: string;
+  logo?: string;
+}
+
+export const INSTITUTIONS: Institution[] = [
+  { name: "Cumhurbaşkanlığı" },
+  { name: "Aselsan" },
+  { name: "Siemens" },
+  { name: "Yemeksepeti" },
+  { name: "Turkcell" },
+  { name: "N11" },
+  { name: "TUSAŞ (TEI)" },
+  { name: "İş Bankası" },
+  { name: "Akbank" },
+  { name: "Garanti Bankası" },
+  { name: "Türk Telekom" },
 ];
 
 export interface PresenceCard {
