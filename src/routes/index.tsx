@@ -57,6 +57,7 @@ function Index() {
         <FinalCta />
       </main>
       <Footer />
+      <BackToTop />
       <Toaster position="top-center" richColors />
     </>
   );
