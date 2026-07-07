@@ -400,23 +400,19 @@ export interface FaqItem {
 export const FAQ: FaqItem[] = [
   {
     q: "Eğitime katılmak için ön bilgi gerekiyor mu?",
-    a: "Temel bilgisayar kullanımı yeterli. Programlama bilmek avantaj sağlar ancak gerekli temel kavramlar eğitim içinde uygulamalı olarak anlatılır.",
+    a: "Temel seviye Python programlama dili bilgisi gerekiyor.",
   },
   {
-    q: "Eğitim formatı nedir — canlı mı, kayıt mı, kendi hızında mı?",
-    a: "Eğitim online ve canlı işlenir; tüm oturumların kaydı sizinle paylaşılır, böylece kendi hızınızda tekrar edebilirsiniz. (Müfredat bölümündeki format notu ile aynıdır.)",
+    q: "Eğitim formatı nedir?",
+    a: "Online ve canlı gerçekleşir.",
   },
   {
     q: "Eğitim ücreti nedir, taksit seçenekleri var mı?",
-    a: "Güncel ücret ve taksit seçenekleri başvuru görüşmesinde net olarak paylaşılır. Şeffaflık önceliğimizdir; kredi kartına taksit imkânı mevcuttur. (Yayın öncesi: kesin fiyat ve taksit koşullarını buraya ekleyin.)",
+    a: "Taksit imkânı mevcuttur. Standart eğitim ücreti 40.000 TL'dir; erken kayıt yaptıran ilk 30 öğrenci için ücret 35.000 TL olarak uygulanır.",
   },
   {
-    q: "İade / garanti politikası nedir?",
-    a: "İlk canlı oturumdan sonraki belirli bir süre içinde eğitimin size uygun olmadığını düşünürseniz koşulsuz iade hakkınız vardır. (Yayın öncesi: kesin iade süresi ve koşullarını buraya ekleyin.)",
-  },
-  {
-    q: "Sertifika veriliyor mu?",
-    a: "Programı ve bitirme projesini tamamlayan katılımcılara katılım sertifikası verilir.",
+    q: "Eğitim günleri ve saatleri nedir?",
+    a: "Eğitimler Salı, Perşembe ve Cumartesi günleri 20.00 - 23.00 saatleri arasında canlı olarak işlenir.",
   },
   {
     q: "Başvuru nasıl ilerliyor?",
