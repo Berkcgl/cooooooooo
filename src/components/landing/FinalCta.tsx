@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { CalendarDays, Hourglass, Users, CheckCircle2 } from "lucide-react";
+import { CalendarDays, Hourglass, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { COURSE } from "@/lib/landing-data";
