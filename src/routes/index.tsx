@@ -18,7 +18,7 @@ import { FinalCta } from "@/components/landing/FinalCta";
 import { Footer } from "@/components/landing/Footer";
 import { BackToTop } from "@/components/landing/BackToTop";
 
-const TITLE = "Agentic AI Uzmanlık Programı | Cihan Özhan";
+const TITLE = "Agentic AI Masterclass | Cihan Özhan";
 const DESC =
   "Sıfırdan başlayarak gerçek projeler üzerinde çalışın. 36+ saatlik uygulamalı eğitimle agentic AI sistemlerini kurmayı, ölçeklemeyi ve işinizde kullanmayı öğrenin.";
 
