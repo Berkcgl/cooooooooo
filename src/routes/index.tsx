@@ -16,6 +16,7 @@ import { Testimonials } from "@/components/landing/Testimonials";
 import { Faq } from "@/components/landing/Faq";
 import { FinalCta } from "@/components/landing/FinalCta";
 import { Footer } from "@/components/landing/Footer";
+import { BackToTop } from "@/components/landing/BackToTop";
 
 const TITLE = "Agentic AI Uzmanlık Programı | Cihan Özhan";
 const DESC =
