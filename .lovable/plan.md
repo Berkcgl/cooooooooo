@@ -1,53 +1,74 @@
+# Update Pass — Logos, Photo, Content & Form Backend
 
-# Landing Page Update — Agentic AI Masterclass
+## 1. Name logo everywhere (`logo_name.svg`)
 
-Scope: mostly frontend copy + presentation changes across existing landing components and `src/lib/landing-data.ts`. Two items depend on files you'll upload later (institution logos, intro video) — I'll build the UI now with clean placeholders that swap in instantly once assets arrive.
+- Upload `logo_name.svg` as a CDN asset (`lovable-assets`).
+- **Nav** (`Nav.tsx`): replace the "CÖ" blue square + "Cihan Özhan" text with the name-logo image (kept in the `#top` link, sized to nav height).
+- **Footer** (`Footer.tsx`): replace the "CÖ" square + text with the same logo.
 
-## Hero Section (`Hero.tsx`)
-- Eyebrow text: "Agentic AI · Uzmanlık Programı" → **"KONTENJAN SINIRLIDIR"**.
-- Headline: replace "Yapay zekayı izleyen değil, kuran taraf olun." with **"Agentic AI Masterclass"**, where **"Masterclass"** is rendered in the brand blue (`text-brand`) to stand out from "Agentic AI".
-- Video button ("Cihan'dan 60 sn"): clicking now opens a **pop-up modal** (shadcn `Dialog`) with a responsive video player instead of doing nothing / navigating. Since the intro video will be uploaded later, the modal will contain a `<video controls>` element pointed at a placeholder source; once you upload the video I'll drop in its URL. No inline autoplay, no navigation.
+## 2. Instructor photo (`co.svg`)
 
-## Institutions / Social Proof (new — replaces current `Organizations` marquee content)
-- New horizontal **logo-only marquee strip** for: Cumhurbaşkanlığı, Aselsan, Siemens, Yemeksepeti, Turkcell, N11, TUSAŞ (TEI), İş Bankası, Akbank, Garanti Bankası, Türk Telekom.
-- You chose to provide the logo files. The strip will be wired to render `<img>` logos from an `INSTITUTIONS` data array (name + logo path). Until you upload logos, each slot shows a neutral grayscale placeholder box sized like a logo (no extra descriptive text, logos only). When you send the files I'll upload them via the assets CLI and fill in the paths — no further layout work needed.
-- Keeps the seamless auto-scroll marquee with edge fades; hover-to-pause retained.
+- Upload `co.svg` as a CDN asset.
+- **Instructor** (`Instructor.tsx`): replace the "CÖ" initials placeholder block with the real photo (object-cover, keeps the name/role overlay).
+- Delete the caption: **"Foto placeholder — yayın öncesi gerçek görselle değiştirin."**
 
-## Stats Section (`landing-data.ts` → `METRICS`)
-Update to exactly:
-- **300.000+ Öğrenci**
-- **7.000+ Saat Üretilmiş İçerik**
-- **250+ Etkinlik, Seminer ve Konferans**
-- **10+ Udemy Best Seller Eğitim**
-- **250+ Kurumsal Eğitim / Proje / Danışmanlık**
-(plus existing "20+ Yıl Sektör Tecrübesi" / "16+ Yıl Eğitmenlik" kept as-is unless you want them dropped.)
+## 3. Institution section headings → "Eğitim verdiği kurumlar"
 
-## General UI
-- **Back-to-top button**: new fixed button, bottom-right, appears after scrolling down, smooth-scrolls to top. Accessible (aria-label "En başa dön", keyboard focusable). Added once in `index.tsx`.
-- **Curriculum accordion** (`Curriculum.tsx`): switch from single/collapsible with one open item to **all items expanded by default** (multiple-type accordion, all values open).
-- **Instructor** (`Instructor.tsx`): "Offensive AI Security · Araştırmacı & Geliştirici" → "…· **Girişimci & Geliştirici**".
-- **Training video thumbnails** (`FreeLibrary.tsx`): add cover thumbnail images to each video card. For YouTube `watch?v=` links I'll derive the real YouTube thumbnail automatically; for playlist links without a single video id I'll use a branded gradient cover with the play icon (current look) so no card is blank.
+- **Hero** (`Hero.tsx`): "Eğitim verdiği kurumlardan bazıları" → **"Eğitim verdiği kurumlar"**.
+- **Organizations** (`Organizations.tsx`): "Eğitim ve danışmanlık verdiği kurumlardan bazıları" → **"Eğitim verdiği kurumlar"**.
 
-## FAQ / SSS (`landing-data.ts` → `FAQ`, `Faq.tsx`)
-Overall refresh with these specifics:
-- Prerequisites answer → **"Temel seviye Python programlama dili bilgisi gerekiyor."**
-- Format question → **"Eğitim formatı nedir?"**, answer → **"Online ve canlı gerçekleşir."**
-- Pricing answer → taksit imkânı var; standart ücret **40.000 TL**, erken kayıt (ilk 30 öğrenci) **35.000 TL**.
-- **Remove** the refund policy (iade) and certificate (sertifika) items entirely.
-- Remaining items reworded for clarity/consistency.
+## 4. Institution logos (real images, no text wordmarks)
 
-## Digital Presence (`DigitalPresence.tsx`)
-- Heading "İçerikleri 150.000+ kişi takip ediyor" → **"300.000+ Öğrenci"**.
+Upload the 8 provided logos as CDN assets and wire them into the `INSTITUTIONS` array (`landing-data.ts`):
 
-## Registration Form (`FinalCta.tsx`)
-- Replace the "Kalan Kontenjan" stat card with **"EĞİTİM GÜNLERİ: Salı-Perşembe-Cumartesi 20.00 - 23.00"**.
-- Delete the line **"Son 30 günde 380+ kişi ön kayıt oluşturdu."**
+- Cumhurbaşkanlığı → `tc-cumhurbaskanligi-logo.png`
+- Aselsan → `aselsan-logo-mavi.svg`
+- Siemens → `siemens-logo.png`
+- Yemeksepeti → `Yemeksepeti_New_2021.svg`
+- Turkcell → `TURKCELL_YATAY_ERKEK_LOGO.webp`
+- N11 → `N11_Logo_2025.svg`
+- TUSAŞ (TEI) → `tusaşlogo.svg`
+- İş Bankası → `isbankDlogo.png`
 
-## Footer (`Footer.tsx`)
-- "Agentic AI Uzmanlık Programı" → **"Agentic AI Masterclass"**.
+Notes:
 
-## Technical Notes
-- New files: a `VideoModal`/dialog usage in `Hero.tsx` (using existing `@/components/ui/dialog`), a `BackToTop.tsx` component, and refactor of `Organizations.tsx` into an institutions logo strip.
-- Data changes centralized in `landing-data.ts` (METRICS, FAQ, new INSTITUTIONS array, remove preRegistrations/seatsLeft usage in CTA).
-- No backend changes. Accessibility (WCAG AA contrast, alt text, keyboard nav) preserved.
-- After you upload the **logo files** and **intro video**, I'll add them as assets and wire the paths in a quick follow-up.
+- **İş Bankası logo is white**, so it would be invisible on the light logo tile. Its tile will get a dark background so the white logo shows; the other tiles stay as-is.
+- **Akbank, Garanti Bankası, Türk Telekom**: no files yet → keep them in the list with the existing neutral placeholder box; they swap in instantly when you upload the files.
+- The marquee already renders `<img>` logos, so no layout changes are needed beyond filling in the paths.
+- Sizes should be same, it sholdn't be bigger or smaller compared to eachother.
+
+## 5. Real testimonials (name + quote only)
+
+Replace the 4 placeholder testimonials in `TESTIMONIALS` (`landing-data.ts`) with:
+
+- **Mahmut** — "İçimdeki başlama arzunu ne yapmam gerektiğini samimi bir dille anlatan eğitici. Kendisine teşekkür ederim."
+- **Büşra** — "Çok başarılı ve güzel bir kurs, emeğiniz için çok teşekkürler."
+- **M. Şükrü** — "Ufuk açıcı bir kurs."
+- **Yusuf** — "Çok faydalı bilgiler veriliyor. Teşekkür ederim."
+
+`Testimonials.tsx`: remove the `role` line and the initials avatar circle (no photos/titles), keep just the quote + name. Delete the footnote *" Yorumlar placeholder. İsim/foto/alıntı kullanımı için yazılı onay alınmalıdır."**
+
+## 6. Remove remaining placeholder texts
+
+- **DigitalPresence** (`DigitalPresence.tsx`): delete "Takipçi sayıları son güncelleme: … canlı çekilmelidir." (and the now-unused `LAST_UPDATED` import).
+- **WhyNow** (`landing-data.ts` + `WhyNow.tsx`): drop the three "Kaynak placeholder …" source lines — remove the `source` display from the card so no empty source note remains.
+
+## 7. Format text
+
+- `landing-data.ts` `COURSE.format`: "Online / Canlı + Kayıt erişimi (kendi hızınızda tekrar)" → **"Online / Canlı"**.
+
+## 8. See & store form applications (Lovable Cloud)
+
+Enable **Lovable Cloud** and wire the application form to persist submissions:
+
+- Create an `applications` table (name, phone, email, kvkk_consent, created_at) with RLS: allow public **insert** (anyone can apply), and **no public read**.
+- `FinalCta.tsx`: on submit, insert the row into `applications` (replacing the current "no backend" success-only behavior); keep the existing validation and success UI.
+- Add a **protected `/admin` page** (email/password login) that lists submissions so you can see who applied. Reads run through an authenticated, role-checked server function.
+- You'll also be able to view/export rows directly from the Cloud → Database view.
+- Optional (say the word): email you a notification on each new application.
+
+## Technical notes
+
+- Large embedded-image SVGs (`co.svg`, `logo_name.svg`) and other logos are uploaded via the assets CLI and referenced by CDN URL — no big binaries committed.
+- Accessibility preserved: every logo/photo gets descriptive `alt` text; contrast maintained (white İş Bankası logo on a dark tile).
+- No changes to curriculum, metrics, FAQ, or other sections beyond those listed.
