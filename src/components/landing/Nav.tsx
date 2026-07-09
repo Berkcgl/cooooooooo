@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { APPLY_ANCHOR } from "@/lib/landing-data";
+import logo from "@/assets/cihan-ozhan-logo.svg.asset.json";
 
 const NAV_LINKS = [
   { href: "#neden", label: "Neden Şimdi" },
@@ -30,12 +31,10 @@ export function Nav() {
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Ana menü">
-        <a href="#top" className="flex items-center gap-2 font-bold tracking-tight text-ink-900">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand text-brand-foreground text-sm font-black">
-            CÖ
-          </span>
-          <span className="hidden sm:inline">Cihan Özhan</span>
+        <a href="#top" className="flex items-center" aria-label="Cihan Özhan — ana sayfa">
+          <img src={logo.url} alt="Cihan Özhan" className="h-9 w-auto" />
         </a>
+
 
         <div className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((l) => (

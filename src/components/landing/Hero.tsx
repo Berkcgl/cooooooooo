@@ -42,8 +42,9 @@ export function Hero() {
 
           <div className="mt-10">
             <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">
-              Eğitim verdiği kurumlardan bazıları
+              Eğitim verdiği kurumlar
             </p>
+
             <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
               {TRUST.map((t) => (
                 <span key={t} className="text-sm font-semibold text-ink-700">

@@ -20,27 +20,14 @@ export function Testimonials() {
               <blockquote className="mt-4 flex-1 text-base leading-relaxed text-ink-900">
                 “{t.quote}”
               </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3">
-                {/* Replace initials block with a real, consented participant photo */}
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-brand-soft text-sm font-bold text-brand">
-                  {t.name
-                    .split(" ")
-                    .map((w) => w[0])
-                    .join("")
-                    .slice(0, 2)}
-                </span>
-                <span>
-                  <span className="block text-sm font-semibold text-ink-900">{t.name}</span>
-                  <span className="block text-xs text-ink-500">{t.role}</span>
-                </span>
+              <figcaption className="mt-6 text-sm font-semibold text-ink-900">
+                {t.name}
               </figcaption>
             </figure>
           ))}
         </div>
-        <p className="mt-6 text-[11px] text-ink-500">
-          * Yorumlar placeholder. İsim/foto/alıntı kullanımı için yazılı onay alınmalıdır.
-        </p>
       </div>
     </section>
   );
 }
+

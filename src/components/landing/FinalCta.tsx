@@ -3,6 +3,7 @@ import { CalendarDays, Hourglass, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { COURSE } from "@/lib/landing-data";
+import { supabase } from "@/integrations/supabase/client";
 import ctaBg from "@/assets/cta-dark.jpg";
 
 const TR_PHONE = /^[0-9\s()+-]{7,20}$/;
@@ -10,9 +11,10 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function FinalCta() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
@@ -33,11 +35,25 @@ export function FinalCta() {
       return;
     }
 
-    // No backend wired — surface success. Connect to Lovable Cloud or email to persist.
+    setSubmitting(true);
+    const { error } = await supabase.from("applications").insert({
+      name,
+      phone,
+      email,
+      kvkk_consent: kvkk,
+    });
+    setSubmitting(false);
+
+    if (error) {
+      toast.error("Başvuru gönderilemedi. Lütfen tekrar deneyin.");
+      return;
+    }
+
     setSubmitted(true);
     toast.success("Başvurunuz alındı! En kısa sürede sizinle iletişime geçeceğiz.");
     form.reset();
   }
+
 
   return (
     <section
@@ -154,9 +170,10 @@ export function FinalCta() {
                 {errors.kvkk && <p className="mt-1.5 text-xs text-destructive">{errors.kvkk}</p>}
               </div>
 
-              <Button type="submit" variant="brand" size="xl" className="w-full">
-                Başvuruyu Gönder
+              <Button type="submit" variant="brand" size="xl" className="w-full" disabled={submitting}>
+                {submitting ? "Gönderiliyor…" : "Başvuruyu Gönder"}
               </Button>
+
             </form>
           )}
         </div>

@@ -1,3 +1,5 @@
+import logo from "@/assets/cihan-ozhan-logo.svg.asset.json";
+
 const SOCIALS = [
   { label: "Udemy", url: "https://udemy.com/user/cihanozhan" },
   { label: "YouTube", url: "https://www.youtube.com/cihanozhan" },
@@ -10,12 +12,10 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-card">
       <div className="container-page flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
-        <div className="flex items-center gap-2 font-bold tracking-tight text-ink-900">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand text-brand-foreground text-sm font-black">
-            CÖ
-          </span>
-          Cihan Özhan
+        <div className="flex items-center">
+          <img src={logo.url} alt="Cihan Özhan" className="h-9 w-auto" />
         </div>
+
 
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2" aria-label="Sosyal medya">
           {SOCIALS.map((s) => (

@@ -21,6 +21,15 @@
  * ============================================================================
  */
 
+import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.png.asset.json";
+import aselsanLogo from "@/assets/logos/aselsan.svg.asset.json";
+import siemensLogo from "@/assets/logos/siemens.png.asset.json";
+import yemeksepetiLogo from "@/assets/logos/yemeksepeti.svg.asset.json";
+import turkcellLogo from "@/assets/logos/turkcell.webp.asset.json";
+import n11Logo from "@/assets/logos/n11.svg.asset.json";
+import tusasLogo from "@/assets/logos/tusas.svg.asset.json";
+import isbankasiLogo from "@/assets/logos/isbankasi.png.asset.json";
+
 export const LAST_UPDATED = "Haziran 2026";
 
 /** Single source of truth for the application target so every CTA behaves identically. */
@@ -32,7 +41,7 @@ export const COURSE = {
   // Headline is intentionally Turkish (primary audience is Türkiye-based).
   hours: "36+",
   modules: 8,
-  format: "Online / Canlı + Kayıt erişimi (kendi hızınızda tekrar)",
+  format: "Online / Canlı",
   cohortStart: "15 Eylül 2026",
   applicationDeadline: "5 Eylül 2026",
   seatsTotal: 40,
@@ -60,7 +69,6 @@ export interface WhyNowCard {
   stat: string;
   title: string;
   body: string;
-  source: string;
   verify?: boolean;
 }
 
@@ -69,21 +77,18 @@ export const WHY_NOW: WhyNowCard[] = [
     stat: "%75",
     title: "AI artık rekabet avantajı değil, temel beceri",
     body: "Bilgi çalışanlarının büyük çoğunluğu işlerinde yapay zeka araçlarını kullanmaya başladı. Kullanmayanlar geride kalıyor.",
-    source: "Kaynak placeholder — yayın öncesi güncel rapor ile değiştirin (ör. Microsoft Work Trend Index).",
     verify: true,
   },
   {
     stat: "%40",
     title: "İş süreçleri hızla otomatikleşiyor",
     body: "Mevcut iş görevlerinin önemli bir bölümü önümüzdeki yıllarda agentic AI sistemleriyle kısmen veya tamamen otomatize edilecek.",
-    source: "Kaynak placeholder — yayın öncesi güncel rapor ile değiştirin (ör. WEF Future of Jobs).",
     verify: true,
   },
   {
     stat: "1M+",
     title: "Yeni kariyer fırsatları ortaya çıkıyor",
     body: "AI mühendisliği ve agent geliştirme rolleri en hızlı büyüyen pozisyonlar arasında. Talep, yetkin uzman arzının çok üzerinde.",
-    source: "Kaynak placeholder — yayın öncesi güncel iş ilanı verisi ile değiştirin (ör. LinkedIn Jobs on the Rise).",
     verify: true,
   },
 ];
@@ -285,17 +290,19 @@ export const INSTRUCTOR_TIMELINE: TimelineItem[] = [
 export interface Institution {
   name: string;
   logo?: string;
+  /** Render on a dark tile (for logos that are white/transparent). */
+  dark?: boolean;
 }
 
 export const INSTITUTIONS: Institution[] = [
-  { name: "Cumhurbaşkanlığı" },
-  { name: "Aselsan" },
-  { name: "Siemens" },
-  { name: "Yemeksepeti" },
-  { name: "Turkcell" },
-  { name: "N11" },
-  { name: "TUSAŞ (TEI)" },
-  { name: "İş Bankası" },
+  { name: "Cumhurbaşkanlığı", logo: cumhurbaskanligiLogo.url },
+  { name: "Aselsan", logo: aselsanLogo.url },
+  { name: "Siemens", logo: siemensLogo.url },
+  { name: "Yemeksepeti", logo: yemeksepetiLogo.url },
+  { name: "Turkcell", logo: turkcellLogo.url },
+  { name: "N11", logo: n11Logo.url },
+  { name: "TUSAŞ (TEI)", logo: tusasLogo.url },
+  { name: "İş Bankası", logo: isbankasiLogo.url, dark: true },
   { name: "Akbank" },
   { name: "Garanti Bankası" },
   { name: "Türk Telekom" },
@@ -364,31 +371,26 @@ export const PUBLICATIONS: TabItem[] = [
 
 export interface Testimonial {
   name: string;
-  role: string;
   quote: string;
 }
 
-/** PLACEHOLDER testimonials — replace with real, consented quotes + photos. */
+/** Real student comments from Cihan Özhan's Udemy courses. */
 export const TESTIMONIALS: Testimonial[] = [
   {
-    name: "Katılımcı Adı",
-    role: "Yazılım Mühendisi",
-    quote: "Teorik bilgiyi gerçek projelere dökme şeklimi tamamen değiştirdi. İlk haftada çalışan bir agent çıkardım.",
+    name: "Mahmut",
+    quote: "İçimdeki başlama arzunu ne yapmam gerektiğini samimi bir dille anlatan eğitici. Kendisine teşekkür ederim.",
   },
   {
-    name: "Katılımcı Adı",
-    role: "Ürün Yöneticisi",
-    quote: "Cihan'ın anlatımı son derece net ve uygulamaya dönük. Ekibime AI süreçlerini ben kurdum.",
+    name: "Büşra",
+    quote: "Çok başarılı ve güzel bir kurs, emeğiniz için çok teşekkürler.",
   },
   {
-    name: "Katılımcı Adı",
-    role: "Girişimci",
-    quote: "Ürünümüze otonom bir AI katmanı ekledik ve operasyon maliyetimizi gözle görülür düşürdük.",
+    name: "M. Şükrü",
+    quote: "Ufuk açıcı bir kurs.",
   },
   {
-    name: "Katılımcı Adı",
-    role: "Veri Bilimci",
-    quote: "RAG ve multi-agent kısımları tek başına eğitimin ücretini fazlasıyla karşılıyor.",
+    name: "Yusuf",
+    quote: "Çok faydalı bilgiler veriliyor. Teşekkür ederim.",
   },
 ];
 

@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import { PRESENCE, LAST_UPDATED } from "@/lib/landing-data";
+import { PRESENCE } from "@/lib/landing-data";
 
 export function DigitalPresence() {
   return (
@@ -36,10 +36,6 @@ export function DigitalPresence() {
           ))}
         </div>
 
-        <p className="mt-6 text-xs text-ink-500">
-          Takipçi sayıları son güncelleme: {LAST_UPDATED}. İdeal olarak her platformun herkese açık
-          API/oEmbed'i ile canlı çekilmelidir.
-        </p>
       </div>
     </section>
   );

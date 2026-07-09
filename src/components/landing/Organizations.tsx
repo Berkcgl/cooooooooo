@@ -7,8 +7,9 @@ export function Organizations() {
     <section className="border-y border-border bg-secondary/40 py-16">
       <div className="container-page">
         <p className="text-center text-sm font-semibold uppercase tracking-wider text-ink-500">
-          Eğitim ve danışmanlık verdiği kurumlardan bazıları
+          Eğitim verdiği kurumlar
         </p>
+
       </div>
       <div className="group relative mt-8 overflow-hidden" aria-label="Eğitim verilen kurumlar">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent" />
@@ -17,13 +18,15 @@ export function Organizations() {
           {items.map((org, i) => (
             <div
               key={`${org.name}-${i}`}
-              className="grid h-16 w-40 shrink-0 place-items-center rounded-xl border border-border bg-card px-4"
+              className={`grid h-16 w-40 shrink-0 place-items-center rounded-xl border border-border px-4 ${
+                org.dark ? "bg-ink-900" : "bg-card"
+              }`}
             >
               {org.logo ? (
                 <img
                   src={org.logo}
                   alt={`${org.name} logosu`}
-                  className="max-h-9 w-auto max-w-full object-contain opacity-70 grayscale transition group-hover:opacity-100 group-hover:grayscale-0"
+                  className="max-h-8 w-auto max-w-[7rem] object-contain"
                   loading="lazy"
                 />
               ) : (
@@ -35,6 +38,7 @@ export function Organizations() {
               )}
             </div>
           ))}
+
         </div>
       </div>
     </section>
