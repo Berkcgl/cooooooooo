@@ -371,31 +371,26 @@ export const PUBLICATIONS: TabItem[] = [
 
 export interface Testimonial {
   name: string;
-  role: string;
   quote: string;
 }
 
-/** PLACEHOLDER testimonials — replace with real, consented quotes + photos. */
+/** Real student comments from Cihan Özhan's Udemy courses. */
 export const TESTIMONIALS: Testimonial[] = [
   {
-    name: "Katılımcı Adı",
-    role: "Yazılım Mühendisi",
-    quote: "Teorik bilgiyi gerçek projelere dökme şeklimi tamamen değiştirdi. İlk haftada çalışan bir agent çıkardım.",
+    name: "Mahmut",
+    quote: "İçimdeki başlama arzunu ne yapmam gerektiğini samimi bir dille anlatan eğitici. Kendisine teşekkür ederim.",
   },
   {
-    name: "Katılımcı Adı",
-    role: "Ürün Yöneticisi",
-    quote: "Cihan'ın anlatımı son derece net ve uygulamaya dönük. Ekibime AI süreçlerini ben kurdum.",
+    name: "Büşra",
+    quote: "Çok başarılı ve güzel bir kurs, emeğiniz için çok teşekkürler.",
   },
   {
-    name: "Katılımcı Adı",
-    role: "Girişimci",
-    quote: "Ürünümüze otonom bir AI katmanı ekledik ve operasyon maliyetimizi gözle görülür düşürdük.",
+    name: "M. Şükrü",
+    quote: "Ufuk açıcı bir kurs.",
   },
   {
-    name: "Katılımcı Adı",
-    role: "Veri Bilimci",
-    quote: "RAG ve multi-agent kısımları tek başına eğitimin ücretini fazlasıyla karşılıyor.",
+    name: "Yusuf",
+    quote: "Çok faydalı bilgiler veriliyor. Teşekkür ederim.",
   },
 ];
 
