@@ -170,9 +170,10 @@ export function FinalCta() {
                 {errors.kvkk && <p className="mt-1.5 text-xs text-destructive">{errors.kvkk}</p>}
               </div>
 
-              <Button type="submit" variant="brand" size="xl" className="w-full">
-                Başvuruyu Gönder
+              <Button type="submit" variant="brand" size="xl" className="w-full" disabled={submitting}>
+                {submitting ? "Gönderiliyor…" : "Başvuruyu Gönder"}
               </Button>
+
             </form>
           )}
         </div>
