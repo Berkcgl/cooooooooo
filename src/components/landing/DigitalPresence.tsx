@@ -1,5 +1,5 @@
 import { ExternalLink } from "lucide-react";
-import { PRESENCE, LAST_UPDATED } from "@/lib/landing-data";
+import { PRESENCE } from "@/lib/landing-data";
 
 export function DigitalPresence() {
   return (
