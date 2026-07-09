@@ -1,16 +1,18 @@
 import { ArrowUpRight } from "lucide-react";
 import { INSTRUCTOR_PROJECTS, INSTRUCTOR_TIMELINE } from "@/lib/landing-data";
+import portrait from "@/assets/cihan-ozhan.svg.asset.json";
 
 export function Instructor() {
   return (
     <section id="egitmen" className="py-20 md:py-28">
       <div className="container-page grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-        {/* Portrait — replace placeholder with a real, permissioned photo of Cihan Özhan */}
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-secondary to-accent">
-            <div className="absolute inset-0 grid place-items-center">
-              <span className="select-none text-7xl font-black tracking-tight text-brand/30">CÖ</span>
-            </div>
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-secondary">
+            <img
+              src={portrait.url}
+              alt="Cihan Özhan portresi"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink-900/70 to-transparent p-6">
               <p className="text-lg font-bold text-brand-foreground">Cihan Özhan</p>
               <p className="text-sm text-brand-foreground/80">
@@ -18,10 +20,8 @@ export function Instructor() {
               </p>
             </div>
           </div>
-          <p className="mt-3 text-center text-[11px] text-ink-500">
-            Foto placeholder — yayın öncesi gerçek görselle değiştirin.
-          </p>
         </div>
+
 
         <div>
           <span className="eyebrow">Eğitmen</span>
