@@ -290,17 +290,19 @@ export const INSTRUCTOR_TIMELINE: TimelineItem[] = [
 export interface Institution {
   name: string;
   logo?: string;
+  /** Render on a dark tile (for logos that are white/transparent). */
+  dark?: boolean;
 }
 
 export const INSTITUTIONS: Institution[] = [
-  { name: "Cumhurbaşkanlığı" },
-  { name: "Aselsan" },
-  { name: "Siemens" },
-  { name: "Yemeksepeti" },
-  { name: "Turkcell" },
-  { name: "N11" },
-  { name: "TUSAŞ (TEI)" },
-  { name: "İş Bankası" },
+  { name: "Cumhurbaşkanlığı", logo: cumhurbaskanligiLogo.url },
+  { name: "Aselsan", logo: aselsanLogo.url },
+  { name: "Siemens", logo: siemensLogo.url },
+  { name: "Yemeksepeti", logo: yemeksepetiLogo.url },
+  { name: "Turkcell", logo: turkcellLogo.url },
+  { name: "N11", logo: n11Logo.url },
+  { name: "TUSAŞ (TEI)", logo: tusasLogo.url },
+  { name: "İş Bankası", logo: isbankasiLogo.url, dark: true },
   { name: "Akbank" },
   { name: "Garanti Bankası" },
   { name: "Türk Telekom" },
