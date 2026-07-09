@@ -32,7 +32,7 @@ export const COURSE = {
   // Headline is intentionally Turkish (primary audience is Türkiye-based).
   hours: "36+",
   modules: 8,
-  format: "Online / Canlı + Kayıt erişimi (kendi hızınızda tekrar)",
+  format: "Online / Canlı",
   cohortStart: "15 Eylül 2026",
   applicationDeadline: "5 Eylül 2026",
   seatsTotal: 40,
