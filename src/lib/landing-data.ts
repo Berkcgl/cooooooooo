@@ -21,6 +21,15 @@
  * ============================================================================
  */
 
+import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.png.asset.json";
+import aselsanLogo from "@/assets/logos/aselsan.svg.asset.json";
+import siemensLogo from "@/assets/logos/siemens.png.asset.json";
+import yemeksepetiLogo from "@/assets/logos/yemeksepeti.svg.asset.json";
+import turkcellLogo from "@/assets/logos/turkcell.webp.asset.json";
+import n11Logo from "@/assets/logos/n11.svg.asset.json";
+import tusasLogo from "@/assets/logos/tusas.svg.asset.json";
+import isbankasiLogo from "@/assets/logos/isbankasi.png.asset.json";
+
 export const LAST_UPDATED = "Haziran 2026";
 
 /** Single source of truth for the application target so every CTA behaves identically. */
