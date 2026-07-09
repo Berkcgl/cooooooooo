@@ -60,7 +60,6 @@ export interface WhyNowCard {
   stat: string;
   title: string;
   body: string;
-  source: string;
   verify?: boolean;
 }
 
@@ -69,21 +68,18 @@ export const WHY_NOW: WhyNowCard[] = [
     stat: "%75",
     title: "AI artık rekabet avantajı değil, temel beceri",
     body: "Bilgi çalışanlarının büyük çoğunluğu işlerinde yapay zeka araçlarını kullanmaya başladı. Kullanmayanlar geride kalıyor.",
-    source: "Kaynak placeholder — yayın öncesi güncel rapor ile değiştirin (ör. Microsoft Work Trend Index).",
     verify: true,
   },
   {
     stat: "%40",
     title: "İş süreçleri hızla otomatikleşiyor",
     body: "Mevcut iş görevlerinin önemli bir bölümü önümüzdeki yıllarda agentic AI sistemleriyle kısmen veya tamamen otomatize edilecek.",
-    source: "Kaynak placeholder — yayın öncesi güncel rapor ile değiştirin (ör. WEF Future of Jobs).",
     verify: true,
   },
   {
     stat: "1M+",
     title: "Yeni kariyer fırsatları ortaya çıkıyor",
     body: "AI mühendisliği ve agent geliştirme rolleri en hızlı büyüyen pozisyonlar arasında. Talep, yetkin uzman arzının çok üzerinde.",
-    source: "Kaynak placeholder — yayın öncesi güncel iş ilanı verisi ile değiştirin (ör. LinkedIn Jobs on the Rise).",
     verify: true,
   },
 ];
