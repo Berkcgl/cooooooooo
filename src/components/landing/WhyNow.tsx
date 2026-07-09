@@ -20,9 +20,6 @@ export function WhyNow() {
               <div className="text-5xl font-extrabold tracking-tight text-brand">{c.stat}</div>
               <h3 className="mt-5 text-lg font-bold text-ink-900">{c.title}</h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{c.body}</p>
-              <p className="mt-5 border-t border-border pt-4 text-[11px] leading-snug text-ink-500">
-                {c.source}
-              </p>
             </article>
           ))}
         </div>
