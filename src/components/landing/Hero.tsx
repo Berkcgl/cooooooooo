@@ -7,10 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { APPLY_ANCHOR, CURRICULUM_ANCHOR, COURSE } from "@/lib/landing-data";
+import { APPLY_ANCHOR, CURRICULUM_ANCHOR, COURSE, INSTITUTIONS } from "@/lib/landing-data";
 import heroImg from "@/assets/hero-agentic.jpg";
-
-const TRUST = ["Cumhurbaşkanlığı DDO", "Microsoft / BilgeAdam", "Cisco Academy"];
 
 // Intro video — replace with the uploaded intro video URL once available.
 const INTRO_VIDEO_SRC = "";
