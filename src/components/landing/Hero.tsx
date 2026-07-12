@@ -38,23 +38,10 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="mt-10">
-            <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">
-              Eğitim verdiği kurumlar
-            </p>
-
-            <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
-              {TRUST.map((t) => (
-                <span key={t} className="text-sm font-semibold text-ink-700">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="relative">
-          <div className="relative mx-auto aspect-square w-full max-w-md rounded-3xl border border-border bg-secondary/40 p-4">
+          <div className="relative mx-auto aspect-video w-full max-w-lg rounded-3xl border border-border bg-secondary/40 p-4">
             <img
               src={heroImg}
               alt="Agentic AI sistem mimarisi: merkezi modeli araçlara bağlayan otonom agent ağı"
