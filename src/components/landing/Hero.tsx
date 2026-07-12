@@ -64,6 +64,29 @@ export function Hero() {
               </span>
             </button>
           </div>
+
+          <div className="mx-auto mt-8 w-full max-w-lg">
+            <p className="text-center text-xs font-semibold uppercase tracking-wider text-ink-500">
+              Eğitim verdiği bazı kurumlar
+            </p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+              {INSTITUTIONS.filter((org) => org.logo).map((org) => (
+                <div
+                  key={org.name}
+                  className={`grid h-12 w-28 shrink-0 place-items-center rounded-lg border border-border px-4 ${
+                    org.dark ? "bg-ink-900" : "bg-card"
+                  }`}
+                >
+                  <img
+                    src={org.logo}
+                    alt={`${org.name} logosu`}
+                    className="max-h-6 w-auto max-w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
