@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { APPLY_ANCHOR } from "@/lib/landing-data";
-import logo from "@/assets/cihan-ozhan-logo.svg.asset.json";
+import logo from "@/assets/main-website-logo.svg.asset.json";
 
 const NAV_LINKS = [
   { href: "#neden", label: "Neden Şimdi" },
