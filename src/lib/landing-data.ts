@@ -302,13 +302,13 @@ export const INSTITUTIONS: Institution[] = [
   { name: "Aselsan", logo: aselsanLogo.url },
   { name: "Siemens", logo: siemensLogo.url },
   { name: "Yemeksepeti", logo: yemeksepetiLogo.url },
-  { name: "Turkcell", logo: turkcellLogo.url },
+  { name: "Turkcell", logo: turkcellLogo.url, dark: true },
   { name: "N11", logo: n11Logo.url },
   { name: "TUSAŞ (TEI)", logo: tusasLogo.url },
   { name: "İş Bankası", logo: isbankasiLogo.url, dark: true },
-  { name: "Akbank" },
-  { name: "Garanti Bankası" },
-  { name: "Türk Telekom" },
+  { name: "Akbank", logo: akbankLogo.url },
+  { name: "Garanti Bankası", logo: garantiLogo.url, dark: true },
+  { name: "Türk Telekom", logo: turkTelekomLogo.url },
 ];
 
 export interface PresenceCard {
