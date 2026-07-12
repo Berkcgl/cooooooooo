@@ -1,74 +1,44 @@
-# Update Pass — Logos, Photo, Content & Form Backend
+# Hero, Institutions, Nav Logo & Form CTA Update
 
-## 1. Name logo everywhere (`logo_name.svg`)
+## 1. New institution logos (assets)
+Upload the 8 uploaded SVGs as CDN assets via `lovable-assets`, writing `.asset.json` pointers into `src/assets/logos/`:
+- **New (3):** `akbank-logo.svg`, `garanti-logo.svg`, `Turktelekom-logo.svg`
+- **Revised (4):** `turkcell-logo.svg`, `tusas-logo.svg`, `yemeksepeti-logo.svg`, `isbankasi-logo.svg` (overwrite the existing pointers)
+- Upload `main-website-logo.svg` for the nav (item 6).
 
-- Upload `logo_name.svg` as a CDN asset (`lovable-assets`).
-- **Nav** (`Nav.tsx`): replace the "CÖ" blue square + "Cihan Özhan" text with the name-logo image (kept in the `#top` link, sized to nav height).
-- **Footer** (`Footer.tsx`): replace the "CÖ" square + text with the same logo.
+Then in `src/lib/landing-data.ts`:
+- Add imports for the new asset pointers and update revised ones.
+- Wire `logo` URLs for **Akbank**, **Garanti Bankası**, **Türk Telekom** so all 11 institutions have real logos.
+- Re-check the `dark` flag per logo. The uploaded İş Bankası, TUSAŞ and Türk Telekom variants render on light/color, so most tiles can stay on the normal light card; keep `dark: true` only for any logo that is white/would be invisible on a light tile.
 
-## 2. Instructor photo (`co.svg`)
+## 2. Normalize logo sizing (item 4 & 5)
+In `src/components/landing/Organizations.tsx`, standardize every logo image so file dimensions no longer cause size differences:
+- Apply `object-contain` with a fixed `max-h-9` (~36px) and `max-w-[7rem]`, centered, with consistent tile padding.
+- Keep equal tile size (`h-16 w-40`). This makes all logos visually balanced regardless of source dimensions. The 3 new logos inherit the same rules automatically.
 
-- Upload `co.svg` as a CDN asset.
-- **Instructor** (`Instructor.tsx`): replace the "CÖ" initials placeholder block with the real photo (object-cover, keeps the name/role overlay).
-- Delete the caption: **"Foto placeholder — yayın öncesi gerçek görselle değiştirin."**
+## 3. Rename headings (item 3)
+Change the heading text in **both** places from `Eğitim verdiği kurumlar` to `Eğitim verdiği bazı kurumlar` (exact Turkish, no translation):
+- `src/components/landing/Hero.tsx` (the eyebrow above the institution block)
+- `src/components/landing/Organizations.tsx` (section heading)
 
-## 3. Institution section headings → "Eğitim verdiği kurumlar"
+## 4. Hero: logo strip + wider video (items 1 & 2)
+In `src/components/landing/Hero.tsx`:
+- **Remove** the plain-text `TRUST` name list (Cumhurbaşkanlığı DDO, Microsoft / BilgeAdam, Cisco Academy).
+- Replace it with a compact **logo strip** rendered from `INSTITUTIONS`, using the same tile/`object-contain` styling as the Organizations section (a wrapping row of small logo tiles, not the animated marquee). Heading stays `Eğitim verdiği bazı kurumlar`.
+- **Video box:** change the right-side container from `aspect-square` to a landscape ratio (`aspect-video`), so it reads as a wider rectangular player. Keep the "Cihan'dan 60 sn" play button + modal behavior intact.
+- Place the logo strip below the video block on the right column (or spanning the section) so it sits comfortably in the freed horizontal space.
 
-- **Hero** (`Hero.tsx`): "Eğitim verdiği kurumlardan bazıları" → **"Eğitim verdiği kurumlar"**.
-- **Organizations** (`Organizations.tsx`): "Eğitim ve danışmanlık verdiği kurumlardan bazıları" → **"Eğitim verdiği kurumlar"**.
+## 5. Nav logo swap (item 6)
+In `src/components/landing/Nav.tsx`, point the existing `<img>` at the new `main-website-logo` asset. Keep the `#top` link, `h-9 w-auto` sizing, alignment, and position unchanged — swap the asset source only. (Footer keeps its current logo unless you want that swapped too.)
 
-## 4. Institution logos (real images, no text wordmarks)
-
-Upload the 8 provided logos as CDN assets and wire them into the `INSTITUTIONS` array (`landing-data.ts`):
-
-- Cumhurbaşkanlığı → `tc-cumhurbaskanligi-logo.png`
-- Aselsan → `aselsan-logo-mavi.svg`
-- Siemens → `siemens-logo.png`
-- Yemeksepeti → `Yemeksepeti_New_2021.svg`
-- Turkcell → `TURKCELL_YATAY_ERKEK_LOGO.webp`
-- N11 → `N11_Logo_2025.svg`
-- TUSAŞ (TEI) → `tusaşlogo.svg`
-- İş Bankası → `isbankDlogo.png`
-
-Notes:
-
-- **İş Bankası logo is white**, so it would be invisible on the light logo tile. Its tile will get a dark background so the white logo shows; the other tiles stay as-is.
-- **Akbank, Garanti Bankası, Türk Telekom**: no files yet → keep them in the list with the existing neutral placeholder box; they swap in instantly when you upload the files.
-- The marquee already renders `<img>` logos, so no layout changes are needed beyond filling in the paths.
-- Sizes should be same, it sholdn't be bigger or smaller compared to eachother.
-
-## 5. Real testimonials (name + quote only)
-
-Replace the 4 placeholder testimonials in `TESTIMONIALS` (`landing-data.ts`) with:
-
-- **Mahmut** — "İçimdeki başlama arzunu ne yapmam gerektiğini samimi bir dille anlatan eğitici. Kendisine teşekkür ederim."
-- **Büşra** — "Çok başarılı ve güzel bir kurs, emeğiniz için çok teşekkürler."
-- **M. Şükrü** — "Ufuk açıcı bir kurs."
-- **Yusuf** — "Çok faydalı bilgiler veriliyor. Teşekkür ederim."
-
-`Testimonials.tsx`: remove the `role` line and the initials avatar circle (no photos/titles), keep just the quote + name. Delete the footnote *" Yorumlar placeholder. İsim/foto/alıntı kullanımı için yazılı onay alınmalıdır."**
-
-## 6. Remove remaining placeholder texts
-
-- **DigitalPresence** (`DigitalPresence.tsx`): delete "Takipçi sayıları son güncelleme: … canlı çekilmelidir." (and the now-unused `LAST_UPDATED` import).
-- **WhyNow** (`landing-data.ts` + `WhyNow.tsx`): drop the three "Kaynak placeholder …" source lines — remove the `source` display from the card so no empty source note remains.
-
-## 7. Format text
-
-- `landing-data.ts` `COURSE.format`: "Online / Canlı + Kayıt erişimi (kendi hızınızda tekrar)" → **"Online / Canlı"**.
-
-## 8. See & store form applications (Lovable Cloud)
-
-Enable **Lovable Cloud** and wire the application form to persist submissions:
-
-- Create an `applications` table (name, phone, email, kvkk_consent, created_at) with RLS: allow public **insert** (anyone can apply), and **no public read**.
-- `FinalCta.tsx`: on submit, insert the row into `applications` (replacing the current "no backend" success-only behavior); keep the existing validation and success UI.
-- Add a **protected `/admin` page** (email/password login) that lists submissions so you can see who applied. Reads run through an authenticated, role-checked server function.
-- You'll also be able to view/export rows directly from the Cloud → Database view.
-- Optional (say the word): email you a notification on each new application.
+## 6. Replace application form with external CTA button (item 7)
+In `src/components/landing/FinalCta.tsx`:
+- Remove the entire form (fields, validation, `supabase.from("applications").insert`, submitted state, `Field` component) and its Supabase import.
+- Replace the right-hand form card with a clean card containing a single prominent button ("Başvuru Yap" / "Hemen Başvur") that links to an **external URL opening in a new tab** (`target="_blank" rel="noopener noreferrer"`). Use `href="/#"` as a placeholder until the real link is provided.
+- Keep the left column copy ("Yeni dönem kontenjanı sınırlı…") and the three info cards (Başlangıç, Son Başvuru, Eğitim Günleri) unchanged.
+- The `#basvuru` section id and the header/nav "Başvuru Yap" anchors continue to scroll here.
 
 ## Technical notes
-
-- Large embedded-image SVGs (`co.svg`, `logo_name.svg`) and other logos are uploaded via the assets CLI and referenced by CDN URL — no big binaries committed.
-- Accessibility preserved: every logo/photo gets descriptive `alt` text; contrast maintained (white İş Bankası logo on a dark tile).
-- No changes to curriculum, metrics, FAQ, or other sections beyond those listed.
+- The `applications` table, `/auth`, `/admin` routes and `applications.functions.ts` become unused after removing the form. I will leave the backend/table in place (non-breaking) unless you want them removed too — say the word and I'll delete the admin/auth routes and the table in a follow-up.
+- All logos referenced by CDN URL via `.asset.json` pointers; no binaries committed to the repo.
+- Accessibility preserved: every logo keeps a descriptive `alt`; the CTA button keeps clear label text.

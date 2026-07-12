@@ -7,10 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { APPLY_ANCHOR, CURRICULUM_ANCHOR, COURSE } from "@/lib/landing-data";
+import { APPLY_ANCHOR, CURRICULUM_ANCHOR, COURSE, INSTITUTIONS } from "@/lib/landing-data";
 import heroImg from "@/assets/hero-agentic.jpg";
-
-const TRUST = ["Cumhurbaşkanlığı DDO", "Microsoft / BilgeAdam", "Cisco Academy"];
 
 // Intro video — replace with the uploaded intro video URL once available.
 const INTRO_VIDEO_SRC = "";
@@ -40,23 +38,10 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="mt-10">
-            <p className="text-xs font-semibold uppercase tracking-wider text-ink-500">
-              Eğitim verdiği kurumlar
-            </p>
-
-            <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
-              {TRUST.map((t) => (
-                <span key={t} className="text-sm font-semibold text-ink-700">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="relative">
-          <div className="relative mx-auto aspect-square w-full max-w-md rounded-3xl border border-border bg-secondary/40 p-4">
+          <div className="relative mx-auto aspect-video w-full max-w-lg rounded-3xl border border-border bg-secondary/40 p-4">
             <img
               src={heroImg}
               alt="Agentic AI sistem mimarisi: merkezi modeli araçlara bağlayan otonom agent ağı"
@@ -78,6 +63,29 @@ export function Hero() {
                 <span className="block text-xs text-ink-500">Tanıtım videosu</span>
               </span>
             </button>
+          </div>
+
+          <div className="mx-auto mt-8 w-full max-w-lg">
+            <p className="text-center text-xs font-semibold uppercase tracking-wider text-ink-500">
+              Eğitim verdiği bazı kurumlar
+            </p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+              {INSTITUTIONS.filter((org) => org.logo).map((org) => (
+                <div
+                  key={org.name}
+                  className={`grid h-12 w-28 shrink-0 place-items-center rounded-lg border border-border px-4 ${
+                    org.dark ? "bg-ink-900" : "bg-card"
+                  }`}
+                >
+                  <img
+                    src={org.logo}
+                    alt={`${org.name} logosu`}
+                    className="max-h-6 w-auto max-w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

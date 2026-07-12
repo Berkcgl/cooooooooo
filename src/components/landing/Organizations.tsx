@@ -7,7 +7,7 @@ export function Organizations() {
     <section className="border-y border-border bg-secondary/40 py-16">
       <div className="container-page">
         <p className="text-center text-sm font-semibold uppercase tracking-wider text-ink-500">
-          Eğitim verdiği kurumlar
+          Eğitim verdiği bazı kurumlar
         </p>
 
       </div>
@@ -18,7 +18,7 @@ export function Organizations() {
           {items.map((org, i) => (
             <div
               key={`${org.name}-${i}`}
-              className={`grid h-16 w-40 shrink-0 place-items-center rounded-xl border border-border px-4 ${
+              className={`grid h-16 w-40 shrink-0 place-items-center rounded-xl border border-border px-6 ${
                 org.dark ? "bg-ink-900" : "bg-card"
               }`}
             >
@@ -26,7 +26,7 @@ export function Organizations() {
                 <img
                   src={org.logo}
                   alt={`${org.name} logosu`}
-                  className="max-h-8 w-auto max-w-[7rem] object-contain"
+                  className="max-h-9 w-auto max-w-full object-contain"
                   loading="lazy"
                 />
               ) : (

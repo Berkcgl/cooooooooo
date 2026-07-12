@@ -25,10 +25,13 @@ import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.png.asset.json
 import aselsanLogo from "@/assets/logos/aselsan.svg.asset.json";
 import siemensLogo from "@/assets/logos/siemens.png.asset.json";
 import yemeksepetiLogo from "@/assets/logos/yemeksepeti.svg.asset.json";
-import turkcellLogo from "@/assets/logos/turkcell.webp.asset.json";
+import turkcellLogo from "@/assets/logos/turkcell.svg.asset.json";
 import n11Logo from "@/assets/logos/n11.svg.asset.json";
 import tusasLogo from "@/assets/logos/tusas.svg.asset.json";
-import isbankasiLogo from "@/assets/logos/isbankasi.png.asset.json";
+import isbankasiLogo from "@/assets/logos/isbankasi.svg.asset.json";
+import akbankLogo from "@/assets/logos/akbank.svg.asset.json";
+import garantiLogo from "@/assets/logos/garanti.svg.asset.json";
+import turkTelekomLogo from "@/assets/logos/turktelekom.svg.asset.json";
 
 export const LAST_UPDATED = "Haziran 2026";
 
@@ -299,13 +302,13 @@ export const INSTITUTIONS: Institution[] = [
   { name: "Aselsan", logo: aselsanLogo.url },
   { name: "Siemens", logo: siemensLogo.url },
   { name: "Yemeksepeti", logo: yemeksepetiLogo.url },
-  { name: "Turkcell", logo: turkcellLogo.url },
+  { name: "Turkcell", logo: turkcellLogo.url, dark: true },
   { name: "N11", logo: n11Logo.url },
   { name: "TUSAŞ (TEI)", logo: tusasLogo.url },
   { name: "İş Bankası", logo: isbankasiLogo.url, dark: true },
-  { name: "Akbank" },
-  { name: "Garanti Bankası" },
-  { name: "Türk Telekom" },
+  { name: "Akbank", logo: akbankLogo.url },
+  { name: "Garanti Bankası", logo: garantiLogo.url, dark: true },
+  { name: "Türk Telekom", logo: turkTelekomLogo.url },
 ];
 
 export interface PresenceCard {
