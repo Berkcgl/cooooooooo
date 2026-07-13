@@ -16,6 +16,7 @@ import { FreeLibrary } from "@/components/landing/FreeLibrary";
 import { Talks } from "@/components/landing/Talks";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { Faq } from "@/components/landing/Faq";
+import { Pricing } from "@/components/landing/Pricing";
 import { FinalCta } from "@/components/landing/FinalCta";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { ScrollReadout } from "@/components/site/ScrollReadout";
