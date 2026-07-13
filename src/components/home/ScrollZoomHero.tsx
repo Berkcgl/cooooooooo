@@ -30,23 +30,23 @@ export function ScrollZoomHero() {
   }, []);
 
   return (
-    <section ref={zoomRef} id="top" className="relative h-[130vh] md:h-[160vh]">
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+    <section ref={zoomRef} id="top" className="dark relative h-[130vh] bg-background md:h-[160vh]">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden bg-background">
         {/* Soft brand-tinted glow behind the network */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-1/2 -z-20 h-[70vh] w-[70vh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/20 blur-3xl"
         />
-        {/* Scroll-scrubbed camera push */}
+        {/* Scroll-scrubbed camera push — wide glowing network globe anchored to the bottom */}
         <img
           data-hero-visual
           src={heroNetwork.url}
           alt="Soyut yapay zeka sinir ağı görselleştirmesi"
-          width={1600}
-          height={1600}
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[min(96vh,96vw)] w-[min(96vh,96vw)] -translate-x-1/2 -translate-y-1/2 object-contain opacity-95 will-change-transform [mask-image:radial-gradient(circle_at_center,black_60%,transparent_88%)]"
+          width={2000}
+          height={1125}
+          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-auto w-full origin-bottom object-cover object-bottom opacity-90 will-change-transform"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/20 via-background/40 to-background" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/70 via-background/40 to-background" />
 
 
         <div ref={introRef} data-hero-fade className="container-page max-w-4xl text-center">
