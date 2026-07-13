@@ -21,9 +21,9 @@
  * ============================================================================
  */
 
-import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.png.asset.json";
+import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.svg.asset.json";
 import aselsanLogo from "@/assets/logos/aselsan.svg.asset.json";
-import siemensLogo from "@/assets/logos/siemens.png.asset.json";
+import siemensLogo from "@/assets/logos/siemens.svg.asset.json";
 import yemeksepetiLogo from "@/assets/logos/yemeksepeti.svg.asset.json";
 import turkcellLogo from "@/assets/logos/turkcell.svg.asset.json";
 import n11Logo from "@/assets/logos/n11.svg.asset.json";
@@ -302,12 +302,12 @@ export const INSTITUTIONS: Institution[] = [
   { name: "Aselsan", logo: aselsanLogo.url },
   { name: "Siemens", logo: siemensLogo.url },
   { name: "Yemeksepeti", logo: yemeksepetiLogo.url },
-  { name: "Turkcell", logo: turkcellLogo.url, dark: true },
+  { name: "Turkcell", logo: turkcellLogo.url },
   { name: "N11", logo: n11Logo.url },
   { name: "TUSAŞ (TEI)", logo: tusasLogo.url },
-  { name: "İş Bankası", logo: isbankasiLogo.url, dark: true },
+  { name: "İş Bankası", logo: isbankasiLogo.url },
   { name: "Akbank", logo: akbankLogo.url },
-  { name: "Garanti Bankası", logo: garantiLogo.url, dark: true },
+  { name: "Garanti Bankası", logo: garantiLogo.url },
   { name: "Türk Telekom", logo: turkTelekomLogo.url },
 ];
 
