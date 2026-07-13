@@ -59,7 +59,7 @@ export function ScrollZoomHero() {
           </span>
 
           <h1 className="display-1 mt-6 text-ink-900 text-balance">
-            <span className="block overflow-hidden">
+            <span className="hero-line-mask block overflow-hidden">
               <span data-hero-line className="block">
                 {PERSON.name}
               </span>
