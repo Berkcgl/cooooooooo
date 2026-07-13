@@ -18,6 +18,7 @@ import { Testimonials } from "@/components/landing/Testimonials";
 import { Faq } from "@/components/landing/Faq";
 import { FinalCta } from "@/components/landing/FinalCta";
 import { BackToTop } from "@/components/landing/BackToTop";
+import { ScrollReadout } from "@/components/site/ScrollReadout";
 
 const TITLE = "Agentic AI Masterclass | Cihan Özhan";
 const DESC =
@@ -42,6 +43,7 @@ function Masterclass() {
     <>
       <Ticker />
       <SiteHeader />
+      <ScrollReadout />
       <main>
         <Hero />
         <Metrics />

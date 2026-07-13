@@ -1,11 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TALKS, PRESENTATIONS, PUBLICATIONS, type TabItem } from "@/lib/landing-data";
 
 function ItemList({ items }: { items: TabItem[] }) {
   return (
     <ul className="mt-6 divide-y divide-border rounded-2xl border border-border bg-card">
-      {items.map((it) => (
+      {items.slice(0, 6).map((it) => (
         <li key={it.title}>
           <a
             href={it.url}
@@ -22,6 +23,20 @@ function ItemList({ items }: { items: TabItem[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+function ViewAll({ to }: { to: string }) {
+  return (
+    <div className="mt-6 flex justify-center">
+      <Link
+        to={to}
+        className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-ink-900 transition-colors hover:border-brand hover:text-brand"
+      >
+        Tamamını incele
+        <ArrowUpRight className="h-4 w-4" />
+      </Link>
+    </div>
   );
 }
 
@@ -44,12 +59,15 @@ export function Talks() {
           </TabsList>
           <TabsContent value="konusmalar">
             <ItemList items={TALKS} />
+            <ViewAll to="/speaking" />
           </TabsContent>
           <TabsContent value="sunumlar">
             <ItemList items={PRESENTATIONS} />
+            <ViewAll to="/speaking" />
           </TabsContent>
           <TabsContent value="yayinlar">
             <ItemList items={PUBLICATIONS} />
+            <ViewAll to="/publications" />
           </TabsContent>
         </Tabs>
       </div>
