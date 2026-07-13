@@ -5,7 +5,18 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageHero } from "@/components/site/PageHero";
 import { BackToTop } from "@/components/landing/BackToTop";
-import { TALKS, INSTRUCTOR_PROJECTS } from "@/lib/landing-data";
+import { TALKS, INSTRUCTOR_PROJECTS, type TabItem } from "@/lib/landing-data";
+
+/** Group archive items by year, newest first. */
+function groupByYear(items: TabItem[]): [number, TabItem[]][] {
+  const map = new Map<number, TabItem[]>();
+  for (const it of items) {
+    const y = it.year ?? 0;
+    if (!map.has(y)) map.set(y, []);
+    map.get(y)!.push(it);
+  }
+  return [...map.entries()].sort((a, b) => b[0] - a[0]);
+}
 
 const TITLE = "Konuşmalar & Etkinlikler | Cihan Özhan";
 const DESC =
