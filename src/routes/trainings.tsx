@@ -155,7 +155,7 @@ function TrainingsPage() {
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
-                  <span>02</span>
+                  <span>03</span>
                   <span className="h-px w-8 bg-brand/40" />
                   <span className="text-ink-500">Arşiv</span>
                 </div>
