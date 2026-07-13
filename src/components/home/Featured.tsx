@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { useReveal } from "@/hooks/useReveal";
 import { TRAININGS } from "@/lib/home-data";
-import { TALKS, PUBLICATIONS } from "@/lib/landing-data";
+import { TALKS, PRESENTATIONS, PUBLICATIONS, COURSES } from "@/lib/landing-data";
 
 interface Item {
   title: string;
@@ -18,28 +18,31 @@ interface Column {
   items: Item[];
 }
 
+const trainingItems: Item[] = [
+  ...TRAININGS.map((t) => ({ title: t.title, meta: t.meta, url: t.url, internal: t.internal })),
+  ...COURSES.map((c) => ({ title: c.title, meta: c.meta, url: c.url })),
+].slice(0, 7);
+
 const COLUMNS: Column[] = [
   {
-    label: "Eğitimler",
+    label: "Eğitimler & Kurslar",
     to: "/trainings",
-    items: TRAININGS.slice(0, 3).map((t) => ({
-      title: t.title,
-      meta: t.meta,
-      url: t.url,
-      internal: t.internal,
-    })),
+    items: trainingItems,
   },
   {
     label: "Konuşmalar",
     to: "/speaking",
-    items: TALKS.slice(0, 3).map((t) => ({ title: t.title, meta: t.meta, url: t.url })),
+    items: TALKS.slice(0, 7).map((t) => ({ title: t.title, meta: t.meta, url: t.url })),
   },
   {
-    label: "Yayınlar",
+    label: "Sunumlar & Yayınlar",
     to: "/publications",
-    items: PUBLICATIONS.slice(0, 3).map((t) => ({ title: t.title, meta: t.meta, url: t.url })),
+    items: [...PUBLICATIONS, ...PRESENTATIONS]
+      .slice(0, 7)
+      .map((t) => ({ title: t.title, meta: t.meta, url: t.url })),
   },
 ];
+
 
 export function Featured() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-feat-col]", y: 30, stagger: 0.12 });

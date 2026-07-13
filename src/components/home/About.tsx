@@ -1,5 +1,6 @@
 import { ABOUT_PARAGRAPHS, PERSON } from "@/lib/home-data";
 import { useReveal } from "@/hooks/useReveal";
+import portrait from "@/assets/cihan-ozhan.svg.asset.json";
 
 export function About() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-about-line]", y: 24, stagger: 0.15 });
@@ -8,6 +9,19 @@ export function About() {
     <section id="hakkinda" className="border-t border-border py-24 md:py-32">
       <div ref={ref} className="container-page grid gap-10 lg:grid-cols-[0.4fr_1fr] lg:gap-16">
         <div>
+          <div
+            data-about-line
+            className="relative mb-8 aspect-[4/5] w-full max-w-xs overflow-hidden rounded-2xl border border-border bg-secondary shadow-[0_0_0_1px_var(--color-border)]"
+          >
+            <img
+              src={portrait.url}
+              alt="Cihan Özhan portresi"
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-brand/20" />
+          </div>
+
           <div
             data-about-line
             className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand"

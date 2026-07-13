@@ -1,13 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { CHANNELS } from "@/lib/home-data";
-import logo from "@/assets/cihan-ozhan-logo.svg.asset.json";
+import logo from "@/assets/main-website-logo.svg.asset.json";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-card">
       <div className="container-page flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
         <Link to="/" className="flex items-center" aria-label="Cihan Özhan — ana sayfa">
-          <img src={logo.url} alt="Cihan Özhan" className="h-9 w-auto dark:brightness-0 dark:invert" />
+          <img src={logo.url} alt="Cihan Özhan" className="h-11 w-auto dark:brightness-0 dark:invert" />
         </Link>
 
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2" aria-label="Kanallar">

@@ -1,62 +1,73 @@
-# cihanozhan.com — Unified Redesign
 
-Confirmed direction: **dark-first** theme, **abstract AI/network** scroll-zoom hero, **4 subpages** (talks + events merged). No content rewriting — existing copy in `home-data.ts` / `landing-data.ts` is reorganized and restyled only. Link-index sections trimmed to label + link where purely navigational.
+# cihanozhan.com — Polish & Content Pass
 
-## 1. Sitemap
+Eleven scoped fixes across the homepage, subpages, and Masterclass page. All frontend/presentation + content-data only. Each item below is applied and visually verified before moving on.
 
-```text
-/                        Homepage — curated, cinematic
-/agentic-ai-masterclass  Existing course page (all sections/copy kept, inherits shared shell + tokens)
-/trainings               Full course list — Masterclass as flagship card → its own page; + free video series
-/speaking                Full talks + events history (TALKS)
-/publications            Presentations archive + writing/books (PRESENTATIONS + PUBLICATIONS)
-/experience              Skills + timeline + narrative bio — calm editorial style (EXPERTISE, INSTRUCTOR_TIMELINE, ABOUT)
-```
+## 1. Hero neural-network visual (more presence)
+`src/components/home/ScrollZoomHero.tsx` — the network image is currently `opacity-70` with an aggressive radial mask fading at 74%. Make it read clearly:
+- Raise base opacity, soften the mask fade (extend the visible radius), and add a subtle brand-tinted glow behind it so nodes/lines read on near-black.
+- Keep it behind the text (lower z, gradient scrim intact) so it never competes with the headline.
+- Regenerate the hero asset as a brighter, higher-contrast abstract network (glowing nodes + brighter connecting lines, dark-optimized, premium/not busy) and replace `src/assets/hero-network.jpg`. Motion stays transform-only (existing GSAP scrub).
 
-Shared **SiteHeader** (persistent across all routes) + **SiteFooter**. Header nav: About · Ventures · Trainings · Speaking · Publications · Experience · Contact, plus the sun/moon theme toggle and the flagship-course CTA. On the homepage, About/Ventures/Contact are in-page anchors; Trainings/Speaking/Publications/Experience route to subpages.
+## 2. Bottom-right scroll indicator
+- `src/components/site/ScrollReadout.tsx`: remove the mouse X/Y coordinate block entirely; keep only `SCROLL nnn%`.
+- Reposition so it never collides with the Back-to-Top button (`fixed bottom-6 right-6`). Move the readout up/left (e.g. `bottom-24 right-6` or left side) so the two never overlap; verify at scrolled state where both are visible.
 
-## 2. Homepage section-by-section
+## 3. Reuse the professional photo (About + Experience)
+The Masterclass page already uses the real portrait (`src/assets/cihan-ozhan.svg`, via `Instructor.tsx`). Reuse it:
+- `src/components/home/About.tsx`: add a portrait to the left column (replacing/【augmenting the tagline block), cropped `object-cover`, rounded, subtle border + soft brand glow — consistent with dark/corporate look.
+- `src/routes/experience.tsx`: add the same portrait in the summary section header area.
+- Styling: subtle border/ring only, no heavy effects.
 
-Each borrows a reference pattern (labeled →):
+## 4. Map section → simple event list
+`src/components/home/TeachingMap.tsx`: remove the SVG map, pins, arcs, and `useMapReveal` map-specific bits. Replace with a clean list/grid of location cards where **event name is the title** and **place/org is the description** (plus year). Keep the numbered `SectionHeading`. Drop the now-unused map markup; `TEACHING_LOCATIONS` data reused (may drop x/y usage).
 
-1. **Ticker bar** → terminal/monospace marquee: thin top strip, monospace status items separated by `·` (location, role, "son güncelleme"). Pauses on hover, respects reduced-motion.
-2. **Hero — scroll-zoom** → award globe/hero zoom: abstract AI/network SVG/canvas visual, GSAP ScrollTrigger `scrub` scales it on scroll (camera push). Identity statement (`PERSON.name` + title) + tagline + one circular arrow CTA. Giant duplicated title as background typography. Corner live scroll-position + cursor-coordinate readout (desktop only).
-3. **About** → minimal editorial: portrait-adjacent one-line identity claim, then `ABOUT_PARAGRAPHS` as steady staggered line reveals. Calm, high-trust.
-4. **Ventures** → stat-driven feature cards: Safebox / AISecLab / Runbit as numbered cards with hover lift + circular arrow links (`VENTURES`).
-5. **Map — scroll-reveal pins** → map-with-cards: stylized custom SVG map (Turkey + New York), pins appear on scroll each with a card (institution, event, year) sourced only from existing copy — İstanbul/New York (`PERSON.location`), Boğaziçi, Google DSC, AI Safety Summit, Cyber Anatolian, Cumhurbaşkanlığı DDO, and corporate `INSTITUTIONS`. Mobile: becomes a scrollable list of location cards (no scroll-hijack).
-6. **Stat callouts** → big-number benefit tiles: `METRICS` as oversized count-up figures (300.000+ öğrenci, 20+ yıl, etc.), reusing `useCountUp`.
-7. **Trusted-by marquee** → horizontal logo marquee: `INSTITUTIONS` logos scrolling, existing `marquee` keyframe.
-8. **Featured band** → curated (not full lists): a handful of standout trainings + talks + publications with a "view all →" link into each subpage.
-9. **Flagship course** → feature card: prominent Agentic AI Masterclass block linking to `/agentic-ai-masterclass`.
-10. **Contact CTA** → cinematic closing: headline reveal + parallax, `CONTACT` email + channels, one circular arrow CTA.
+## 5. Institution logos normalized (every logo)
+Applied to **both** the homepage marquee (`src/components/home/LogoMarquee.tsx`) and the Masterclass strip (see #10):
+- Uniform bounding box: fixed tile height, `max-h-8` (~32–40px) logo, `w-auto`, `object-contain`, consistent padding.
+- Every logo on a consistent neutral **white/light card** container regardless of source background, so contrast is even (removes the `dark ? bg-ink-900` branching that made some disappear).
+- Even scaling on desktop and mobile (consistent tile sizing + wrap/marquee behavior).
 
-Section titles use numbered labels (01/02/03…) with a giant duplicated background title, per the portfolio-structure reference. One **circular arrow button** component is reused for every CTA site-wide.
+## 6. "Öne çıkan çalışmalar" — much more content + populated archives
+Expand `src/lib/landing-data.ts` (and `home-data.ts` where relevant) with the full provided dataset, organized into logical categories:
+- **Training programs** (LLM Engineering Bootcamp, ML Engineer, AI Security Engineer) → `TRAININGS`.
+- **Courses** (full YouTube/Udemy list, 2010–2025) → new `COURSES` array with year + platform, sortable by year.
+- **Books** (T-SQL 2013, Go draft 2018) → `PUBLICATIONS`.
+- **Presentations** (full list) → `PRESENTATIONS`.
+- **Events/Talks** (full org — date list) → `TALKS`.
+- `src/components/home/Featured.tsx`: show **6–8 items per column** instead of 3 (add a Courses column or fold into Trainings; keep 3–4 balanced columns), each with a working "Tümünü gör" link.
+- Subpages populated with the complete lists, grouped/ordered by year:
+  - `src/routes/trainings.tsx`: programs + full Courses archive (by year).
+  - `src/routes/speaking.tsx`: full Events/Talks list (by date).
+  - `src/routes/publications.tsx`: Books + full Presentations archive (by year).
+- Content is entered verbatim from the provided lists; links reuse existing known URLs where available, otherwise point to the relevant channel (no fabricated deep links).
 
-## 3. Light/dark token approach
+## 7. Typography — distinctive display font
+- Add a strong, corporate-appropriate display font (proposed **Space Grotesk** for headlines) via the existing Google Fonts `<link>` in `src/routes/__root.tsx`; keep **Inter** for body and **JetBrains Mono** for mono/labels.
+- `src/styles.css`: add `--font-display` token and apply it to `.display-1`, `.display-2`, and section headings so headlines gain character while body stays clean/readable.
 
-Both themes share layout, spacing, motion, radius — only color tokens flip. Accent blue `#0A66FF` stays in both (used more sparingly in light). Implemented in `styles.css`: keep `:root` = light, add a `.dark { … }` block (the `dark` custom-variant already exists). Theme applied by toggling `.dark` on `<html>` via a React `ThemeProvider` (in-memory `useState`, no localStorage), default **dark**.
+## 8. Header logo — larger (trim padding first)
+- Inspect `main-website-logo.svg` viewBox; if it has excess surrounding whitespace, tighten the viewBox so the mark fills its box (re-upload trimmed asset).
+- `src/components/site/SiteHeader.tsx`: increase logo from `h-9` to a noticeably larger size (e.g. `h-12` / `h-14` responsive), keeping header height balanced.
 
-| Token | Dark (default) | Light |
-| --- | --- | --- |
-| `--background` | near-black `oklch(0.16 0.01 264)` | paper `oklch(0.985 0.003 250)` |
-| `--foreground` | off-white `oklch(0.97 0.01 250)` | ink `oklch(0.21 0.012 257)` |
-| `--card` | `oklch(0.20 0.015 264)` | `oklch(1 0 0)` |
-| `--border` | `oklch(0.30 0.015 264)` | `oklch(0.922 0.004 257)` |
-| `--muted-foreground` | `oklch(0.68 0.01 260)` | `oklch(0.5 0.012 257)` |
-| `--brand` (accent) | `oklch(0.62 0.20 263)` | `oklch(0.582 0.224 263.5)` |
-| `--surface` (cinematic) | deeper `oklch(0.13 0.02 264)` | `oklch(0.21 0.024 264)` |
-| `--ink-900…100` | remapped light-on-dark ramp | current ramp |
+## 9. Footer logo — match header
+- `src/components/site/SiteFooter.tsx`: switch the import from `cihan-ozhan-logo.svg` to the current `main-website-logo.svg` (same asset + dark-mode treatment as the header), sized consistently.
 
-Corner scroll-indicator + links use `--brand` in both. Terminal ticker leans into the dark aesthetic (monospace, subtle brand accent).
+## 10. Masterclass hero right panel (video + logos)
+`src/components/landing/Hero.tsx`:
+- Apply the same neutral-card logo normalization from #5 (uniform white tiles, `max-h`, `object-contain`) so no logo disappears in dark mode or blows out in light mode.
+- Tidy spacing/alignment of the video block and the logo grid (consistent gaps, aligned max-width, even grid) so it reads intentional, not cramped.
+- Optionally reuse a shared `LogoStrip` component so #5 and #10 stay in sync.
 
-## Technical notes
+## 11. Overall constraint
+Every change stays corporate/professional — restrained motion, neutral surfaces, single brand accent, no playful/experimental elements. Serious offensive-AI-security brand tone throughout.
 
-- **Motion**: existing GSAP + ScrollTrigger + Lenis (`SmoothScrollProvider`). New `useScrollZoom` (scrubbed scale) and `useMapReveal` (staggered pin/card) hooks alongside existing `useReveal`/`useCountUp`. Only `transform`/`opacity` animated. Guards: `prefers-reduced-motion` disables scrubbing/pinning; mobile (`<768px`) drops pinning, cursor readout, and map scroll-trigger (list fallback).
-- **Theme**: `ThemeProvider` context + `ThemeToggle` (sun/moon) in `SiteHeader`; wraps app in `__root.tsx`. SSR-safe (default class on `<html>`, no storage read at init).
-- **Monospace**: add JetBrains Mono via `<link>` in `__root.tsx` head + `--font-mono` token for ticker/meta labels.
-- **Hero visual**: generate one premium abstract neural-network/node-graph asset (dark-optimized) via image gen, uploaded as a Lovable asset.
-- **New files**: `ThemeProvider`/`ThemeToggle`, `hooks/useScrollZoom.ts`, `hooks/useMapReveal.ts`, `components/home/Ticker.tsx`, `ScrollZoomHero.tsx`, `TeachingMap.tsx`, `StatCallouts.tsx`, `LogoMarquee.tsx`, `Featured.tsx`, `CircularArrowButton.tsx`, `ScrollReadout.tsx`, and subpage routes `trainings.tsx`, `speaking.tsx`, `publications.tsx`, `experience.tsx`. Extend `home-data.ts` with a `TEACHING_LOCATIONS` array derived from existing copy (no new facts).
-- **Edited**: `styles.css` (dark tokens, mono font), `__root.tsx` (ThemeProvider + fonts), `index.tsx` (new homepage composition), `SiteHeader.tsx` (nav + toggle), `agentic-ai-masterclass.tsx` (inherits shared shell/tokens), `sitemap[.]xml.ts` (new routes).
-- **Masterclass page**: copy and section order untouched; only wrapped in shared header/footer and re-themed via tokens.
+---
 
-Reply to confirm and I'll build it, or tell me what to adjust.
+### Technical notes
+- New/edited data lives in `src/lib/landing-data.ts` (+ small `home-data.ts` tweaks); type-safe arrays with `year`/`platform` for sorting.
+- Consider a shared `src/components/site/LogoStrip.tsx` to unify logo rendering across LogoMarquee and Masterclass Hero.
+- New display font token in `styles.css`; font loaded via `__root.tsx` head link (no `@import` of remote URLs in CSS).
+- Regenerated hero asset via image gen, re-uploaded through the assets CLI; old asset replaced.
+- All animations remain transform/opacity; `prefers-reduced-motion` respected; responsive verified on mobile + desktop.
+- Verified with typecheck + a headless browser pass (dark and light) confirming each fix is visible.

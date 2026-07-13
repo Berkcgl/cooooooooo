@@ -349,26 +349,123 @@ export interface TabItem {
   title: string;
   meta: string;
   url: string;
+  /** Numeric year used for grouping/sorting archive pages. */
+  year?: number;
 }
 
-/** REAL talks / presentations / publications from cihanozhan.com. */
+const UDEMY_PROFILE = "https://www.udemy.com/user/cihanozhan/";
+const SLIDESHARE_PROFILE = "https://www.slideshare.net/Cihanzhan";
+const KODLAB_TSQL =
+  "https://www.kodlab.com/database/237-yazilimcilar-icin-ileri-seviye-t-sql-programlama-9786055201142.html";
+const GO_BOOK_DRAFT =
+  "https://cihanozhan.medium.com/go-programlama-dili-kitab%C4%B1-81eea6997997";
+
+/**
+ * COURSES — full YouTube/Udemy course archive (2010–2025), newest first.
+ * Titles are kept verbatim; links point to the relevant channel/profile
+ * where a specific deep link isn't known.
+ */
+export const COURSES: TabItem[] = [
+  { title: "AI Red Teaming", meta: "2025 · YouTube", year: 2025, url: "https://www.youtube.com/watch?v=U4H2P73Uz_c" },
+  { title: "Machine Learning as a Service — MLaaS", meta: "2025 · YouTube", year: 2025, url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFwyKekACxgGMt50A3JrYm1x" },
+  { title: "Mobile Application Security", meta: "2025 · YouTube", year: 2025, url: YOUTUBE_CHANNEL },
+  { title: "Engineering Roadmaps — Video Serisi", meta: "2025 · YouTube", year: 2025, url: YOUTUBE_CHANNEL },
+  { title: "Algorithmic Trading with AI", meta: "2025 · YouTube", year: 2025, url: YOUTUBE_CHANNEL },
+  { title: "AI Security Engineer Bootcamp (15 Saat)", meta: "2023 · YouTube", year: 2023, url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFxjMco-nxzOCffjwx1LKzpQ" },
+  { title: "Self-Learning AI with Reinforcement Learning", meta: "2023 · YouTube", year: 2023, url: YOUTUBE_CHANNEL },
+  { title: "Applied Deep Learning (50+ Saat)", meta: "2022/23 · YouTube", year: 2022, url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFxVptNDb76nTHk4SMkInDDw" },
+  { title: "Numeric Programming with NumPy", meta: "2022 · YouTube", year: 2022, url: YOUTUBE_CHANNEL },
+  { title: "AI Safety", meta: "2022 · YouTube", year: 2022, url: YOUTUBE_CHANNEL },
+  { title: "Applied ML Model Deployment — MLaaS", meta: "2022 · YouTube", year: 2022, url: YOUTUBE_CHANNEL },
+  { title: "Computer Vision with OpenCV", meta: "2022 · YouTube", year: 2022, url: "https://www.youtube.com/watch?v=752a-huWGuA" },
+  { title: "PyTorch Mimarisi ve Ekosistemi", meta: "2022 · YouTube", year: 2022, url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFz5M1hDKh-ZyrUYLXRuX_3J" },
+  { title: "TensorFlow Mimarisi ve Ekosistemi", meta: "2022 · YouTube", year: 2022, url: YOUTUBE_CHANNEL },
+  { title: "Database Programming with SQL Server", meta: "2021 · YouTube", year: 2021, url: YOUTUBE_CHANNEL },
+  { title: "Web Programming with Flask/Python", meta: "2021 · YouTube", year: 2021, url: YOUTUBE_CHANNEL },
+  { title: "Artificial Intelligence Starter Guide", meta: "2021 · Udemy", year: 2021, url: UDEMY_PROFILE },
+  { title: "Software Development Getting Started Guide & Advice", meta: "2021 · Udemy", year: 2021, url: UDEMY_PROFILE },
+  { title: "Python Programming Language: Beginner to Advanced", meta: "2020 · YouTube", year: 2020, url: YOUTUBE_CHANNEL },
+  { title: "RESTful API Basics: Architecture and Design", meta: "2020 · Udemy", year: 2020, url: UDEMY_PROFILE },
+  { title: "Database Programming with PostgreSQL", meta: "2019 · Udemy", year: 2019, url: UDEMY_PROFILE },
+  { title: "Database Programming with SQLite", meta: "2019 · Udemy", year: 2019, url: UDEMY_PROFILE },
+  { title: "C# Programming Language", meta: "2017 · Udemy", year: 2017, url: UDEMY_PROFILE },
+  { title: "Database Programming with SQL Server", meta: "2017 · Udemy", year: 2017, url: UDEMY_PROFILE },
+  { title: "Go: The Standard Library", meta: "2017 · Udemy", year: 2017, url: UDEMY_PROFILE },
+  { title: "RESTful API Programming with Go", meta: "2016 · Udemy", year: 2016, url: UDEMY_PROFILE },
+  { title: "Go Programming Language", meta: "2016 · Udemy", year: 2016, url: UDEMY_PROFILE },
+  { title: "Database Programming with Oracle", meta: "2011 · Udemy", year: 2011, url: UDEMY_PROFILE },
+  { title: "Oracle SQL Developer", meta: "2010 · Udemy", year: 2010, url: UDEMY_PROFILE },
+];
+
+/** EVENTS / TALKS — full history (organization · date), newest first. */
 export const TALKS: TabItem[] = [
-  { title: "Applied Offensive AI — Cyber Anatolian Communities", meta: "02.2025", url: "https://www.cihanozhan.com/" },
-  { title: "Offensive AI — Boğaziçi Üniversitesi", meta: "05.2023", url: "https://cihanozhan.medium.com/event-offensive-ai-dd28384ddb02" },
-  { title: "Offensive AI — Google Developer Student Clubs", meta: "2023", url: "https://www.youtube.com/watch?v=5QoIW4IFjnQ" },
-  { title: "AI Safety — AI Safety Summit (AISecLab)", meta: "01.2024", url: "https://www.instagram.com/p/C2Ca2JDNqY7/" },
+  { title: "Applied Offensive AI — Cyber Anatolian Communities", meta: "02.2025", year: 2025, url: "https://www.cihanozhan.com/" },
+  { title: "Microsoft Copilot & Azure AI Studio — Microsoft / BilgeAdam", meta: "09.2024", year: 2024, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Beykoz Üniversitesi", meta: "06.2024", year: 2024, url: "https://www.cihanozhan.com/" },
+  { title: "AI Safety — AI Safety Summit (AISecLab)", meta: "01.2024", year: 2024, url: "https://www.instagram.com/p/C2Ca2JDNqY7/" },
+  { title: "Career in Cyber Security — İstinye Üniversitesi", meta: "01.2024", year: 2024, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Bahçeşehir Üniversitesi", meta: "01.2024", year: 2024, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Maltepe Üniversitesi", meta: "12.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Haliç Üniversitesi", meta: "12.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — ML Career Hole", meta: "12.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "OWASP Machine Learning Top 10 — AISecLab.org", meta: "2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Cyber Security App Development with Deep Learning — AISecLab.org", meta: "2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — T.C. Cumhurbaşkanlığı Dijital Dönüşüm Ofisi", meta: "05.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "AI and Security in the Defense Industry — AISecLab.org", meta: "2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Google Developer Student Clubs", meta: "2023", year: 2023, url: "https://www.youtube.com/watch?v=5QoIW4IFjnQ" },
+  { title: "Offensive AI — Marmara Üniversitesi", meta: "05.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "AI in National Security — Türkiye Gençlik STK'ları Platformu", meta: "05.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Boğaziçi Üniversitesi", meta: "05.2023", year: 2023, url: "https://cihanozhan.medium.com/event-offensive-ai-dd28384ddb02" },
+  { title: "Offensive AI — Yıldız Teknik Üniversitesi", meta: "05.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Karadeniz Teknik Üniversitesi", meta: "04.2023", year: 2023, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — Istanbul Data Lab", meta: "08.2022", year: 2022, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI: Cyber Security and AI — BilgincIT Academy", meta: "08.2022", year: 2022, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI: Cyber Security and AI — Cisco Networking Academy", meta: "07.2022", year: 2022, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI: Cyber Security and AI — İstanbul Medeniyet Üniversitesi", meta: "07.2022", year: 2022, url: "https://www.cihanozhan.com/" },
+  { title: "Deep Understanding of AI — Üsküdar Üniversitesi", meta: "03.2022", year: 2022, url: "https://www.cihanozhan.com/" },
+  { title: "Deep Understanding of AI — Iğdır Üniversitesi", meta: "02.2022", year: 2022, url: "https://www.cihanozhan.com/" },
+  { title: "Offensive AI — YouTube", meta: "11.2021", year: 2021, url: YOUTUBE_CHANNEL },
+  { title: "Offensive AI: Security, ML & DL & Computer Vision Security", meta: "2021", year: 2021, url: "https://www.cihanozhan.com/" },
+  { title: "AI Getting Started Guide — YouTube", meta: "2021", year: 2021, url: YOUTUBE_CHANNEL },
+  { title: "Offensive AI — BGA Security", meta: "2021", year: 2021, url: "https://www.cihanozhan.com/" },
+  { title: "Industrial AI and Autonomous Vehicles — YouTube", meta: "2021", year: 2021, url: YOUTUBE_CHANNEL },
+  { title: "Data Security Fundamentals for Developers — YouTube", meta: "2021", year: 2021, url: YOUTUBE_CHANNEL },
+  { title: "AI, Cyber Security, Autonomous Systems and Industry 4.0 — YouTube", meta: "2021", year: 2021, url: YOUTUBE_CHANNEL },
+  { title: "MLaaS: Scaling ML Models as Microservices — Devnot Summit", meta: "11.2020", year: 2020, url: "https://www.cihanozhan.com/" },
+  { title: "Industry 4.0 Getting Started Guide — YouTube", meta: "2020", year: 2020, url: YOUTUBE_CHANNEL },
+  { title: "Digital Transformation MBA Program: AI — YouTube", meta: "2020", year: 2020, url: YOUTUBE_CHANNEL },
+  { title: "AI Event/Training — Lycée Saint-Joseph", meta: "2020", year: 2020, url: "https://www.cihanozhan.com/" },
+  { title: "Decentralized Application Development — Teknopark İstanbul", meta: "2019", year: 2019, url: "https://www.cihanozhan.com/" },
+  { title: "IAthon: AI Hackathon — Lycée Saint Benoît d'Istanbul", meta: "2019", year: 2019, url: "https://www.cihanozhan.com/" },
 ];
 
+/** PRESENTATIONS — full SlideShare archive, newest first. */
 export const PRESENTATIONS: TabItem[] = [
-  { title: "AI Security: ML, DL & Computer Vision Security", meta: "SlideShare · 2021", url: "https://www.slideshare.net/Cihanzhan/ai-security-machine-learning-deep-learning-and-computer-vision-security" },
-  { title: "MLaaS: Scaling ML Models as Microservices", meta: "SlideShare · 2022", url: "https://www.slideshare.net/Cihanzhan/mlaas-presenting-scaling-machine-learning-models-as-microservicespptx" },
-  { title: "Endüstriyel Yapay Zeka ve Otonom Sistemler", meta: "SlideShare · 2021", url: "https://www.slideshare.net/Cihanzhan/endstriyel-yapay-zeka-ve-otonom-sistemler" },
-  { title: "Mobil Uygulama Güvenliği", meta: "SlideShare · 2022", url: "https://www.slideshare.net/Cihanzhan/mobil-uygulama-gvenlii-mobile-security" },
+  { title: "Cyber Security: Mobile Security", meta: "SlideShare · 2022", year: 2022, url: "https://www.slideshare.net/Cihanzhan/mobil-uygulama-gvenlii-mobile-security" },
+  { title: "AI: MLaaS — Presenting & Scaling ML Models as Microservices", meta: "SlideShare · 2022", year: 2022, url: "https://www.slideshare.net/Cihanzhan/mlaas-presenting-scaling-machine-learning-models-as-microservicespptx" },
+  { title: "AI: AI and Machine Learning — Today's Implementation Realities", meta: "SlideShare · 2022", year: 2022, url: SLIDESHARE_PROFILE },
+  { title: "AI Security: Security, ML & DL & Computer Vision Security v2", meta: "SlideShare · 2021", year: 2021, url: "https://www.slideshare.net/Cihanzhan/ai-security-machine-learning-deep-learning-and-computer-vision-security" },
+  { title: "AI: Industrial AI and Autonomous Systems/Vehicles", meta: "SlideShare · 2021", year: 2021, url: "https://www.slideshare.net/Cihanzhan/endstriyel-yapay-zeka-ve-otonom-sistemler" },
+  { title: "AI Security: Security, ML & DL & Computer Vision Security v1 (EN)", meta: "SlideShare · 2021", year: 2021, url: SLIDESHARE_PROFILE },
+  { title: "AI Security: Security, ML & DL & Computer Vision Security v1 (TR)", meta: "SlideShare · 2021", year: 2021, url: SLIDESHARE_PROFILE },
+  { title: "AI Getting Started Guide", meta: "SlideShare · 2020", year: 2020, url: SLIDESHARE_PROFILE },
+  { title: "Industry 4.0 Getting Started Guide for Manufacturing", meta: "SlideShare · 2020", year: 2020, url: SLIDESHARE_PROFILE },
+  { title: "Database Programming with SQLite", meta: "SlideShare · 2020", year: 2020, url: SLIDESHARE_PROFILE },
+  { title: "Python Programming Language", meta: "SlideShare · 2020", year: 2020, url: SLIDESHARE_PROFILE },
+  { title: "React.js Web Programming", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
+  { title: "Angular Web Programming", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
+  { title: "Secure Application Development: OWASP", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
+  { title: "Key Data Security Elements, Software Driven", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
+  { title: "Go Programming Language", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
+  { title: "Rust Programming Language", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
+  { title: "Decentralized Application Development", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
+  { title: "RESTful API Architecture and Design", meta: "SlideShare · 2019", year: 2019, url: SLIDESHARE_PROFILE },
 ];
 
+/** PUBLICATIONS — books & long-form writing. */
 export const PUBLICATIONS: TabItem[] = [
-  { title: "Kitap: İleri Seviye T-SQL Programlama (Kodlab)", meta: "2013", url: "https://www.kodlab.com/database/237-yazilimcilar-icin-ileri-seviye-t-sql-programlama-9786055201142.html" },
-  { title: "Kitap: Go Programlama Dili (Taslak)", meta: "2018 · Medium", url: "https://cihanozhan.medium.com/go-programlama-dili-kitab%C4%B1-81eea6997997" },
+  { title: "Kitap: İleri Seviye T-SQL Programlama (Kodlab)", meta: "2013 · Kitap", year: 2013, url: KODLAB_TSQL },
+  { title: "Kitap: Go Programlama Dili (Taslak)", meta: "2018 · Kitap", year: 2018, url: GO_BOOK_DRAFT },
   { title: "Makaleler — Medium", meta: "Sürekli", url: "https://medium.com/@cihanozhan" },
 ];
 

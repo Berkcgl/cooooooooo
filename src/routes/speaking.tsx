@@ -5,7 +5,18 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageHero } from "@/components/site/PageHero";
 import { BackToTop } from "@/components/landing/BackToTop";
-import { TALKS, INSTRUCTOR_PROJECTS } from "@/lib/landing-data";
+import { TALKS, INSTRUCTOR_PROJECTS, type TabItem } from "@/lib/landing-data";
+
+/** Group archive items by year, newest first. */
+function groupByYear(items: TabItem[]): [number, TabItem[]][] {
+  const map = new Map<number, TabItem[]>();
+  for (const it of items) {
+    const y = it.year ?? 0;
+    if (!map.has(y)) map.set(y, []);
+    map.get(y)!.push(it);
+  }
+  return [...map.entries()].sort((a, b) => b[0] - a[0]);
+}
 
 const TITLE = "Konuşmalar & Etkinlikler | Cihan Özhan";
 const DESC =
@@ -35,38 +46,41 @@ function SpeakingPage() {
           index="02"
           kicker="Konuşmalar & Etkinlikler"
           title="Sahnede ve kürsüde"
-          description="Konuşmalar, seminerler ve topluluk etkinlikleri."
+          description="Üniversitelerden kamu kurumlarına ve global etkinliklere — 35+ konuşma, seminer ve topluluk etkinliği."
         />
 
         <section className="py-16 md:py-24">
-          <div className="container-page">
-            <ol className="border-t border-border">
-              {TALKS.map((t, i) => (
-                <li key={t.title} className="border-b border-border">
-                  <a
-                    href={t.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 py-6 md:gap-8 md:py-8"
-                  >
-                    <span className="font-mono text-sm text-ink-500">
-                      [{String(i + 1).padStart(2, "0")}]
-                    </span>
-                    <span>
-                      <span className="block text-lg font-semibold text-ink-900 transition-colors group-hover:text-brand md:text-xl">
-                        {t.title}
-                      </span>
-                      <span className="mt-1 block font-mono text-[11px] uppercase tracking-wide text-ink-500">
-                        {t.meta}
-                      </span>
-                    </span>
-                    <ArrowUpRight className="h-5 w-5 text-ink-300 transition-all group-hover:-translate-y-0.5 group-hover:text-brand" />
-                  </a>
-                </li>
-              ))}
-            </ol>
+          <div className="container-page space-y-12">
+            {groupByYear(TALKS).map(([year, items]) => (
+              <div key={year} className="grid gap-6 lg:grid-cols-[auto_1fr] lg:gap-12">
+                <div className="font-mono text-2xl font-bold tracking-tight text-brand">{year}</div>
+                <ol className="border-t border-border">
+                  {items.map((t) => (
+                    <li key={`${t.title}-${t.meta}`} className="border-b border-border">
+                      <a
+                        href={t.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group grid grid-cols-[1fr_auto] items-center gap-5 py-5 md:gap-8"
+                      >
+                        <span>
+                          <span className="block text-base font-semibold text-ink-900 transition-colors group-hover:text-brand md:text-lg">
+                            {t.title}
+                          </span>
+                          <span className="mt-1 block font-mono text-[11px] uppercase tracking-wide text-ink-500">
+                            {t.meta}
+                          </span>
+                        </span>
+                        <ArrowUpRight className="h-5 w-5 text-ink-300 transition-all group-hover:-translate-y-0.5 group-hover:text-brand" />
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
           </div>
         </section>
+
 
         <section className="border-t border-border bg-secondary/30 py-16 md:py-24">
           <div className="container-page">
