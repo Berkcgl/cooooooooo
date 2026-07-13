@@ -1,13 +1,15 @@
-import { PERSON } from "@/lib/home-data";
-import { LAST_UPDATED } from "@/lib/landing-data";
-
 const ITEMS = [
-  "OFFENSIVE AI SECURITY",
-  PERSON.location.toUpperCase(),
-  "SAFEBOX · AISECLAB · RUNBIT",
-  "AGENTIC SYSTEMS",
-  `SON GÜNCELLEME ${LAST_UPDATED.toUpperCase()}`,
-  "RESEARCHER · DEVELOPER · EDUCATOR",
+  "ARTIFICIAL INTELLIGENCE (AI)",
+  "MACHINE LEARNING (ML)",
+  "DEEP LEARNING (DL)",
+  "NEURAL NETWORKS (NN)",
+  "ARTIFICIAL NEURAL NETWORKS (ANN)",
+  "GENERATIVE AI (GENAI)",
+  "LARGE LANGUAGE MODELS (LLM)",
+  "AGENTIC AI",
+  "AI AS A SERVICE (AIAAS)",
+  "AI SECURITY",
+  "OFFENSIVE AI",
 ];
 
 /**
