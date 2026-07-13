@@ -53,58 +53,98 @@ function TrainingsPage() {
         />
 
         <section className="py-16 md:py-24">
-          <div className="container-page space-y-4">
-            {TRAININGS.map((t, i) => {
-              const inner = (
-                <div className="grid gap-4 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-8">
-                  <span className="font-mono text-sm text-ink-500">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <h2
-                        className={`font-bold text-ink-900 ${t.featured ? "text-2xl md:text-3xl" : "text-xl"}`}
+          <div className="container-page space-y-12">
+            {/* Aktif eğitimler */}
+            <div>
+              <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
+                <span>01</span>
+                <span className="h-px w-8 bg-brand/40" />
+                <span className="text-ink-500">Aktif</span>
+              </div>
+              <div className="mt-6 space-y-4">
+                {activeTrainings.map((t) => (
+                  <div
+                    key={t.title}
+                    className="rounded-2xl border border-brand/40 bg-brand-soft/50 p-6 md:p-8"
+                  >
+                    <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center md:gap-8">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h2 className="text-2xl font-bold text-ink-900 md:text-3xl">{t.title}</h2>
+                          <span className="inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-brand">
+                            <Star className="h-3 w-3 fill-current" />
+                            Online &amp; Live Class
+                          </span>
+                        </div>
+                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-700">
+                          {t.body}
+                        </p>
+                        <p className="mt-2 font-mono text-[11px] uppercase tracking-wide text-ink-500">
+                          {t.meta}
+                        </p>
+                      </div>
+                      <Link
+                        to={t.url}
+                        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
                       >
-                        {t.title}
-                      </h2>
-                      {t.featured && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-brand">
-                          <Star className="h-3 w-3 fill-current" />
-                          Flagship
-                        </span>
-                      )}
+                        Eğitime Başvur
+                        <ArrowUpRight className="h-4 w-4" />
+                      </Link>
                     </div>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-700">{t.body}</p>
-                    <p className="mt-2 font-mono text-[11px] uppercase tracking-wide text-ink-500">
-                      {t.meta}
-                    </p>
                   </div>
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/40 bg-brand/10 text-brand transition-all group-hover:bg-brand group-hover:text-brand-foreground">
-                    <ArrowUpRight className="h-5 w-5" />
-                  </span>
-                </div>
-              );
+                ))}
+              </div>
+            </div>
 
-              const cls = `card-hover group block rounded-2xl border p-6 md:p-8 ${
-                t.featured ? "border-brand/40 bg-brand-soft/50" : "border-border bg-card"
-              }`;
+            {/* Geçmiş eğitimler */}
+            <div>
+              <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
+                <span>02</span>
+                <span className="h-px w-8 bg-brand/40" />
+                <span className="text-ink-500">Geçmiş</span>
+              </div>
+              <div className="mt-6 space-y-4">
+                {pastTrainings.map((t, i) => {
+                  const inner = (
+                    <div className="grid gap-4 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-8">
+                      <span className="font-mono text-sm text-ink-500">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h2 className="text-xl font-bold text-ink-900">{t.title}</h2>
+                        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-700">
+                          {t.body}
+                        </p>
+                        <p className="mt-2 font-mono text-[11px] uppercase tracking-wide text-ink-500">
+                          {t.meta}
+                        </p>
+                      </div>
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-border bg-secondary text-ink-500 transition-all group-hover:border-brand/40 group-hover:text-brand">
+                        <ArrowUpRight className="h-5 w-5" />
+                      </span>
+                    </div>
+                  );
 
-              return t.internal ? (
-                <Link key={t.title} to={t.url} className={cls}>
-                  {inner}
-                </Link>
-              ) : (
-                <a
-                  key={t.title}
-                  href={t.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cls}
-                >
-                  {inner}
-                </a>
-              );
-            })}
+                  const cls = "card-hover group block rounded-2xl border border-border bg-card p-6 md:p-8";
+
+                  return t.internal ? (
+                    <Link key={t.title} to={t.url} className={cls}>
+                      {inner}
+                    </Link>
+                  ) : (
+                    <a
+                      key={t.title}
+                      href={t.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cls}
+                    >
+                      {inner}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </section>
 
