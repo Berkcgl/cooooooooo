@@ -1,4 +1,5 @@
 import { INSTITUTIONS } from "@/lib/landing-data";
+import { LogoTile } from "@/components/site/LogoTile";
 
 export function Organizations() {
   // Duplicate the list for a seamless marquee loop.
