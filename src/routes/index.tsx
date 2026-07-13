@@ -1,26 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Toaster } from "@/components/ui/sonner";
-import { Nav } from "@/components/landing/Nav";
-import { Hero } from "@/components/landing/Hero";
-import { Metrics } from "@/components/landing/Metrics";
-import { WhyNow } from "@/components/landing/WhyNow";
-import { WhoFor } from "@/components/landing/WhoFor";
-import { Outcomes } from "@/components/landing/Outcomes";
-import { Curriculum } from "@/components/landing/Curriculum";
-import { Instructor } from "@/components/landing/Instructor";
-import { Organizations } from "@/components/landing/Organizations";
-import { DigitalPresence } from "@/components/landing/DigitalPresence";
-import { FreeLibrary } from "@/components/landing/FreeLibrary";
-import { Talks } from "@/components/landing/Talks";
-import { Testimonials } from "@/components/landing/Testimonials";
-import { Faq } from "@/components/landing/Faq";
-import { FinalCta } from "@/components/landing/FinalCta";
-import { Footer } from "@/components/landing/Footer";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { Hero } from "@/components/home/Hero";
+import { MetricsStrip } from "@/components/home/MetricsStrip";
+import { About } from "@/components/home/About";
+import { Ventures } from "@/components/home/Ventures";
+import { Trainings } from "@/components/home/Trainings";
+import { Expertise } from "@/components/home/Expertise";
+import { Speaking } from "@/components/home/Speaking";
+import { Publications } from "@/components/home/Publications";
+import { Channels } from "@/components/home/Channels";
+import { ContactCta } from "@/components/home/ContactCta";
 import { BackToTop } from "@/components/landing/BackToTop";
 
-const TITLE = "Agentic AI Masterclass | Cihan Özhan";
+const TITLE = "Cihan Özhan | Offensive AI Security · Researcher · Developer";
 const DESC =
-  "Sıfırdan başlayarak gerçek projeler üzerinde çalışın. 36+ saatlik uygulamalı eğitimle agentic AI sistemlerini kurmayı, ölçeklemeyi ve işinizde kullanmayı öğrenin.";
+  "Cihan Özhan — Safebox, AISecLab ve Runbit kurucusu. Offensive AI Security araştırmacısı ve geliştiricisi. Agentic AI sistemleri, güvenlik ve canlı eğitim programları.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,32 +28,27 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: Index,
+  component: Home,
 });
 
-function Index() {
+function Home() {
   return (
     <>
-      <Nav />
+      <SiteHeader />
       <main>
         <Hero />
-        <Metrics />
-        <WhyNow />
-        <WhoFor />
-        <Outcomes />
-        <Curriculum />
-        <Instructor />
-        <Organizations />
-        <DigitalPresence />
-        <FreeLibrary />
-        <Talks />
-        <Testimonials />
-        <Faq />
-        <FinalCta />
+        <MetricsStrip />
+        <About />
+        <Ventures />
+        <Trainings />
+        <Expertise />
+        <Speaking />
+        <Publications />
+        <Channels />
+        <ContactCta />
       </main>
-      <Footer />
+      <SiteFooter />
       <BackToTop />
-      <Toaster position="top-center" richColors />
     </>
   );
 }

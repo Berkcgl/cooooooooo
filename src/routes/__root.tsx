@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SmoothScrollProvider } from "../lib/smooth-scroll";
 
 function NotFoundComponent() {
   return (
@@ -77,16 +78,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Learn Agentic AI through hands-on projects with 36+ hours of practical training." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Learn Agentic AI through hands-on projects with 36+ hours of practical training." },
+      { title: "Cihan Özhan | Offensive AI Security · Researcher · Developer" },
+      { name: "description", content: "Cihan Özhan — Safebox, AISecLab ve Runbit kurucusu. Offensive AI Security araştırmacısı, geliştirici ve eğitmen." },
+      { name: "author", content: "Cihan Özhan" },
+      { property: "og:title", content: "Cihan Özhan | Offensive AI Security · Researcher · Developer" },
+      { property: "og:description", content: "Safebox, AISecLab ve Runbit kurucusu. Agentic AI sistemleri, güvenlik ve canlı eğitim programları." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Learn Agentic AI through hands-on projects with 36+ hours of practical training." },
+      { name: "twitter:title", content: "Cihan Özhan | Offensive AI Security · Researcher · Developer" },
+      { name: "twitter:description", content: "Safebox, AISecLab ve Runbit kurucusu. Agentic AI sistemleri, güvenlik ve canlı eğitim programları." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/05f2d004-9769-4c7b-bbff-a5f01b89bb05/id-preview-fc88a86f--91b97e2a-ae44-4532-8873-b45c4e8b0eb8.lovable.app-1781966605585.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/05f2d004-9769-4c7b-bbff-a5f01b89bb05/id-preview-fc88a86f--91b97e2a-ae44-4532-8873-b45c4e8b0eb8.lovable.app-1781966605585.png" },
     ],
@@ -128,8 +128,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SmoothScrollProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </SmoothScrollProvider>
     </QueryClientProvider>
   );
 }
