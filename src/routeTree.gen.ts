@@ -13,6 +13,7 @@ import { Route as TrainingsRouteImport } from './routes/trainings'
 import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PublicationsRouteImport } from './routes/publications'
+import { Route as GizlilikPolitikasiRouteImport } from './routes/gizlilik-politikasi'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as AgenticAiMasterclassRouteImport } from './routes/agentic-ai-masterclass'
 import { Route as IndexRouteImport } from './routes/index'
@@ -37,6 +38,11 @@ const PublicationsRoute = PublicationsRouteImport.update({
   path: '/publications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GizlilikPolitikasiRoute = GizlilikPolitikasiRouteImport.update({
+  id: '/gizlilik-politikasi',
+  path: '/gizlilik-politikasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExperienceRoute = ExperienceRouteImport.update({
   id: '/experience',
   path: '/experience',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/experience': typeof ExperienceRoute
+  '/gizlilik-politikasi': typeof GizlilikPolitikasiRoute
   '/publications': typeof PublicationsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/experience': typeof ExperienceRoute
+  '/gizlilik-politikasi': typeof GizlilikPolitikasiRoute
   '/publications': typeof PublicationsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/experience': typeof ExperienceRoute
+  '/gizlilik-politikasi': typeof GizlilikPolitikasiRoute
   '/publications': typeof PublicationsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agentic-ai-masterclass'
     | '/experience'
+    | '/gizlilik-politikasi'
     | '/publications'
     | '/sitemap.xml'
     | '/speaking'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agentic-ai-masterclass'
     | '/experience'
+    | '/gizlilik-politikasi'
     | '/publications'
     | '/sitemap.xml'
     | '/speaking'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/agentic-ai-masterclass'
     | '/experience'
+    | '/gizlilik-politikasi'
     | '/publications'
     | '/sitemap.xml'
     | '/speaking'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgenticAiMasterclassRoute: typeof AgenticAiMasterclassRoute
   ExperienceRoute: typeof ExperienceRoute
+  GizlilikPolitikasiRoute: typeof GizlilikPolitikasiRoute
   PublicationsRoute: typeof PublicationsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SpeakingRoute: typeof SpeakingRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gizlilik-politikasi': {
+      id: '/gizlilik-politikasi'
+      path: '/gizlilik-politikasi'
+      fullPath: '/gizlilik-politikasi'
+      preLoaderRoute: typeof GizlilikPolitikasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/experience': {
       id: '/experience'
       path: '/experience'
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgenticAiMasterclassRoute: AgenticAiMasterclassRoute,
   ExperienceRoute: ExperienceRoute,
+  GizlilikPolitikasiRoute: GizlilikPolitikasiRoute,
   PublicationsRoute: PublicationsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SpeakingRoute: SpeakingRoute,
