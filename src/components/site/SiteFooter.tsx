@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { CHANNELS } from "@/lib/home-data";
-import logo from "@/assets/cihan-ozhan-logo.svg.asset.json";
+import logo from "@/assets/main-website-logo.svg.asset.json";
 
 export function SiteFooter() {
   return (
