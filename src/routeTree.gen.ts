@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrainingsRouteImport } from './routes/trainings'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AgenticAiMasterclassRouteImport } from './routes/agentic-ai-masterclass'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TrainingsRoute = TrainingsRouteImport.update({
+  id: '/trainings',
+  path: '/trainings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -33,34 +39,50 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/trainings': typeof TrainingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/trainings': typeof TrainingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/trainings': typeof TrainingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agentic-ai-masterclass' | '/sitemap.xml'
+  fullPaths: '/' | '/agentic-ai-masterclass' | '/sitemap.xml' | '/trainings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agentic-ai-masterclass' | '/sitemap.xml'
-  id: '__root__' | '/' | '/agentic-ai-masterclass' | '/sitemap.xml'
+  to: '/' | '/agentic-ai-masterclass' | '/sitemap.xml' | '/trainings'
+  id:
+    | '__root__'
+    | '/'
+    | '/agentic-ai-masterclass'
+    | '/sitemap.xml'
+    | '/trainings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgenticAiMasterclassRoute: typeof AgenticAiMasterclassRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TrainingsRoute: typeof TrainingsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trainings': {
+      id: '/trainings'
+      path: '/trainings'
+      fullPath: '/trainings'
+      preLoaderRoute: typeof TrainingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -89,6 +111,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgenticAiMasterclassRoute: AgenticAiMasterclassRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TrainingsRoute: TrainingsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
