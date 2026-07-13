@@ -154,6 +154,41 @@ export interface TeachingLocation {
   hub?: boolean;
 }
 
+/**
+ * Compact list of organizations / brands where Cihan has taught or spoken.
+ * Names only — events are covered in other sections, so this strip stays lean.
+ */
+export const TEACHING_ORGS: string[] = [
+  "Cyber Anatolian Communities",
+  "Microsoft / BilgeAdam",
+  "Beykoz University",
+  "AISecLab (AI Safety Summit organizer)",
+  "İstinye University",
+  "Bahçeşehir University",
+  "Maltepe University",
+  "Haliç University",
+  "ML Career Hole (Devmulti Group)",
+  "AISecLab.org",
+  "Digital Transformation Office, Presidency of Türkiye",
+  "Google Developer Student Clubs",
+  "Marmara University",
+  "Türkiye Youth NGOs Platform",
+  "Boğaziçi University",
+  "Yıldız Technical University",
+  "Karadeniz Technical University",
+  "Istanbul Data Lab",
+  "BilgincIT Academy",
+  "Cisco Networking Academy",
+  "Istanbul Medeniyet University",
+  "Üsküdar University",
+  "Iğdır University",
+  "BGA Security",
+  "Devnot Summit",
+  "Lycée Saint-Joseph",
+  "Teknopark İstanbul",
+  "Lycée Saint Benoît d'İstanbul",
+];
+
 export const TEACHING_LOCATIONS: TeachingLocation[] = [
   {
     id: "newyork",
