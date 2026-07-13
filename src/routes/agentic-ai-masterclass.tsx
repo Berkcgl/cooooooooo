@@ -59,6 +59,7 @@ function Masterclass() {
         <Talks />
         <Testimonials />
         <Faq />
+        <Pricing />
         <FinalCta />
       </main>
       <SiteFooter />
