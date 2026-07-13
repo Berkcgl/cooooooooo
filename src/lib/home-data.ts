@@ -75,19 +75,19 @@ export const TRAININGS: Training[] = [
     title: "LLM Engineering Bootcamp",
     body: "LLM tabanlı uygulamalar, RAG ve üretim seviyesinde sistem tasarımı.",
     meta: "Bootcamp",
-    url: "https://www.cihanozhan.com/", // TODO
+    url: "https://cihanozhan.com/llms",
   },
   {
     title: "Machine Learning Engineer",
     body: "Makine öğrenmesi modellerini uçtan uca geliştirme ve servisleştirme.",
     meta: "Program",
-    url: "https://www.cihanozhan.com/", // TODO
+    url: "https://aiseclab.org/courses/machine-learning-engineer/",
   },
   {
     title: "AI Security Engineer",
     body: "Offensive & defensive AI güvenliği, red teaming ve güvenli ML sistemleri.",
     meta: "Bootcamp",
-    url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFxjMco-nxzOCffjwx1LKzpQ",
+    url: "https://aiseclab.org/courses/ai-security-engineer/",
   },
 ];
 
