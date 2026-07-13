@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SmoothScrollProvider } from "../lib/smooth-scroll";
 import { ThemeProvider } from "../components/theme/ThemeProvider";
+import { CookieConsent } from "../components/site/CookieConsent";
 
 function NotFoundComponent() {
   return (
