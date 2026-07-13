@@ -13,7 +13,7 @@ export function TeachingMap() {
     <section id="harita" className="border-t border-border py-24 md:py-32">
       <div className="container-page">
         <SectionHeading
-          index="04"
+          index="03"
           kicker="Nerede öğretti / konuştu"
           ghost="MAP"
           title="Sahadan sahaya, kürsüden kürsüye"
