@@ -16,6 +16,10 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/agentic-ai-masterclass", changefreq: "weekly", priority: "0.9" },
+          { path: "/trainings", changefreq: "monthly", priority: "0.8" },
+          { path: "/speaking", changefreq: "monthly", priority: "0.7" },
+          { path: "/publications", changefreq: "monthly", priority: "0.7" },
+          { path: "/experience", changefreq: "monthly", priority: "0.6" },
         ];
 
         const urls = entries.map((e) =>
