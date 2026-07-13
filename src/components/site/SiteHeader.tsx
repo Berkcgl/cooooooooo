@@ -11,7 +11,6 @@ type NavLink = { label: string; to?: string; href?: string };
 const HOME_LINKS: NavLink[] = [
   { label: "Hakkında", href: "/#hakkinda" },
   { label: "Girişimler", href: "/#girisimler" },
-  { label: "Eğitimler", to: "/trainings" },
   { label: "Konuşmalar", to: "/speaking" },
   { label: "Yayınlar", to: "/publications" },
   { label: "Deneyim", to: "/experience" },
@@ -88,7 +87,7 @@ export function SiteHeader() {
             </Button>
           ) : (
             <Button asChild variant="brand" size="lg" className="hidden sm:inline-flex">
-              <Link to={MASTERCLASS_ROUTE}>Masterclass</Link>
+              <Link to="/trainings">AI Masterclasses</Link>
             </Button>
           )}
           <button
@@ -122,11 +121,11 @@ export function SiteHeader() {
               </Link>
             ) : (
               <Link
-                to={MASTERCLASS_ROUTE}
+                to="/trainings"
                 onClick={() => setOpen(false)}
                 className="rounded-md px-2 py-3 text-sm font-medium text-brand hover:bg-secondary"
               >
-                Masterclass
+                AI Masterclasses
               </Link>
             )}
           </div>

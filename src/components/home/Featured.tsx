@@ -21,7 +21,7 @@ interface Column {
 const trainingItems: Item[] = [
   ...TRAININGS.map((t) => ({ title: t.title, meta: t.meta, url: t.url, internal: t.internal })),
   ...COURSES.map((c) => ({ title: c.title, meta: c.meta, url: c.url })),
-].slice(0, 7);
+].slice(0, 6);
 
 const COLUMNS: Column[] = [
   {
@@ -32,13 +32,13 @@ const COLUMNS: Column[] = [
   {
     label: "Konuşmalar",
     to: "/speaking",
-    items: TALKS.slice(0, 7).map((t) => ({ title: t.title, meta: t.meta, url: t.url })),
+    items: TALKS.slice(0, 6).map((t) => ({ title: t.title, meta: t.meta, url: t.url })),
   },
   {
     label: "Sunumlar & Yayınlar",
     to: "/publications",
     items: [...PUBLICATIONS, ...PRESENTATIONS]
-      .slice(0, 7)
+      .slice(0, 6)
       .map((t) => ({ title: t.title, meta: t.meta, url: t.url })),
   },
 ];
@@ -111,7 +111,9 @@ function FeaturedRow({ title, meta }: { title: string; meta: string }) {
   return (
     <div className="flex items-start justify-between gap-3">
       <div>
-        <p className="text-sm font-semibold leading-snug text-ink-900">{title}</p>
+        <p className="line-clamp-2 min-h-[2.5rem] text-sm font-semibold leading-snug text-ink-900">
+          {title}
+        </p>
         <p className="mt-1 font-mono text-[11px] uppercase tracking-wide text-ink-500">{meta}</p>
       </div>
       <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-ink-300 transition-colors group-hover:text-brand" />

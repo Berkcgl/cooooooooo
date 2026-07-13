@@ -44,7 +44,7 @@ export function ScrollZoomHero() {
           alt="Soyut yapay zeka sinir ağı görselleştirmesi"
           width={2000}
           height={1125}
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-auto w-full origin-bottom object-cover object-bottom opacity-90 will-change-transform"
+          className="pointer-events-none absolute inset-0 -z-10 h-full w-full origin-bottom object-cover object-center opacity-90 will-change-transform md:inset-x-0 md:bottom-0 md:top-auto md:h-auto md:object-bottom"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/70 via-background/40 to-background" />
 
@@ -62,11 +62,6 @@ export function ScrollZoomHero() {
             <span className="block overflow-hidden">
               <span data-hero-line className="block">
                 {PERSON.name}
-              </span>
-            </span>
-            <span className="mt-1 block overflow-hidden">
-              <span data-hero-line className="block text-brand">
-                Offensive AI &amp; Agentic Systems
               </span>
             </span>
           </h1>

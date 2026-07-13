@@ -21,12 +21,12 @@ export function TeachingMap() {
           description="Üniversitelerden kamu kurumlarına ve global etkinliklere — eğitim ve konuşma verilen kurumlardan bir seçki."
         />
 
-        <div ref={ref} className="mt-14 flex flex-wrap gap-2.5">
+        <div ref={ref} className="mt-14 flex flex-wrap justify-center gap-2.5">
           {TEACHING_ORGS.map((org) => (
             <span
               key={org}
               data-org-chip
-              className="inline-flex items-center rounded-lg border border-border bg-card px-3.5 py-2 text-sm font-medium text-ink-700 transition-colors hover:border-brand/40 hover:text-ink-900"
+              className="inline-flex items-center justify-center rounded-lg border border-border bg-card px-3.5 py-2 text-center text-sm font-medium text-ink-700 transition-colors hover:border-brand/40 hover:text-ink-900"
             >
               {org}
             </span>

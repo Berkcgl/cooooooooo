@@ -293,22 +293,24 @@ export const INSTRUCTOR_TIMELINE: TimelineItem[] = [
 export interface Institution {
   name: string;
   logo?: string;
+  /** External site for the institution — makes the logo tile a link. */
+  url?: string;
   /** Render on a dark tile (for logos that are white/transparent). */
   dark?: boolean;
 }
 
 export const INSTITUTIONS: Institution[] = [
-  { name: "Cumhurbaşkanlığı", logo: cumhurbaskanligiLogo.url },
-  { name: "Aselsan", logo: aselsanLogo.url },
-  { name: "Siemens", logo: siemensLogo.url },
-  { name: "Yemeksepeti", logo: yemeksepetiLogo.url },
-  { name: "Turkcell", logo: turkcellLogo.url },
-  { name: "N11", logo: n11Logo.url },
-  { name: "TUSAŞ (TEI)", logo: tusasLogo.url },
-  { name: "İş Bankası", logo: isbankasiLogo.url },
-  { name: "Akbank", logo: akbankLogo.url },
-  { name: "Garanti Bankası", logo: garantiLogo.url },
-  { name: "Türk Telekom", logo: turkTelekomLogo.url },
+  { name: "Cumhurbaşkanlığı", logo: cumhurbaskanligiLogo.url, url: "https://www.tccb.gov.tr/" },
+  { name: "Aselsan", logo: aselsanLogo.url, url: "https://www.aselsan.com/tr" },
+  { name: "Siemens", logo: siemensLogo.url, url: "https://www.siemens.com/tr-tr/" },
+  { name: "Yemeksepeti", logo: yemeksepetiLogo.url, url: "https://www.yemeksepeti.com/" },
+  { name: "Turkcell", logo: turkcellLogo.url, url: "https://www.turkcell.com.tr/" },
+  { name: "N11", logo: n11Logo.url, url: "https://www.n11.com/" },
+  { name: "TUSAŞ (TEI)", logo: tusasLogo.url, url: "https://www.tusas.com/" },
+  { name: "İş Bankası", logo: isbankasiLogo.url, url: "https://www.isbank.com.tr/" },
+  { name: "Akbank", logo: akbankLogo.url, url: "https://www.akbank.com/" },
+  { name: "Garanti Bankası", logo: garantiLogo.url, url: "https://www.garantibbva.com.tr/" },
+  { name: "Türk Telekom", logo: turkTelekomLogo.url, url: "https://www.turktelekom.com.tr/" },
 ];
 
 export interface PresenceCard {
@@ -510,7 +512,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "Eğitim ücreti nedir, taksit seçenekleri var mı?",
-    a: "Taksit imkânı mevcuttur. Standart eğitim ücreti 40.000 TL'dir; erken kayıt yaptıran ilk 30 öğrenci için ücret 35.000 TL olarak uygulanır.",
+    a: "Taksit imkanı mevcuttur. Standart eğitim ücreti 40.000 TL'dir; erken kayıt döneminde ücret 35.000 TL'dir. Öğrenciler için fiyat 30.000 TL'dir.",
   },
   {
     q: "Eğitim günleri ve saatleri nedir?",
