@@ -6,11 +6,11 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageHero } from "@/components/site/PageHero";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { TRAININGS } from "@/lib/home-data";
-import { FREE_VIDEOS, YOUTUBE_CHANNEL } from "@/lib/landing-data";
+import { COURSES, YOUTUBE_CHANNEL, type TabItem } from "@/lib/landing-data";
 
 const TITLE = "Eğitimler & Programlar | Cihan Özhan";
 const DESC =
-  "Agentic AI Masterclass'tan LLM Engineering ve AI Security Engineer programlarına — canlı, uygulamalı eğitimler ve ücretsiz video serileri.";
+  "Agentic AI Masterclass'tan LLM Engineering ve AI Security Engineer programlarına — canlı, uygulamalı eğitimler ve 30+ kurs / video serisi arşivi.";
 
 export const Route = createFileRoute("/trainings")({
   head: () => ({
@@ -26,7 +26,20 @@ export const Route = createFileRoute("/trainings")({
   component: TrainingsPage,
 });
 
+/** Group archive items by year, newest first. */
+function groupByYear(items: TabItem[]): [number, TabItem[]][] {
+  const map = new Map<number, TabItem[]>();
+  for (const it of items) {
+    const y = it.year ?? 0;
+    if (!map.has(y)) map.set(y, []);
+    map.get(y)!.push(it);
+  }
+  return [...map.entries()].sort((a, b) => b[0] - a[0]);
+}
+
 function TrainingsPage() {
+  const grouped = groupByYear(COURSES);
+
   return (
     <>
       <Ticker />
@@ -36,7 +49,7 @@ function TrainingsPage() {
           index="01"
           kicker="Eğitimler & Programlar"
           title="Canlı ve uygulamalı eğitim programları"
-          description="Amiral gemisi Agentic AI Masterclass ve diğer bootcamp / programlar."
+          description="Amiral gemisi Agentic AI Masterclass ve diğer bootcamp / programlar, ardından 30+ kurs ve video serisinden oluşan tam arşiv."
         />
 
         <section className="py-16 md:py-24">
@@ -102,9 +115,11 @@ function TrainingsPage() {
                 <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
                   <span>02</span>
                   <span className="h-px w-8 bg-brand/40" />
-                  <span className="text-ink-500">Ücretsiz</span>
+                  <span className="text-ink-500">Arşiv</span>
                 </div>
-                <h2 className="display-2 mt-4 text-ink-900 text-balance">Ücretsiz video serileri</h2>
+                <h2 className="display-2 mt-4 text-ink-900 text-balance">
+                  Kurslar & video serileri
+                </h2>
               </div>
               <a
                 href={YOUTUBE_CHANNEL}
@@ -117,23 +132,33 @@ function TrainingsPage() {
               </a>
             </div>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {FREE_VIDEOS.map((v) => (
-                <a
-                  key={v.title}
-                  href={v.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-hover group flex flex-col justify-between rounded-2xl border border-border bg-card p-6"
-                >
-                  <h3 className="text-base font-semibold leading-snug text-ink-900">{v.title}</h3>
-                  <div className="mt-6 flex items-center justify-between">
-                    <span className="font-mono text-[11px] uppercase tracking-wide text-ink-500">
-                      {v.meta}
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 text-ink-300 transition-colors group-hover:text-brand" />
-                  </div>
-                </a>
+            <div className="mt-12 space-y-12">
+              {grouped.map(([year, items]) => (
+                <div key={year} className="grid gap-6 lg:grid-cols-[auto_1fr] lg:gap-12">
+                  <div className="font-mono text-2xl font-bold tracking-tight text-brand">{year}</div>
+                  <ol className="border-t border-border">
+                    {items.map((c) => (
+                      <li key={`${c.title}-${c.meta}`} className="border-b border-border">
+                        <a
+                          href={c.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group grid grid-cols-[1fr_auto] items-center gap-5 py-4 md:gap-8"
+                        >
+                          <span>
+                            <span className="block text-base font-semibold text-ink-900 transition-colors group-hover:text-brand">
+                              {c.title}
+                            </span>
+                            <span className="mt-1 block font-mono text-[11px] uppercase tracking-wide text-ink-500">
+                              {c.meta}
+                            </span>
+                          </span>
+                          <ArrowUpRight className="h-5 w-5 text-ink-300 transition-all group-hover:-translate-y-0.5 group-hover:text-brand" />
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               ))}
             </div>
           </div>
