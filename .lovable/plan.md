@@ -1,49 +1,102 @@
-## Goal
+# Plan: WhyNow cleanup, free videos, KVKK page & cookie banner
 
-Three focused, presentation-only changes: (1) stop the "Ö"/"A" from being clipped in the big display titles, (2) replace the top ticker strip text, and (3) replace placeholder links in the archive pages with the real matching links from cihanozhan.com.
+Four frontend-only changes. No backend, no changes to unrelated copy.
 
----
+## 1. "NEDEN ŞİMDİ" — remove the percentage/stat numbers
 
-### 1. Clipped display titles ("Cihan Özhan", "Agentic AI Masterclass")
+In `src/components/landing/WhyNow.tsx`, stop rendering the big `c.stat` number
+(`%75`, `%40`, `1M+`) and its styling. Keep each card's title + body and the
+grid layout. Add a small neutral top accent (a short brand-colored rule) so the
+cards don't look empty where the number was.
 
-The titles use `display-1` (`line-height: 1.02`) and the hero markup wraps each line in `<span class="block overflow-hidden">` for the reveal animation. The very tight line-height plus `overflow-hidden` crops the top of tall glyphs (the umlaut on "Ö", the apex of "A").
+`src/lib/landing-data.ts`: leave the `WHY_NOW` array as-is (just stop consuming
+`.stat`) to avoid touching data other components might reference — the `stat`
+field simply goes unused.
 
-- In `src/styles.css`, add a small amount of headroom to the line-clipping wrappers without disturbing the reveal animation — apply a tiny top padding + matching negative top margin to the `overflow-hidden` line wrappers in the hero (via a scoped utility class, e.g. `.hero-line-mask { padding-top: 0.12em; margin-top: -0.12em; }`), and relax `line-height` on the hero title only to ~`1.1`.
-- Apply that class to the `<span className="block overflow-hidden">` wrappers in `src/components/home/ScrollZoomHero.tsx` (Cihan Özhan) and `src/components/landing/Hero.tsx` (Agentic AI Masterclass). This keeps the GSAP `yPercent` reveal intact while giving glyphs room at the top.
+## 2. "Ücretsiz eğitimlerle başlayın" — replace with the 6 new videos
 
-### 2. Ticker text swap
+In `src/lib/landing-data.ts`, replace the `FREE_VIDEOS` array with the six
+provided YouTube videos (stored as `watch?v=` URLs so the existing
+`youtubeThumb()` thumbnail logic keeps working). Real fetched titles, upload
+dates and source:
 
-In `src/components/site/Ticker.tsx`, replace the current `ITEMS` array (Offensive AI Security, location, Safebox·AISecLab·Runbit, etc.) with the requested keyword list, uppercased for the mono strip:
+| Title | Meta | URL |
+|---|---|---|
+| Prompt Mühendisliği Yol Haritası | 2025 · YouTube | watch?v=OyBpfOKgpwo |
+| Python Mühendisliği Yol Haritası | 2025 · YouTube | watch?v=NfduR0QV-Gk |
+| Yapay Zeka Mühendisliği Yol Haritası | 2025 · YouTube | watch?v=O3W_QkjI2yw |
+| Python Programlama Eğitimi (Hızlandırılmış) | 2025 · YouTube | watch?v=w9QLH4pQd7o |
+| Uygulamalı Derin Öğrenme (Applied Deep Learning) | 2025 · YouTube | watch?v=Fqa2A-TSI80 |
+| Python ile Fonksiyon/Metot Kullanımı | 2021 · YouTube | watch?v=SbI5UGf8DMw |
 
-```
-Artificial Intelligence (AI) · Machine Learning (ML) · Deep Learning (DL) ·
-Neural Networks (NN) · Artificial Neural Networks (ANN) · Generative AI (GenAI) ·
-Large Language Models (LLM) · Agentic AI · AI as a Service (AIaaS) ·
-AI Security · Offensive AI
-```
+`src/components/landing/FreeLibrary.tsx` needs no structural change — it already
+renders thumbnail cards in a responsive `sm:grid-cols-2 lg:grid-cols-3` grid
+(matches the site's card design and gives the requested consistent sizing).
+This replaces the raw `<iframe>` embeds with themed, click-to-YouTube cards that
+fit the existing layout. If you specifically want inline playable iframes
+instead of thumbnail cards, say so and I'll switch the card to a 16:9 iframe.
 
-The existing marquee duplication/animation stays unchanged.
+## 3. New page: "Gizlilik Politikası" at `/gizlilik-politikasi`
 
-### 3. Real deep-links from cihanozhan.com
+Create `src/routes/gizlilik-politikasi.tsx` (TanStack file route → URL
+`/gizlilik-politikasi`), following the existing route pattern:
 
-I fetched cihanozhan.com and matched each archive item to its real link. Update `url` fields in `src/lib/landing-data.ts` (and `src/lib/home-data.ts` for trainings). Items with no real target on the source site keep their current fallback.
+- `head()` with page-specific `title` / `description` / `og:*` meta.
+- Reuse site chrome: `Ticker`, `SiteHeader`, `SiteFooter` (same as other pages),
+  wrapped in `<main>` with the site's `container-page` width and prose spacing.
+- Render the full KVKK text provided (aydınlatma metni + açık rıza metni) as
+  proper JSX headings/paragraphs/lists using existing typography tokens
+  (`display-2`, `text-ink-900/700`, etc.). No `dangerouslySetInnerHTML`.
+- Add a top page heading "Gizlilik Politikası (KVKK)".
 
-**Trainings (`home-data.ts` → `TRAININGS`):**
-- LLM Engineering Bootcamp → `https://cihanozhan.com/llms`
-- Machine Learning Engineer → `https://aiseclab.org/courses/machine-learning-engineer/`
-- AI Security Engineer → `https://aiseclab.org/courses/ai-security-engineer/`
+Add the sitemap entry in `src/routes/sitemap[.]xml.ts` for the new slug.
 
-**Courses (`landing-data.ts` → `COURSES`)** — replace `YOUTUBE_CHANNEL`/profile placeholders with the real playlist/course URLs for: Mobile Application Security, Engineering Roadmaps, Algorithmic Trading with AI, Self-Learning AI (RL), Numeric Programming with NumPy, AI Safety, Applied ML Model Deployment (MLaaS), TensorFlow Ecosystem, DB Programming w/ SQL Server (2021), Web Programming w/ Flask, AI Starter Guide, Software Dev Starter Guide, Python (2020), RESTful API Basics, PostgreSQL, SQLite, C#, SQL Server (2017), Go Standard Library, RESTful API w/ Go, Go Language (2016), Oracle PL/SQL, Oracle SQL Developer.
+## 4. Footer link to the privacy page
 
-**Talks/Events (`landing-data.ts` → `TALKS`)** — replace the `https://www.cihanozhan.com/` placeholders with the real event links: Cyber Anatolian (LinkedIn), Microsoft/BilgeAdam (LinkedIn), Beykoz (LinkedIn), Haliç (Instagram), ML Career Hole (Kommunity), OWASP ML Top 10 (YouTube), Deep Learning defense app (YouTube), Cumhurbaşkanlığı (aiseclab portfolio), Defense Industry (YouTube), Marmara (Biletino), National Security (Twitter), Yıldız (Medium), Karadeniz (Medium), Istanbul Data Lab (Medium), BilgincIT (Medium), Cisco (netacad), Medeniyet (Medium), Üsküdar (LinkedIn), Iğdır (LinkedIn), Offensive AI 2021 (YouTube), AI Getting Started (YouTube), BGA Security, Industrial AI (YouTube), Data Security Fundamentals (YouTube), AI+CyberSec+Autonomous (YouTube), Devnot Summit, Industry 4.0 (YouTube), Digital Transformation MBA (YouTube), Teknopark İstanbul. Items with only `cihanozhan.com/#` on source (İstinye, Bahçeşehir, Maltepe, Lycée Saint-Joseph, Lycée Saint Benoît) keep the current fallback.
+In `src/components/site/SiteFooter.tsx` (the footer used on every current page),
+add a "Gizlilik Politikası" `<Link to="/gizlilik-politikasi">` alongside the
+copyright line, styled like the existing footer links. (`landing/Footer.tsx`
+is unused, so it's left alone.)
 
-**Presentations (`landing-data.ts` → `PRESENTATIONS`)** — replace `SLIDESHARE_PROFILE` placeholders with the real slide URLs for: Today's Implementation Realities (slideserve), AI Security v1 EN/TR (slideshare), AI Getting Started (slideserve), Industry 4.0 (slideserve), SQLite (slideserve), Python (slideshare), React.js, Angular, OWASP (slideserve), Key Data Security (slideserve), Go (slideshare), Decentralized App Dev (slideshare), RESTful API (slideserve). Rust has no real link on source → keep fallback.
+## 5. Session-only cookie consent banner (all pages)
 
-**Publications** already point to real book/article URLs — no change.
+New `src/components/site/CookieConsent.tsx`, mounted once globally in
+`src/routes/__root.tsx`'s `RootComponent` so it appears on every route
+including the masterclass page.
 
----
+**Behavior**
+- Session-only React state (module-level flag or `sessionState`) — no
+  localStorage, no real cookie logic. Once "Kabul Et" or "Reddet" is clicked,
+  hide for the rest of the session.
+- Appears ~600ms after mount with a calm fade + slight slide-up
+  (reuse `animate-fade-in` / existing motion tokens, no bounce).
 
-### Notes
-- All changes are frontend/data only — no backend or business-logic changes.
-- Verification: headless screenshot of the hero titles (light + dark) to confirm glyphs aren't clipped, and a quick check that ticker + a few updated links render.
-- Any item I couldn't source a real link for keeps its existing URL; share those and I'll drop them in one by one.
+**Layout / position**
+- Desktop: compact fixed rectangle in the **bottom-left** corner (to stay clear
+  of the bottom-right `BackToTop` button + `ScrollReadout`). Alternatively keep
+  it bottom-right and push `BackToTop`/`ScrollReadout` up while visible — I'll go
+  with bottom-left as the simpler, non-overlapping option unless you prefer the
+  push-up approach.
+- Mobile: full-width bar anchored to the bottom edge.
+- `z-index` below nothing critical but above page content; doesn't block the
+  page (not a modal overlay).
+
+**Content**
+- Headline: "Çerez Tercihleri"
+- One sentence: site uses cookies to improve experience and analyze traffic,
+  with "Gizlilik Politikası" linking to `/gizlilik-politikasi`.
+- Primary "Kabul Et" button (`variant="brand"`) + secondary "Reddet" button
+  (`variant="brandOutline"`), matching existing CTA styles.
+- Optional single small shield/cookie lucide icon, nothing more.
+
+**Design**
+- Uses `bg-card`, `border-border`, rounded corners, `shadow-lg` — same elevation
+  language as other floating UI. All colors via theme tokens (works in
+  light/dark). Visually quiet.
+
+## Technical notes
+- All work is in `src/routes/`, `src/components/`, and `src/lib/landing-data.ts`.
+- New route file created before any `<Link to="/gizlilik-politikasi">` is added,
+  so the type-safe router/build stays green.
+- Verify light + dark rendering and mobile/desktop banner behavior with a
+  headless screenshot pass.
