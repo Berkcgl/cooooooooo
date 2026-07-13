@@ -43,6 +43,7 @@ function Masterclass() {
     <>
       <Ticker />
       <SiteHeader />
+      <ScrollReadout />
       <main>
         <Hero />
         <Metrics />
