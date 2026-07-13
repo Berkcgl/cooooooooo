@@ -16,27 +16,7 @@ export function Organizations() {
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent" />
         <div className="flex w-max animate-[marquee_38s_linear_infinite] items-center gap-6 group-hover:[animation-play-state:paused]">
           {items.map((org, i) => (
-            <div
-              key={`${org.name}-${i}`}
-              className={`grid h-16 w-40 shrink-0 place-items-center rounded-xl border border-border px-6 ${
-                org.dark ? "bg-ink-900" : "bg-card"
-              }`}
-            >
-              {org.logo ? (
-                <img
-                  src={org.logo}
-                  alt={`${org.name} logosu`}
-                  className="max-h-9 w-auto max-w-full object-contain"
-                  loading="lazy"
-                />
-              ) : (
-                // Placeholder until client-provided logo files are uploaded.
-                <span
-                  aria-label={`${org.name} logosu`}
-                  className="h-6 w-24 rounded bg-ink-300/40"
-                />
-              )}
-            </div>
+            <LogoTile key={`${org.name}-${i}`} org={org} className="h-16 w-40" />
           ))}
 
         </div>
