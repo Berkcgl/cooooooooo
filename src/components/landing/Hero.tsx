@@ -41,7 +41,7 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative mx-auto aspect-video w-full max-w-lg rounded-3xl border border-border bg-secondary/40 p-4">
+          <div className="relative mx-auto aspect-video w-full max-w-lg overflow-hidden rounded-3xl border border-border bg-secondary/40 p-3">
             <img
               src={heroImg}
               alt="Agentic AI sistem mimarisi: merkezi modeli araçlara bağlayan otonom agent ağı"
@@ -53,7 +53,7 @@ export function Hero() {
               type="button"
               aria-label="Tanıtım videosunu oynat"
               onClick={() => setVideoOpen(true)}
-              className="group absolute bottom-7 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-border bg-background/90 py-2 pl-2 pr-5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5 hover:-translate-x-1/2"
+              className="group absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-border bg-background/90 py-2 pl-2 pr-5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5 hover:-translate-x-1/2"
             >
               <span className="grid h-10 w-10 place-items-center rounded-full bg-brand text-brand-foreground">
                 <Play className="h-4 w-4 fill-current" />
@@ -65,29 +65,18 @@ export function Hero() {
             </button>
           </div>
 
-          <div className="mx-auto mt-8 w-full max-w-lg">
-            <p className="text-center text-xs font-semibold uppercase tracking-wider text-ink-500">
+          <div className="mx-auto mt-10 w-full max-w-lg">
+            <p className="text-center font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink-500">
               Eğitim verdiği bazı kurumlar
             </p>
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-5 grid grid-cols-3 place-items-center gap-3 sm:grid-cols-4">
               {INSTITUTIONS.filter((org) => org.logo).map((org) => (
-                <div
-                  key={org.name}
-                  className={`grid h-12 w-28 shrink-0 place-items-center rounded-lg border border-border px-4 ${
-                    org.dark ? "bg-ink-900" : "bg-card"
-                  }`}
-                >
-                  <img
-                    src={org.logo}
-                    alt={`${org.name} logosu`}
-                    className="max-h-6 w-auto max-w-full object-contain"
-                    loading="lazy"
-                  />
-                </div>
+                <LogoTile key={org.name} org={org} className="h-14 w-full" />
               ))}
             </div>
           </div>
         </div>
+
       </div>
 
       <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
