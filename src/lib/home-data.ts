@@ -19,9 +19,9 @@ export const PERSON = {
 export const MASTERCLASS_ROUTE = "/agentic-ai-masterclass";
 
 export const ABOUT_PARAGRAPHS: string[] = [
-  "20+ yıldır yazılım, güvenlik ve yapay zeka alanında araştırmacı, geliştirici ve girişimci olarak çalışıyorum.",
-  "Offensive AI Security üzerine araştırmalar yürütüyor; kamu kurumlarından üniversitelere ve global teknoloji şirketlerine kadar yüzlerce kuruma eğitim ve danışmanlık veriyorum.",
-  "İstanbul ve New York arasında; agentic AI sistemlerini tasarlıyor, güvenli hale getiriyor ve üretime taşıyorum.",
+  "20+ yıldır yazılım, siber güvenlik ve yapay zeka alanlarında çalışan; Offensive AI Security, agentic AI ve otonom sistemler üzerine uzmanlaşmış araştırmacı, mühendis ve girişimciyim.",
+  "Yapay zekanın güvenliği ve saldırı yüzeyi üzerine araştırmalar yürütüyor; kamu kurumlarından üniversitelere, savunma sanayiinden global teknoloji şirketlerine kadar yüzlerce kuruma eğitim, danışmanlık ve teknik liderlik sağlıyorum.",
+  "İstanbul ve New York arasında; üretim ortamında çalışan agentic AI sistemleri tasarlıyor, güvenliğini sağlıyor ve ölçeklenebilir AI platformları geliştiriyorum.",
 ];
 
 export interface Venture {
@@ -160,7 +160,8 @@ export interface TeachingLocation {
  */
 export const TEACHING_ORGS: string[] = [
   "Cyber Anatolian Communities",
-  "Microsoft / BilgeAdam",
+  "Microsoft",
+  "BilgeAdam",
   "Beykoz University",
   "AISecLab (AI Safety Summit organizer)",
   "İstinye University",

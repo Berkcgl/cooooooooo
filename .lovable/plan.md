@@ -1,39 +1,65 @@
-# Site polish: hero image, logos, hero theme, org section, scroll HUD, Otorite, portrait
+Presentation-only content and layout updates across the homepage, header, `/trainings`, and `/agentic-ai-masterclass`. Each change is verified in the preview (light + dark, desktop + mobile) before finishing.
 
-Presentation-only fixes across the site. Each is verified in the preview before moving on.
+## 1) Homepage hero text (`src/components/home/ScrollZoomHero.tsx`)
+- Remove the line `Offensive AI & Agentic Systems`.
+- Move `Cihan Özhan` down into that lower line slot, keeping its current (non-brand) `text-ink-900` color unchanged. Result: a single-name headline sitting where the two-line stack used to be.
 
-## 1) Homepage hero: use the uploaded network image
-Replace the AI-generated `hero-network.jpg` with the newly uploaded glowing blue network-globe image.
-- Create a CDN asset pointer from the upload via `lovable-assets` (e.g. `src/assets/hero-network-globe.jpg.asset.json`).
-- Point `src/components/home/ScrollZoomHero.tsx` at the new pointer. Adjust the framing/mask so the wide globe reads well behind the centered headline (the image is a wide crop of the top of a glowing sphere, not a square), keeping the scroll-zoom camera push intact.
+## 2) About copy (`src/lib/home-data.ts`)
+Replace the three `ABOUT_PARAGRAPHS` with the new wording:
+1. "20+ yıldır yazılım, siber güvenlik ve yapay zeka alanlarında çalışan; Offensive AI Security, agentic AI ve otonom sistemler üzerine uzmanlaşmış araştırmacı, mühendis ve girişimciyim."
+2. "Yapay zekanın güvenliği ve saldırı yüzeyi üzerine araştırmalar yürütüyor; kamu kurumlarından üniversitelere, savunma sanayiinden global teknoloji şirketlerine kadar yüzlerce kuruma eğitim, danışmanlık ve teknik liderlik sağlıyorum."
+3. "İstanbul ve New York arasında; üretim ortamında çalışan agentic AI sistemleri tasarlıyor, güvenliğini sağlıyor ve ölçeklenebilir AI platformları geliştiriyorum."
 
-## 2) Homepage hero: keep it dark even in light theme
-The network image is built for a dark backdrop; on the light theme it washes out and text loses contrast.
-- In `ScrollZoomHero.tsx`, scope the hero `<section>` to always render dark tokens (add the `dark` class + explicit dark background) so the visual, brand glow, and white headline read correctly regardless of active theme.
-- Keep the bottom fade resolving to the section's own (dark) background and ensure a clean transition into the next (light) `About` section. Only the hero is pinned dark.
+The tagline ("Yapay zekayı güvenli, otonom ve üretime hazır hale getiriyorum.") stays as-is since no replacement was provided.
 
-## 3) Bigger logos in every "Eğitim verdiği bazı kurumlar" strip
-`src/components/site/LogoTile.tsx` is the shared tile for the homepage `LogoMarquee`, Masterclass `Organizations`, and the Hero grid — editing it fixes all at once.
-- Reduce internal padding (`px-5` → `px-2`) and raise the logo cap (`max-h-8` → `max-h-10`) so each mark fills ~80% of the tile. Keep the white card, border, and fixed bounding box so alignment stays uniform.
+## 3) TeachingMap "Sahadan sahaya" (`src/components/home/TeachingMap.tsx` + `home-data.ts`)
+- Center-align the chip row and the text inside each chip (`justify-center`, `text-center`).
+- In `TEACHING_ORGS`, split `"Microsoft / BilgeAdam"` into two separate entries: `"Microsoft"` and `"BilgeAdam"`.
 
-## 4) "Sahadan sahaya" → compact Organizations / Brands list
-`TeachingMap` currently renders event+org+year cards, duplicating event info shown elsewhere.
-- Replace the card grid in `src/components/home/TeachingMap.tsx` with a compact, corporate layout showing only organization/brand names (no events, no years).
-- Add a `TEACHING_ORGS` string array in `src/lib/home-data.ts` with the full provided list (Cyber Anatolian Communities, Microsoft / BilgeAdam, Beykoz University, AISecLab, İstinye University, Bahçeşehir University, Maltepe University, Haliç University, ML Career Hole (Devmulti Group), AISecLab.org, Digital Transformation Office – Presidency of Türkiye, Google Developer Student Clubs, Marmara University, Türkiye Youth NGOs Platform, Boğaziçi University, Yıldız Technical University, Karadeniz Technical University, Istanbul Data Lab, BilgincIT Academy, Cisco Networking Academy, Istanbul Medeniyet University, Üsküdar University, Iğdır University, BGA Security, Devnot Summit, Lycée Saint-Joseph, Teknopark İstanbul, Lycée Saint Benoît d'İstanbul).
-- Render as a tight, wrapping grid of small bordered name tiles/pills, keeping the existing `SectionHeading`.
+## 4) Stats on the homepage (`src/components/home/StatCallouts.tsx`)
+Currently shows only the first 4 metrics. Show all metrics including the three requested (`250+ Kurumsal Eğitim / Proje / Danışmanlık`, `20+ Yıl Sektör Tecrübesi`, `16+ Yıl Eğitmenlik Tecrübesi`), and fix alignment so the grid stays even (responsive columns that divide the 7 items cleanly, consistent tile heights/dividers).
 
-## 5) Restore scroll-percentage HUD on the Masterclass page
-The bottom-right `SCROLL %` readout only mounts on the homepage.
-- Add `<ScrollReadout />` to `src/routes/agentic-ai-masterclass.tsx` (same placement as `src/routes/index.tsx`).
+## 5) Logo links on every "Eğitim verdiği bazı kurumlar" strip
+- Add optional `url` to the `Institution` interface in `src/lib/landing-data.ts` and fill each entry's URL (Cumhurbaşkanlığı, Aselsan, Siemens, Yemeksepeti, Turkcell, N11, TUSAŞ, İş Bankası, Akbank, Garanti BBVA, Türk Telekom).
+- Update `src/components/site/LogoTile.tsx` to wrap the tile in an external `<a target="_blank" rel="noopener noreferrer">` when `org.url` exists (fallback to the current div otherwise). This covers `LogoMarquee`, `Organizations`, and the Hero grid at once.
 
-## 6) Otorite section: fewer cards + "Tamamını incele" button
-In `src/components/landing/Talks.tsx` (heading "Otorite"), each tab lists the full arrays.
-- Cap each tab (Konuşmalar / Sunumlar / Yayınlar) to ~6 via `.slice(0, 6)`.
-- Add a "Tamamını incele" button under the list linking to existing subpages: Konuşmalar & Sunumlar → `/speaking`, Yayınlar → `/publications`, using TanStack `Link`.
+## 6) Featured "Öne çıkan çalışmalar" (`src/components/home/Featured.tsx`)
+- Cap each column to 6 items (currently 7).
+- Give each card title a reserved 2-line height (`line-clamp-2` + `min-h` for two lines) so every card is the same height regardless of title length.
 
-## 7) Remove the white gradient on Cihan Özhan's portrait
-In `src/components/landing/Instructor.tsx`, the portrait overlay uses `bg-gradient-to-t from-ink-900/70` with `text-brand-foreground` text — in dark theme `ink-900` resolves near-white, so a white gradient sits under white text and the name is unreadable.
-- Remove that gradient caption overlay so the portrait shows cleanly (name/role already appear in the adjacent heading/body).
+## 7) Header (`src/components/site/SiteHeader.tsx`)
+- Rename the header CTA button from `Masterclass` to `AI Masterclasses`, pointing to `/trainings` (internal Link) instead of the masterclass route. Update the mobile menu button the same way.
+- Remove the `Eğitimler` nav link from `HOME_LINKS`.
+
+## 8) Trainings page — active vs past (`src/routes/trainings.tsx`)
+- Split the program cards into two groups: **Aktif** and **Geçmiş**.
+- Agentic AI Masterclass is the only active card, keeping the special highlighted styling (brand border + `brand-soft` background).
+- Change its `FLAGSHIP` tag label to `ONLINE & LIVE CLASS`.
+- Replace the circular arrow affordance with a wider rectangular button reading `Eğitime Başvur` (links to the masterclass application).
+- The other three programs render as past cards (neutral styling, no apply button).
+
+## 9) Masterclass page (`src/components/landing/Hero.tsx`)
+- Remove the "Eğitim verdiği bazı kurumlar" logo grid that sits below the promo video block (keep the separate `Organizations` marquee section elsewhere on the page).
+- Align the promo video to the right within its column (`ml-auto`) now that the logo block is gone.
+
+## 10) FAQ answer (`src/lib/landing-data.ts`)
+Replace the answer for "Eğitim ücreti nedir, taksit seçenekleri var mı?" with:
+"Taksit imkanı mevcuttur. Standart eğitim ücreti 40.000 TL'dir; erken kayıt döneminde ücret 35.000 TL'dir. Öğrenciler için fiyat 30.000 TL'dir."
+
+## 11) New pricing section (new `src/components/landing/Pricing.tsx`, inserted in `src/routes/agentic-ai-masterclass.tsx` between `Faq` and `FinalCta`)
+- Eyebrow: `FİYAT`; big heading: `Erken Kayıtta Avantajlı Fiyat`.
+- Two blocks:
+  - **Erken Kayıt** — `40.000 TL` shown struck-through, `35.000 TL` highlighted below.
+  - **Öğrenci Kayıt** — `30.000 TL`.
+- Styled consistently with existing card/section design tokens.
+
+## 12) Mobile hero polish (`src/components/home/ScrollZoomHero.tsx`)
+Adjust framing so the network image and the headline read as one composition on mobile (tune image `object-position`/scale and vertical spacing at small breakpoints) to preserve the premium look, keeping the scroll-zoom intact.
 
 ## Verification
-Headless screenshots in both light and dark themes of: homepage hero (new image), both logo strips, the compact Organizations grid, the Masterclass Otorite section + scroll HUD, and the Instructor portrait — confirming each change is visibly applied and the look stays corporate/professional.
+Headless screenshots: homepage hero (desktop + mobile, light + dark), About copy, centered TeachingMap, full stats row, logo strips (link behavior), Featured equal-height cards, header CTA, `/trainings` active/past split, masterclass page (video right-aligned, removed logo grid), FAQ, and the new pricing section.
+
+### Technical notes
+- `Institution.url` is optional so tiles without a URL still render.
+- Trainings grouping uses the existing `featured` flag (active = featured) to avoid new data plumbing; the three non-featured entries become "Geçmiş".
+- No backend/business-logic changes — all edits are frontend/presentation.
