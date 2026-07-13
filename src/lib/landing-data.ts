@@ -335,14 +335,14 @@ export interface FreeVideo {
   url: string;
 }
 
-/** REAL published courses/series from cihanozhan.com — do not invent titles. */
+/** REAL published videos from Cihan Özhan's YouTube channel. */
 export const FREE_VIDEOS: FreeVideo[] = [
-  { title: "AI Red Teaming", meta: "2025 · YouTube", url: "https://www.youtube.com/watch?v=U4H2P73Uz_c" },
-  { title: "Machine Learning as a Service (MLaaS)", meta: "2025 · Playlist", url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFwyKekACxgGMt50A3JrYm1x" },
-  { title: "Applied Deep Learning (50+ Saat)", meta: "2022/23 · Playlist", url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFxVptNDb76nTHk4SMkInDDw" },
-  { title: "AI Security Engineer (Bootcamp · 15 Saat)", meta: "2023 · Playlist", url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFxjMco-nxzOCffjwx1LKzpQ" },
-  { title: "PyTorch Mimarisi ve Ekosistemi", meta: "2022 · Playlist", url: "https://www.youtube.com/playlist?list=PLr48dQTh3FFz5M1hDKh-ZyrUYLXRuX_3J" },
-  { title: "Computer Vision with OpenCV", meta: "2022 · YouTube", url: "https://www.youtube.com/watch?v=752a-huWGuA" },
+  { title: "Prompt Mühendisliği Yol Haritası", meta: "2025 · YouTube", url: "https://www.youtube.com/watch?v=OyBpfOKgpwo" },
+  { title: "Python Mühendisliği Yol Haritası", meta: "2025 · YouTube", url: "https://www.youtube.com/watch?v=NfduR0QV-Gk" },
+  { title: "Yapay Zeka Mühendisliği Yol Haritası", meta: "2025 · YouTube", url: "https://www.youtube.com/watch?v=O3W_QkjI2yw" },
+  { title: "Python Programlama Eğitimi (Hızlandırılmış)", meta: "2025 · YouTube", url: "https://www.youtube.com/watch?v=w9QLH4pQd7o" },
+  { title: "Uygulamalı Derin Öğrenme (Applied Deep Learning)", meta: "2025 · YouTube", url: "https://www.youtube.com/watch?v=Fqa2A-TSI80" },
+  { title: "Python ile Fonksiyon/Metot Kullanımı", meta: "2021 · YouTube", url: "https://www.youtube.com/watch?v=SbI5UGf8DMw" },
 ];
 
 export const YOUTUBE_CHANNEL = "https://www.youtube.com/@cihanozhan";
