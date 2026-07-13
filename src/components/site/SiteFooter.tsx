@@ -24,9 +24,17 @@ export function SiteFooter() {
           ))}
         </nav>
 
-        <p className="text-xs text-ink-500">
-          © {new Date().getFullYear()} Cihan Özhan
-        </p>
+        <div className="flex flex-col items-center gap-2 md:items-end">
+          <Link
+            to="/gizlilik-politikasi"
+            className="text-sm font-medium text-ink-700 transition-colors hover:text-brand"
+          >
+            Gizlilik Politikası
+          </Link>
+          <p className="text-xs text-ink-500">
+            © {new Date().getFullYear()} Cihan Özhan
+          </p>
+        </div>
       </div>
     </footer>
   );
