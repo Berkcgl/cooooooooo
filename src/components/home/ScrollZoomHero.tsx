@@ -64,11 +64,6 @@ export function ScrollZoomHero() {
                 {PERSON.name}
               </span>
             </span>
-            <span className="mt-1 block overflow-hidden">
-              <span data-hero-line className="block text-brand">
-                Offensive AI &amp; Agentic Systems
-              </span>
-            </span>
           </h1>
 
           <p data-hero-tag className="lead mx-auto mt-7 max-w-2xl text-pretty text-ink-700">
