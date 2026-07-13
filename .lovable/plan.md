@@ -1,44 +1,64 @@
-# Hero, Institutions, Nav Logo & Form CTA Update
+## Cihan Özhan — Personal Homepage Rebuild
 
-## 1. New institution logos (assets)
-Upload the 8 uploaded SVGs as CDN assets via `lovable-assets`, writing `.asset.json` pointers into `src/assets/logos/`:
-- **New (3):** `akbank-logo.svg`, `garanti-logo.svg`, `Turktelekom-logo.svg`
-- **Revised (4):** `turkcell-logo.svg`, `tusas-logo.svg`, `yemeksepeti-logo.svg`, `isbankasi-logo.svg` (overwrite the existing pointers)
-- Upload `main-website-logo.svg` for the nav (item 6).
+### Direction note
+You chose **"match the masterclass exactly"** for theme, so this keeps the current light-dominant design system (accent blue `#0A66FF`, Inter, existing spacing/card/button tokens, the single dark CTA "contrast moment"). Motion — not a dark repaint — is what pushes it to Apple-grade. If you'd rather go fully dark, say so and I'll adapt the tokens; the layout/motion plan below is unchanged either way.
 
-Then in `src/lib/landing-data.ts`:
-- Add imports for the new asset pointers and update revised ones.
-- Wire `logo` URLs for **Akbank**, **Garanti Bankası**, **Türk Telekom** so all 11 institutions have real logos.
-- Re-check the `dark` flag per logo. The uploaded İş Bankası, TUSAŞ and Türk Telekom variants render on light/color, so most tiles can stay on the normal light card; keep `dark: true` only for any logo that is white/would be invisible on a light tile.
+### Architecture
+```
+/                          → NEW animated personal homepage
+/agentic-ai-masterclass    → current masterclass page (content unchanged, restyled to share header/footer)
+```
+- One shared design system + shared `SiteHeader` / `SiteFooter` so both pages feel like one site.
+- Remove unused backend surface: delete `auth.tsx`, `_authenticated/route.tsx`, `_authenticated/admin.tsx`, `applications.functions.ts` (you don't need auth/admin). Supabase integration files stay but go unused.
 
-## 2. Normalize logo sizing (item 4 & 5)
-In `src/components/landing/Organizations.tsx`, standardize every logo image so file dimensions no longer cause size differences:
-- Apply `object-contain` with a fixed `max-h-9` (~36px) and `max-w-[7rem]`, centered, with consistent tile padding.
-- Keep equal tile size (`h-16 w-40`). This makes all logos visually balanced regardless of source dimensions. The 3 new logos inherit the same rules automatically.
+### Motion system (shared)
+- Add `gsap` (+ ScrollTrigger) and `lenis`.
+- `SmoothScrollProvider` mounted in `__root.tsx`: Lenis inertial scroll driving `ScrollTrigger.update` via a single GSAP ticker (no double RAF loops).
+- Guards: `prefers-reduced-motion` disables Lenis + all scrubbed/pinned effects (content renders in final state); on mobile (`< 768px`) pinning is skipped and reveals become short, cheap fade/translate.
+- Only `transform`/`opacity` animated. Reveal helper `useReveal()` + counter helper `useCountUp()` as small reusable hooks.
 
-## 3. Rename headings (item 3)
-Change the heading text in **both** places from `Eğitim verdiği kurumlar` to `Eğitim verdiği bazı kurumlar` (exact Turkish, no translation):
-- `src/components/landing/Hero.tsx` (the eyebrow above the institution block)
-- `src/components/landing/Organizations.tsx` (section heading)
+### New homepage — section-by-section layout + animation
+1. **Hero** — name, title ("Founder of Safebox, AISecLab & Runbit · Offensive AI Security · Researcher · Developer"), primary CTA.
+   *Motion:* staggered word/line reveal of headline, subtle parallax on a background glow/shape, CTA fades up last; slight scroll-linked parallax as you leave.
+2. **About / Bio** — short narrative (20+ yrs, researcher/developer/entrepreneur, İstanbul & New York).
+   *Motion:* line-by-line text reveal pinned briefly so copy "assembles" as you scroll.
+3. **Ventures** — Safebox, AISecLab, Runbit as distinct cards with outbound links.
+   *Motion:* horizontal-drift/scale stagger as cards enter; hover lift (existing `card-hover`).
+4. **Trainings & Courses** — card grid; **Agentic AI Masterclass featured as flagship** card linking to `/agentic-ai-masterclass`; others (LLM Engineering Bootcamp, ML Engineer, AI Security Engineer, …) as secondary cards.
+   *Motion:* flagship card scales/spotlights on enter; grid staggers in.
+5. **Expertise** — condensed scannable grid (languages, databases, architectures, AI/ML, security) grouped by category — not a bullet dump.
+   *Motion:* category columns reveal in sequence; chips fade/stagger.
+6. **Speaking & Events** — curated top talks (subset of existing `TALKS`) + "view more" link.
+   *Motion:* list rows slide/fade in with stagger.
+7. **Publications & Presentations** — curated highlights (subset of `PRESENTATIONS`/`PUBLICATIONS`) + "view more".
+   *Motion:* same treatment as Speaking.
+8. **Channels / Social** — Udemy, YouTube, LinkedIn, GitHub, Medium, Twitter, Vimeo as a clean icon/link row.
+   *Motion:* icons pop-in with small stagger.
+9. **Contact / CTA** — closing cinematic **dark** section (reuses the surface/CTA treatment) with contact info + strong CTA.
+   *Motion:* background image parallax + headline reveal.
 
-## 4. Hero: logo strip + wider video (items 1 & 2)
-In `src/components/landing/Hero.tsx`:
-- **Remove** the plain-text `TRUST` name list (Cumhurbaşkanlığı DDO, Microsoft / BilgeAdam, Cisco Academy).
-- Replace it with a compact **logo strip** rendered from `INSTITUTIONS`, using the same tile/`object-contain` styling as the Organizations section (a wrapping row of small logo tiles, not the animated marquee). Heading stays `Eğitim verdiği bazı kurumlar`.
-- **Video box:** change the right-side container from `aspect-square` to a landscape ratio (`aspect-video`), so it reads as a wider rectangular player. Keep the "Cihan'dan 60 sn" play button + modal behavior intact.
-- Place the logo strip below the video block on the right column (or spanning the section) so it sits comfortably in the freed horizontal space.
+A thin **stats/metrics strip** (reusing verified numbers) sits under the hero with **count-up animation on enter**, mirroring the masterclass page's social proof.
 
-## 5. Nav logo swap (item 6)
-In `src/components/landing/Nav.tsx`, point the existing `<img>` at the new `main-website-logo` asset. Keep the `#top` link, `h-9 w-auto` sizing, alignment, and position unchanged — swap the asset source only. (Footer keeps its current logo unless you want that swapped too.)
+### Shared header/footer
+- `SiteHeader`: context-aware. On `/` it links to homepage sections + a "Masterclass" link to `/agentic-ai-masterclass`; on the masterclass route it shows that page's section anchors + "Ana Sayfa". Sticky, blur-on-scroll (as today), logo → `/`.
+- `SiteFooter`: shared across both routes.
+- Homepage "Trainings" flagship + header both deep-link to `/agentic-ai-masterclass`.
 
-## 6. Replace application form with external CTA button (item 7)
-In `src/components/landing/FinalCta.tsx`:
-- Remove the entire form (fields, validation, `supabase.from("applications").insert`, submitted state, `Field` component) and its Supabase import.
-- Replace the right-hand form card with a clean card containing a single prominent button ("Başvuru Yap" / "Hemen Başvur") that links to an **external URL opening in a new tab** (`target="_blank" rel="noopener noreferrer"`). Use `href="/#"` as a placeholder until the real link is provided.
-- Keep the left column copy ("Yeni dönem kontenjanı sınırlı…") and the three info cards (Başlangıç, Son Başvuru, Eğitim Günleri) unchanged.
-- The `#basvuru` section id and the header/nav "Başvuru Yap" anchors continue to scroll here.
+### Masterclass route
+- Move current `index.tsx` composition into `src/routes/agentic-ai-masterclass.tsx` with its own `head()` (title/description/og). Content (curriculum, instructor, FAQ, testimonials, application CTA) unchanged; wrap in shared `SiteHeader`/`SiteFooter`. In-page `#anchor` nav stays (valid in-page scrolling on a long page).
 
-## Technical notes
-- The `applications` table, `/auth`, `/admin` routes and `applications.functions.ts` become unused after removing the form. I will leave the backend/table in place (non-breaking) unless you want them removed too — say the word and I'll delete the admin/auth routes and the table in a follow-up.
-- All logos referenced by CDN URL via `.asset.json` pointers; no binaries committed to the repo.
-- Accessibility preserved: every logo keeps a descriptive `alt`; the CTA button keeps clear label text.
+### SEO / metadata
+- Root `head()` updated away from "Lovable App" defaults to real Cihan Özhan homepage title/description + OG/Twitter.
+- Each route (`/`, `/agentic-ai-masterclass`) gets distinct `head()` metadata. Single H1 per page, semantic sections, alt text, lazy images.
+
+### Technical details
+- **New deps:** `gsap`, `lenis`.
+- **New files:** `src/lib/smooth-scroll.tsx` (Lenis+GSAP provider), `src/lib/motion.ts` / `src/hooks/useReveal.ts` + `useCountUp.ts`, `src/lib/home-data.ts` (bio, ventures, trainings, expertise, channels — reuse existing arrays where possible), `src/components/site/SiteHeader.tsx` + `SiteFooter.tsx`, `src/components/home/*` (Hero, About, Ventures, Trainings, Expertise, Speaking, Publications, Channels, ContactCta), `src/routes/agentic-ai-masterclass.tsx`.
+- **Edited:** `src/routes/__root.tsx` (metadata + SmoothScrollProvider), `src/routes/index.tsx` (new homepage composition).
+- **Deleted:** `src/routes/auth.tsx`, `src/routes/_authenticated/route.tsx`, `src/routes/_authenticated/admin.tsx`, `src/lib/applications.functions.ts`.
+- SSR-safe: GSAP/Lenis and any `window`/`document` access run in `useEffect` (client-only), so build:dev prerender and SSR don't crash.
+- Reuse existing `src/lib/landing-data.ts` for masterclass; add homepage-specific content in `home-data.ts`. Where bio/venture/training copy isn't in the repo yet, I'll draft concise premium copy from your provided structure and mark anything that needs your exact wording so you can tweak.
+
+### Open items (won't block the build)
+- Exact venture blurbs + outbound URLs for Safebox / AISecLab / Runbit, and the full trainings list with links — I'll seed sensible placeholders you can correct.
+- Contact details (email/handles) for the final section.
