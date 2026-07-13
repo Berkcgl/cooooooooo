@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { APPLY_ANCHOR, CURRICULUM_ANCHOR, COURSE, INSTITUTIONS } from "@/lib/landing-data";
+import { LogoTile } from "@/components/site/LogoTile";
 import heroImg from "@/assets/hero-agentic.jpg";
 
 // Intro video — replace with the uploaded intro video URL once available.
