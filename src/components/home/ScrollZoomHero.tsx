@@ -39,9 +39,9 @@ export function ScrollZoomHero() {
           alt="Soyut yapay zeka sinir ağı görselleştirmesi"
           width={1600}
           height={1600}
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[min(90vh,90vw)] w-[min(90vh,90vw)] -translate-x-1/2 -translate-y-1/2 object-contain opacity-70 will-change-transform"
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[min(90vh,90vw)] w-[min(90vh,90vw)] -translate-x-1/2 -translate-y-1/2 object-contain opacity-70 will-change-transform [mask-image:radial-gradient(circle_at_center,black_50%,transparent_74%)]"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/40 via-background/10 to-background" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/30 via-background/5 to-background" />
 
         <div ref={introRef} data-hero-fade className="container-page max-w-4xl text-center">
           <span
