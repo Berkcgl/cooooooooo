@@ -134,6 +134,7 @@ function RootComponent() {
         <SmoothScrollProvider>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
+          <CookieConsent />
         </SmoothScrollProvider>
       </ThemeProvider>
     </QueryClientProvider>
