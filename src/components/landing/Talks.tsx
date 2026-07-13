@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TALKS, PRESENTATIONS, PUBLICATIONS, type TabItem } from "@/lib/landing-data";
 
