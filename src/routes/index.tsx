@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Ticker } from "@/components/site/Ticker";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { Hero } from "@/components/home/Hero";
-import { MetricsStrip } from "@/components/home/MetricsStrip";
+import { ScrollReadout } from "@/components/site/ScrollReadout";
+import { ScrollZoomHero } from "@/components/home/ScrollZoomHero";
 import { About } from "@/components/home/About";
 import { Ventures } from "@/components/home/Ventures";
-import { Trainings } from "@/components/home/Trainings";
-import { Expertise } from "@/components/home/Expertise";
-import { Speaking } from "@/components/home/Speaking";
-import { Publications } from "@/components/home/Publications";
-import { Channels } from "@/components/home/Channels";
+import { TeachingMap } from "@/components/home/TeachingMap";
+import { StatCallouts } from "@/components/home/StatCallouts";
+import { LogoMarquee } from "@/components/home/LogoMarquee";
+import { Featured } from "@/components/home/Featured";
+import { FlagshipCourse } from "@/components/home/FlagshipCourse";
 import { ContactCta } from "@/components/home/ContactCta";
 import { BackToTop } from "@/components/landing/BackToTop";
 
@@ -34,17 +35,18 @@ export const Route = createFileRoute("/")({
 function Home() {
   return (
     <>
+      <Ticker />
       <SiteHeader />
+      <ScrollReadout />
       <main>
-        <Hero />
-        <MetricsStrip />
+        <ScrollZoomHero />
         <About />
         <Ventures />
-        <Trainings />
-        <Expertise />
-        <Speaking />
-        <Publications />
-        <Channels />
+        <TeachingMap />
+        <StatCallouts />
+        <LogoMarquee />
+        <Featured />
+        <FlagshipCourse />
         <ContactCta />
       </main>
       <SiteFooter />
