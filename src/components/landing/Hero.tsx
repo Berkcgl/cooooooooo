@@ -42,7 +42,7 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative mx-auto aspect-video w-full max-w-lg overflow-hidden rounded-3xl border border-border bg-secondary/40 p-3">
+          <div className="relative mx-auto aspect-video w-full max-w-lg overflow-hidden rounded-3xl border border-border bg-secondary/40 p-3 lg:mr-0 lg:ml-auto">
             <img
               src={heroImg}
               alt="Agentic AI sistem mimarisi: merkezi modeli araçlara bağlayan otonom agent ağı"
@@ -65,18 +65,8 @@ export function Hero() {
               </span>
             </button>
           </div>
-
-          <div className="mx-auto mt-10 w-full max-w-lg">
-            <p className="text-center font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink-500">
-              Eğitim verdiği bazı kurumlar
-            </p>
-            <div className="mt-5 grid grid-cols-3 place-items-center gap-3 sm:grid-cols-4">
-              {INSTITUTIONS.filter((org) => org.logo).map((org) => (
-                <LogoTile key={org.name} org={org} className="h-14 w-full" />
-              ))}
-            </div>
-          </div>
         </div>
+
 
       </div>
 
