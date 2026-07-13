@@ -1,64 +1,62 @@
-## Cihan Özhan — Personal Homepage Rebuild
+# cihanozhan.com — Unified Redesign
 
-### Direction note
-You chose **"match the masterclass exactly"** for theme, so this keeps the current light-dominant design system (accent blue `#0A66FF`, Inter, existing spacing/card/button tokens, the single dark CTA "contrast moment"). Motion — not a dark repaint — is what pushes it to Apple-grade. If you'd rather go fully dark, say so and I'll adapt the tokens; the layout/motion plan below is unchanged either way.
+Confirmed direction: **dark-first** theme, **abstract AI/network** scroll-zoom hero, **4 subpages** (talks + events merged). No content rewriting — existing copy in `home-data.ts` / `landing-data.ts` is reorganized and restyled only. Link-index sections trimmed to label + link where purely navigational.
 
-### Architecture
+## 1. Sitemap
+
+```text
+/                        Homepage — curated, cinematic
+/agentic-ai-masterclass  Existing course page (all sections/copy kept, inherits shared shell + tokens)
+/trainings               Full course list — Masterclass as flagship card → its own page; + free video series
+/speaking                Full talks + events history (TALKS)
+/publications            Presentations archive + writing/books (PRESENTATIONS + PUBLICATIONS)
+/experience              Skills + timeline + narrative bio — calm editorial style (EXPERTISE, INSTRUCTOR_TIMELINE, ABOUT)
 ```
-/                          → NEW animated personal homepage
-/agentic-ai-masterclass    → current masterclass page (content unchanged, restyled to share header/footer)
-```
-- One shared design system + shared `SiteHeader` / `SiteFooter` so both pages feel like one site.
-- Remove unused backend surface: delete `auth.tsx`, `_authenticated/route.tsx`, `_authenticated/admin.tsx`, `applications.functions.ts` (you don't need auth/admin). Supabase integration files stay but go unused.
 
-### Motion system (shared)
-- Add `gsap` (+ ScrollTrigger) and `lenis`.
-- `SmoothScrollProvider` mounted in `__root.tsx`: Lenis inertial scroll driving `ScrollTrigger.update` via a single GSAP ticker (no double RAF loops).
-- Guards: `prefers-reduced-motion` disables Lenis + all scrubbed/pinned effects (content renders in final state); on mobile (`< 768px`) pinning is skipped and reveals become short, cheap fade/translate.
-- Only `transform`/`opacity` animated. Reveal helper `useReveal()` + counter helper `useCountUp()` as small reusable hooks.
+Shared **SiteHeader** (persistent across all routes) + **SiteFooter**. Header nav: About · Ventures · Trainings · Speaking · Publications · Experience · Contact, plus the sun/moon theme toggle and the flagship-course CTA. On the homepage, About/Ventures/Contact are in-page anchors; Trainings/Speaking/Publications/Experience route to subpages.
 
-### New homepage — section-by-section layout + animation
-1. **Hero** — name, title ("Founder of Safebox, AISecLab & Runbit · Offensive AI Security · Researcher · Developer"), primary CTA.
-   *Motion:* staggered word/line reveal of headline, subtle parallax on a background glow/shape, CTA fades up last; slight scroll-linked parallax as you leave.
-2. **About / Bio** — short narrative (20+ yrs, researcher/developer/entrepreneur, İstanbul & New York).
-   *Motion:* line-by-line text reveal pinned briefly so copy "assembles" as you scroll.
-3. **Ventures** — Safebox, AISecLab, Runbit as distinct cards with outbound links.
-   *Motion:* horizontal-drift/scale stagger as cards enter; hover lift (existing `card-hover`).
-4. **Trainings & Courses** — card grid; **Agentic AI Masterclass featured as flagship** card linking to `/agentic-ai-masterclass`; others (LLM Engineering Bootcamp, ML Engineer, AI Security Engineer, …) as secondary cards.
-   *Motion:* flagship card scales/spotlights on enter; grid staggers in.
-5. **Expertise** — condensed scannable grid (languages, databases, architectures, AI/ML, security) grouped by category — not a bullet dump.
-   *Motion:* category columns reveal in sequence; chips fade/stagger.
-6. **Speaking & Events** — curated top talks (subset of existing `TALKS`) + "view more" link.
-   *Motion:* list rows slide/fade in with stagger.
-7. **Publications & Presentations** — curated highlights (subset of `PRESENTATIONS`/`PUBLICATIONS`) + "view more".
-   *Motion:* same treatment as Speaking.
-8. **Channels / Social** — Udemy, YouTube, LinkedIn, GitHub, Medium, Twitter, Vimeo as a clean icon/link row.
-   *Motion:* icons pop-in with small stagger.
-9. **Contact / CTA** — closing cinematic **dark** section (reuses the surface/CTA treatment) with contact info + strong CTA.
-   *Motion:* background image parallax + headline reveal.
+## 2. Homepage section-by-section
 
-A thin **stats/metrics strip** (reusing verified numbers) sits under the hero with **count-up animation on enter**, mirroring the masterclass page's social proof.
+Each borrows a reference pattern (labeled →):
 
-### Shared header/footer
-- `SiteHeader`: context-aware. On `/` it links to homepage sections + a "Masterclass" link to `/agentic-ai-masterclass`; on the masterclass route it shows that page's section anchors + "Ana Sayfa". Sticky, blur-on-scroll (as today), logo → `/`.
-- `SiteFooter`: shared across both routes.
-- Homepage "Trainings" flagship + header both deep-link to `/agentic-ai-masterclass`.
+1. **Ticker bar** → terminal/monospace marquee: thin top strip, monospace status items separated by `·` (location, role, "son güncelleme"). Pauses on hover, respects reduced-motion.
+2. **Hero — scroll-zoom** → award globe/hero zoom: abstract AI/network SVG/canvas visual, GSAP ScrollTrigger `scrub` scales it on scroll (camera push). Identity statement (`PERSON.name` + title) + tagline + one circular arrow CTA. Giant duplicated title as background typography. Corner live scroll-position + cursor-coordinate readout (desktop only).
+3. **About** → minimal editorial: portrait-adjacent one-line identity claim, then `ABOUT_PARAGRAPHS` as steady staggered line reveals. Calm, high-trust.
+4. **Ventures** → stat-driven feature cards: Safebox / AISecLab / Runbit as numbered cards with hover lift + circular arrow links (`VENTURES`).
+5. **Map — scroll-reveal pins** → map-with-cards: stylized custom SVG map (Turkey + New York), pins appear on scroll each with a card (institution, event, year) sourced only from existing copy — İstanbul/New York (`PERSON.location`), Boğaziçi, Google DSC, AI Safety Summit, Cyber Anatolian, Cumhurbaşkanlığı DDO, and corporate `INSTITUTIONS`. Mobile: becomes a scrollable list of location cards (no scroll-hijack).
+6. **Stat callouts** → big-number benefit tiles: `METRICS` as oversized count-up figures (300.000+ öğrenci, 20+ yıl, etc.), reusing `useCountUp`.
+7. **Trusted-by marquee** → horizontal logo marquee: `INSTITUTIONS` logos scrolling, existing `marquee` keyframe.
+8. **Featured band** → curated (not full lists): a handful of standout trainings + talks + publications with a "view all →" link into each subpage.
+9. **Flagship course** → feature card: prominent Agentic AI Masterclass block linking to `/agentic-ai-masterclass`.
+10. **Contact CTA** → cinematic closing: headline reveal + parallax, `CONTACT` email + channels, one circular arrow CTA.
 
-### Masterclass route
-- Move current `index.tsx` composition into `src/routes/agentic-ai-masterclass.tsx` with its own `head()` (title/description/og). Content (curriculum, instructor, FAQ, testimonials, application CTA) unchanged; wrap in shared `SiteHeader`/`SiteFooter`. In-page `#anchor` nav stays (valid in-page scrolling on a long page).
+Section titles use numbered labels (01/02/03…) with a giant duplicated background title, per the portfolio-structure reference. One **circular arrow button** component is reused for every CTA site-wide.
 
-### SEO / metadata
-- Root `head()` updated away from "Lovable App" defaults to real Cihan Özhan homepage title/description + OG/Twitter.
-- Each route (`/`, `/agentic-ai-masterclass`) gets distinct `head()` metadata. Single H1 per page, semantic sections, alt text, lazy images.
+## 3. Light/dark token approach
 
-### Technical details
-- **New deps:** `gsap`, `lenis`.
-- **New files:** `src/lib/smooth-scroll.tsx` (Lenis+GSAP provider), `src/lib/motion.ts` / `src/hooks/useReveal.ts` + `useCountUp.ts`, `src/lib/home-data.ts` (bio, ventures, trainings, expertise, channels — reuse existing arrays where possible), `src/components/site/SiteHeader.tsx` + `SiteFooter.tsx`, `src/components/home/*` (Hero, About, Ventures, Trainings, Expertise, Speaking, Publications, Channels, ContactCta), `src/routes/agentic-ai-masterclass.tsx`.
-- **Edited:** `src/routes/__root.tsx` (metadata + SmoothScrollProvider), `src/routes/index.tsx` (new homepage composition).
-- **Deleted:** `src/routes/auth.tsx`, `src/routes/_authenticated/route.tsx`, `src/routes/_authenticated/admin.tsx`, `src/lib/applications.functions.ts`.
-- SSR-safe: GSAP/Lenis and any `window`/`document` access run in `useEffect` (client-only), so build:dev prerender and SSR don't crash.
-- Reuse existing `src/lib/landing-data.ts` for masterclass; add homepage-specific content in `home-data.ts`. Where bio/venture/training copy isn't in the repo yet, I'll draft concise premium copy from your provided structure and mark anything that needs your exact wording so you can tweak.
+Both themes share layout, spacing, motion, radius — only color tokens flip. Accent blue `#0A66FF` stays in both (used more sparingly in light). Implemented in `styles.css`: keep `:root` = light, add a `.dark { … }` block (the `dark` custom-variant already exists). Theme applied by toggling `.dark` on `<html>` via a React `ThemeProvider` (in-memory `useState`, no localStorage), default **dark**.
 
-### Open items (won't block the build)
-- Exact venture blurbs + outbound URLs for Safebox / AISecLab / Runbit, and the full trainings list with links — I'll seed sensible placeholders you can correct.
-- Contact details (email/handles) for the final section.
+| Token | Dark (default) | Light |
+| --- | --- | --- |
+| `--background` | near-black `oklch(0.16 0.01 264)` | paper `oklch(0.985 0.003 250)` |
+| `--foreground` | off-white `oklch(0.97 0.01 250)` | ink `oklch(0.21 0.012 257)` |
+| `--card` | `oklch(0.20 0.015 264)` | `oklch(1 0 0)` |
+| `--border` | `oklch(0.30 0.015 264)` | `oklch(0.922 0.004 257)` |
+| `--muted-foreground` | `oklch(0.68 0.01 260)` | `oklch(0.5 0.012 257)` |
+| `--brand` (accent) | `oklch(0.62 0.20 263)` | `oklch(0.582 0.224 263.5)` |
+| `--surface` (cinematic) | deeper `oklch(0.13 0.02 264)` | `oklch(0.21 0.024 264)` |
+| `--ink-900…100` | remapped light-on-dark ramp | current ramp |
+
+Corner scroll-indicator + links use `--brand` in both. Terminal ticker leans into the dark aesthetic (monospace, subtle brand accent).
+
+## Technical notes
+
+- **Motion**: existing GSAP + ScrollTrigger + Lenis (`SmoothScrollProvider`). New `useScrollZoom` (scrubbed scale) and `useMapReveal` (staggered pin/card) hooks alongside existing `useReveal`/`useCountUp`. Only `transform`/`opacity` animated. Guards: `prefers-reduced-motion` disables scrubbing/pinning; mobile (`<768px`) drops pinning, cursor readout, and map scroll-trigger (list fallback).
+- **Theme**: `ThemeProvider` context + `ThemeToggle` (sun/moon) in `SiteHeader`; wraps app in `__root.tsx`. SSR-safe (default class on `<html>`, no storage read at init).
+- **Monospace**: add JetBrains Mono via `<link>` in `__root.tsx` head + `--font-mono` token for ticker/meta labels.
+- **Hero visual**: generate one premium abstract neural-network/node-graph asset (dark-optimized) via image gen, uploaded as a Lovable asset.
+- **New files**: `ThemeProvider`/`ThemeToggle`, `hooks/useScrollZoom.ts`, `hooks/useMapReveal.ts`, `components/home/Ticker.tsx`, `ScrollZoomHero.tsx`, `TeachingMap.tsx`, `StatCallouts.tsx`, `LogoMarquee.tsx`, `Featured.tsx`, `CircularArrowButton.tsx`, `ScrollReadout.tsx`, and subpage routes `trainings.tsx`, `speaking.tsx`, `publications.tsx`, `experience.tsx`. Extend `home-data.ts` with a `TEACHING_LOCATIONS` array derived from existing copy (no new facts).
+- **Edited**: `styles.css` (dark tokens, mono font), `__root.tsx` (ThemeProvider + fonts), `index.tsx` (new homepage composition), `SiteHeader.tsx` (nav + toggle), `agentic-ai-masterclass.tsx` (inherits shared shell/tokens), `sitemap[.]xml.ts` (new routes).
+- **Masterclass page**: copy and section order untouched; only wrapped in shared header/footer and re-themed via tokens.
+
+Reply to confirm and I'll build it, or tell me what to adjust.

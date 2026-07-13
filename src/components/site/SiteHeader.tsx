@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { MASTERCLASS_ROUTE } from "@/lib/home-data";
 import { APPLY_ANCHOR } from "@/lib/landing-data";
 import logo from "@/assets/main-website-logo.svg.asset.json";
 
-const HOME_LINKS = [
-  { href: "/#hakkinda", label: "Hakkında" },
-  { href: "/#girisimler", label: "Girişimler" },
-  { href: "/#egitimler", label: "Eğitimler" },
-  { href: "/#uzmanlik", label: "Uzmanlık" },
-  { href: "/#konusmalar", label: "Konuşmalar" },
+type NavLink = { label: string; to?: string; href?: string };
+
+const HOME_LINKS: NavLink[] = [
+  { label: "Hakkında", href: "/#hakkinda" },
+  { label: "Girişimler", href: "/#girisimler" },
+  { label: "Eğitimler", to: "/trainings" },
+  { label: "Konuşmalar", to: "/speaking" },
+  { label: "Yayınlar", to: "/publications" },
+  { label: "Deneyim", to: "/experience" },
+  { label: "İletişim", href: "/#iletisim" },
 ];
 
-const MASTERCLASS_LINKS = [
-  { href: "#neden", label: "Neden Şimdi" },
-  { href: "#mufredat", label: "Müfredat" },
-  { href: "#egitmen", label: "Eğitmen" },
-  { href: "#icerikler", label: "İçerikler" },
-  { href: "#sss", label: "SSS" },
+const MASTERCLASS_LINKS: NavLink[] = [
+  { label: "Neden Şimdi", href: "#neden" },
+  { label: "Müfredat", href: "#mufredat" },
+  { label: "Eğitmen", href: "#egitmen" },
+  { label: "İçerikler", href: "#icerikler" },
+  { label: "SSS", href: "#sss" },
 ];
 
 export function SiteHeader() {
@@ -37,9 +42,22 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const renderLink = (l: NavLink, onClick?: () => void, base = "") => {
+    const cls = `rounded-md px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-secondary hover:text-ink-900 ${base}`;
+    return l.to ? (
+      <Link key={l.label} to={l.to} onClick={onClick} className={cls}>
+        {l.label}
+      </Link>
+    ) : (
+      <a key={l.label} href={l.href} onClick={onClick} className={cls}>
+        {l.label}
+      </a>
+    );
+  };
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-8 z-50 transition-all duration-300 ${
         scrolled
           ? "border-b border-border bg-background/85 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
@@ -47,19 +65,11 @@ export function SiteHeader() {
     >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Ana menü">
         <Link to="/" className="flex items-center" aria-label="Cihan Özhan — ana sayfa">
-          <img src={logo.url} alt="Cihan Özhan" className="h-9 w-auto" />
+          <img src={logo.url} alt="Cihan Özhan" className="h-9 w-auto dark:brightness-0 dark:invert" />
         </Link>
 
-        <div className="hidden items-center gap-1 lg:flex">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-secondary hover:text-ink-900"
-            >
-              {l.label}
-            </a>
-          ))}
+        <div className="hidden items-center gap-0.5 lg:flex">
+          {links.map((l) => renderLink(l))}
           {onMasterclass ? (
             <Link
               to="/"
@@ -67,17 +77,11 @@ export function SiteHeader() {
             >
               Ana Sayfa
             </Link>
-          ) : (
-            <Link
-              to={MASTERCLASS_ROUTE}
-              className="rounded-md px-3 py-2 text-sm font-medium text-brand transition-colors hover:bg-secondary"
-            >
-              Masterclass
-            </Link>
-          )}
+          ) : null}
         </div>
 
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           {onMasterclass ? (
             <Button asChild variant="brand" size="lg" className="hidden sm:inline-flex">
               <a href={APPLY_ANCHOR}>Başvuru Yap</a>
@@ -107,16 +111,7 @@ export function SiteHeader() {
       {open && (
         <div className="border-t border-border bg-background lg:hidden">
           <div className="container-page flex flex-col py-3">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-3 text-sm font-medium text-ink-700 hover:bg-secondary"
-              >
-                {l.label}
-              </a>
-            ))}
+            {links.map((l) => renderLink(l, () => setOpen(false), "px-2 py-3"))}
             {onMasterclass ? (
               <Link
                 to="/"
