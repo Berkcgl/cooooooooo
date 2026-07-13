@@ -21,9 +21,9 @@
  * ============================================================================
  */
 
-import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.png.asset.json";
+import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.svg.asset.json";
 import aselsanLogo from "@/assets/logos/aselsan.svg.asset.json";
-import siemensLogo from "@/assets/logos/siemens.png.asset.json";
+import siemensLogo from "@/assets/logos/siemens.svg.asset.json";
 import yemeksepetiLogo from "@/assets/logos/yemeksepeti.svg.asset.json";
 import turkcellLogo from "@/assets/logos/turkcell.svg.asset.json";
 import n11Logo from "@/assets/logos/n11.svg.asset.json";
