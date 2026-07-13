@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrainingsRouteImport } from './routes/trainings'
+import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AgenticAiMasterclassRouteImport } from './routes/agentic-ai-masterclass'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TrainingsRoute = TrainingsRouteImport.update({
   id: '/trainings',
   path: '/trainings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpeakingRoute = SpeakingRouteImport.update({
+  id: '/speaking',
+  path: '/speaking',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/speaking': typeof SpeakingRoute
   '/trainings': typeof TrainingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/speaking': typeof SpeakingRoute
   '/trainings': typeof TrainingsRoute
 }
 export interface FileRoutesById {
@@ -52,18 +60,30 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/speaking': typeof SpeakingRoute
   '/trainings': typeof TrainingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agentic-ai-masterclass' | '/sitemap.xml' | '/trainings'
+  fullPaths:
+    | '/'
+    | '/agentic-ai-masterclass'
+    | '/sitemap.xml'
+    | '/speaking'
+    | '/trainings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agentic-ai-masterclass' | '/sitemap.xml' | '/trainings'
+  to:
+    | '/'
+    | '/agentic-ai-masterclass'
+    | '/sitemap.xml'
+    | '/speaking'
+    | '/trainings'
   id:
     | '__root__'
     | '/'
     | '/agentic-ai-masterclass'
     | '/sitemap.xml'
+    | '/speaking'
     | '/trainings'
   fileRoutesById: FileRoutesById
 }
@@ -71,6 +91,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgenticAiMasterclassRoute: typeof AgenticAiMasterclassRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SpeakingRoute: typeof SpeakingRoute
   TrainingsRoute: typeof TrainingsRoute
 }
 
@@ -81,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/trainings'
       fullPath: '/trainings'
       preLoaderRoute: typeof TrainingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/speaking': {
+      id: '/speaking'
+      path: '/speaking'
+      fullPath: '/speaking'
+      preLoaderRoute: typeof SpeakingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -111,6 +139,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgenticAiMasterclassRoute: AgenticAiMasterclassRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SpeakingRoute: SpeakingRoute,
   TrainingsRoute: TrainingsRoute,
 }
 export const routeTree = rootRouteImport
