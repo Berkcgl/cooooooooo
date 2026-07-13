@@ -17,7 +17,7 @@ export function WhyNow() {
               key={c.title}
               className="card-hover flex flex-col rounded-2xl border border-border bg-card p-7"
             >
-              <div className="text-5xl font-extrabold tracking-tight text-brand">{c.stat}</div>
+              <span className="h-1 w-10 rounded-full bg-brand" />
               <h3 className="mt-5 text-lg font-bold text-ink-900">{c.title}</h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-700">{c.body}</p>
             </article>
