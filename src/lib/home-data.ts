@@ -134,3 +134,93 @@ export const CONTACT = {
   email: "info@cihanozhan.com", // TODO: gerçek e-posta
   website: "https://www.cihanozhan.com",
 };
+
+/**
+ * Teaching / speaking locations for the scroll-reveal map.
+ * All org/event/year strings are taken verbatim from existing copy
+ * (landing-data TALKS + INSTRUCTOR_PROJECTS). Coordinates are stylized
+ * positions on the abstract SVG map (0–100 space), not precise geodata.
+ */
+export interface TeachingLocation {
+  id: string;
+  /** City label — only set where explicitly stated in copy. */
+  label?: string;
+  x: number;
+  y: number;
+  org: string;
+  event: string;
+  year: string;
+  /** Visual anchor city (base hubs get a large marker). */
+  hub?: boolean;
+}
+
+export const TEACHING_LOCATIONS: TeachingLocation[] = [
+  {
+    id: "newyork",
+    label: "New York",
+    x: 13,
+    y: 41,
+    org: "New York",
+    event: "Çalışma üssü — Offensive AI & agentic sistemler",
+    year: "—",
+    hub: true,
+  },
+  {
+    id: "istanbul",
+    label: "İstanbul",
+    x: 60,
+    y: 33,
+    org: "İstanbul",
+    event: "Çalışma üssü — araştırma, geliştirme ve eğitim",
+    year: "—",
+    hub: true,
+  },
+  {
+    id: "bogazici",
+    x: 57,
+    y: 29,
+    org: "Boğaziçi Üniversitesi",
+    event: "Offensive AI",
+    year: "05.2023",
+  },
+  {
+    id: "cumhurbaskanligi",
+    x: 67,
+    y: 40,
+    org: "T.C. Cumhurbaşkanlığı Dijital Dönüşüm Ofisi",
+    event: "Offensive AI sunumu — Dijital Genç Bilgi Yarışması",
+    year: "2023",
+  },
+  {
+    id: "gdsc",
+    x: 63,
+    y: 47,
+    org: "Google Developer Student Clubs",
+    event: "Offensive AI",
+    year: "2023",
+  },
+  {
+    id: "aisafety",
+    x: 71,
+    y: 32,
+    org: "AI Safety Summit (AISecLab)",
+    event: "AI Safety",
+    year: "01.2024",
+  },
+  {
+    id: "cyberanatolian",
+    x: 54,
+    y: 45,
+    org: "Cyber Anatolian Communities",
+    event: "Applied Offensive AI",
+    year: "02.2025",
+  },
+  {
+    id: "microsoft",
+    x: 69,
+    y: 49,
+    org: "Microsoft / BilgeAdam",
+    event: "Microsoft Copilot & Azure AI Studio eğitimi",
+    year: "2024",
+  },
+];
