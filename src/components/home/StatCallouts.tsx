@@ -19,27 +19,25 @@ function StatTile({ value, label, index }: { value: string; label: string; index
   });
 
   return (
-    <div className="group relative border-b border-border py-8 md:border-b-0 md:border-l md:py-0 md:pl-8">
+    <div className="group relative flex flex-col border-b border-border py-8 md:border-b-0 md:border-l md:py-2 md:pl-6">
       <span className="font-mono text-xs text-ink-500">{String(index + 1).padStart(2, "0")}</span>
       <div
         ref={ref as React.RefObject<HTMLDivElement>}
-        className="mt-2 text-5xl font-extrabold tracking-tight text-ink-900 md:text-6xl"
+        className="mt-2 text-4xl font-extrabold tracking-tight text-ink-900 md:text-5xl"
       >
         {display}
       </div>
-      <div className="mt-2 max-w-[18ch] text-sm font-medium leading-snug text-ink-500">{label}</div>
+      <div className="mt-2 text-sm font-medium leading-snug text-ink-500">{label}</div>
     </div>
   );
 }
 
 export function StatCallouts() {
-  // Curated, high-impact subset — the full list stays on the metrics strip.
-  const featured = METRICS.slice(0, 4);
   return (
     <section aria-label="Öne çıkan sayılar" className="border-t border-border py-20 md:py-28">
       <div className="container-page">
-        <div className="grid gap-0 sm:grid-cols-2 md:grid-cols-4">
-          {featured.map((m, i) => (
+        <div className="grid gap-0 sm:grid-cols-2 lg:grid-cols-4">
+          {METRICS.map((m, i) => (
             <StatTile key={m.label} value={m.value} label={m.label} index={i} />
           ))}
         </div>
