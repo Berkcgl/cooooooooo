@@ -37,8 +37,19 @@ function ExperiencePage() {
         {/* Narrative */}
         <section className="py-16 md:py-24">
           <div className="container-page grid gap-10 lg:grid-cols-[0.35fr_1fr] lg:gap-16">
-            <div className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
-              01 / Özet
+            <div>
+              <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-2xl border border-border bg-secondary">
+                <img
+                  src={portrait.url}
+                  alt="Cihan Özhan portresi"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-brand/20" />
+              </div>
+              <div className="mt-6 font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
+                01 / Özet
+              </div>
             </div>
             <div className="max-w-3xl space-y-6">
               {ABOUT_PARAGRAPHS.map((p, i) => (
@@ -56,6 +67,7 @@ function ExperiencePage() {
             </div>
           </div>
         </section>
+
 
         {/* Timeline */}
         <section className="border-t border-border py-16 md:py-24">
