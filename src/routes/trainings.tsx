@@ -39,6 +39,8 @@ function groupByYear(items: TabItem[]): [number, TabItem[]][] {
 
 function TrainingsPage() {
   const grouped = groupByYear(COURSES);
+  const activeTrainings = TRAININGS.filter((t) => t.featured);
+  const pastTrainings = TRAININGS.filter((t) => !t.featured);
 
   return (
     <>
