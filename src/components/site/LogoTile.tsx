@@ -9,13 +9,13 @@ import type { Institution } from "@/lib/landing-data";
 export function LogoTile({ org, className = "" }: { org: Institution; className?: string }) {
   return (
     <div
-      className={`grid h-16 w-36 shrink-0 place-items-center rounded-xl border border-black/5 bg-white px-5 shadow-sm ${className}`}
+      className={`grid h-16 w-36 shrink-0 place-items-center rounded-xl border border-black/5 bg-white px-2 shadow-sm ${className}`}
     >
       {org.logo ? (
         <img
           src={org.logo}
           alt={`${org.name} logosu`}
-          className="max-h-8 w-auto max-w-full object-contain"
+          className="max-h-10 w-auto max-w-full object-contain"
           loading="lazy"
         />
       ) : (
