@@ -40,6 +40,7 @@ export const Route = createFileRoute("/agentic-ai-masterclass")({
 function Masterclass() {
   return (
     <>
+      <Ticker />
       <SiteHeader />
       <main>
         <Hero />
