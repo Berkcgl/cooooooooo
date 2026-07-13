@@ -59,12 +59,15 @@ export function Talks() {
           </TabsList>
           <TabsContent value="konusmalar">
             <ItemList items={TALKS} />
+            <ViewAll to="/speaking" />
           </TabsContent>
           <TabsContent value="sunumlar">
             <ItemList items={PRESENTATIONS} />
+            <ViewAll to="/speaking" />
           </TabsContent>
           <TabsContent value="yayinlar">
             <ItemList items={PUBLICATIONS} />
+            <ViewAll to="/publications" />
           </TabsContent>
         </Tabs>
       </div>
