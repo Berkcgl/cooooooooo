@@ -32,6 +32,11 @@ export function ScrollZoomHero() {
   return (
     <section ref={zoomRef} id="top" className="relative h-[130vh] md:h-[160vh]">
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+        {/* Soft brand-tinted glow behind the network */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-20 h-[70vh] w-[70vh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/20 blur-3xl"
+        />
         {/* Scroll-scrubbed camera push */}
         <img
           data-hero-visual
@@ -39,9 +44,10 @@ export function ScrollZoomHero() {
           alt="Soyut yapay zeka sinir ağı görselleştirmesi"
           width={1600}
           height={1600}
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[min(90vh,90vw)] w-[min(90vh,90vw)] -translate-x-1/2 -translate-y-1/2 object-contain opacity-70 will-change-transform [mask-image:radial-gradient(circle_at_center,black_50%,transparent_74%)]"
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[min(96vh,96vw)] w-[min(96vh,96vw)] -translate-x-1/2 -translate-y-1/2 object-contain opacity-95 will-change-transform [mask-image:radial-gradient(circle_at_center,black_60%,transparent_88%)]"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/30 via-background/5 to-background" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/20 via-background/40 to-background" />
+
 
         <div ref={introRef} data-hero-fade className="container-page max-w-4xl text-center">
           <span
