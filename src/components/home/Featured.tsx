@@ -48,7 +48,7 @@ export function Featured() {
     <section id="secki" className="border-t border-border bg-secondary/30 py-24 md:py-32">
       <div className="container-page">
         <SectionHeading
-          index="05"
+          index="04"
           kicker="Seçki"
           ghost="WORK"
           title="Öne çıkan çalışmalar"
