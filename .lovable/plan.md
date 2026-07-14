@@ -1,102 +1,67 @@
-# Plan: WhyNow cleanup, free videos, KVKK page & cookie banner
+# Plan: Hero badge, curriculum overhaul, social link fixes
 
-Four frontend-only changes. No backend, no changes to unrelated copy.
+Frontend-only, scoped to the masterclass landing page and shared data.
 
-## 1. "NEDEN ŞİMDİ" — remove the percentage/stat numbers
+## 1. Hero video badge — "Genel Katılım - Kurumsal"
 
-In `src/components/landing/WhyNow.tsx`, stop rendering the big `c.stat` number
-(`%75`, `%40`, `1M+`) and its styling. Keep each card's title + body and the
-grid layout. Add a small neutral top accent (a short brand-colored rule) so the
-cards don't look empty where the number was.
+In `src/components/landing/Hero.tsx`, add a small floating text label
+overlapping the top edge of the video preview card, near the top-right corner.
 
-`src/lib/landing-data.ts`: leave the `WHY_NOW` array as-is (just stop consuming
-`.stat`) to avoid touching data other components might reference — the `stat`
-field simply goes unused.
+- Placement: absolutely positioned on the video wrapper, `top-0` translated up
+  so it overlaps the border (roughly `-translate-y-1/2`), `right-4`.
+- Style: `text-xs font-medium text-brand` (site brand accent; matches the
+  requested "light blue / accent blue" tone using the existing theme token,
+  which keeps light/dark consistent — no hard-coded `text-blue-400`).
+- No background, border, or icon — plain text only.
 
-## 2. "Ücretsiz eğitimlerle başlayın" — replace with the 6 new videos
+## 2. Curriculum — 5 modules, "36+ Saat", no clock/duration UI
 
-In `src/lib/landing-data.ts`, replace the `FREE_VIDEOS` array with the six
-provided YouTube videos (stored as `watch?v=` URLs so the existing
-`youtubeThumb()` thumbnail logic keeps working). Real fetched titles, upload
-dates and source:
+**Data (`src/lib/landing-data.ts`):**
+- Set `COURSE.modules = 5`. Leave `hours = "36+"`.
+- Replace the `MODULES` array with the 5 new modules (NLP, LLMs, Agentic AI,
+  AI Production, AI Security), including all the sub-bullets provided. Nested
+  bullets (e.g. NLTK sub-items under NLP) are rendered as indented children
+  under their parent bullet. `duration` field is dropped from the type.
+- Remove `duration` from the `Module` interface.
 
-| Title | Meta | URL |
-|---|---|---|
-| Prompt Mühendisliği Yol Haritası | 2025 · YouTube | watch?v=OyBpfOKgpwo |
-| Python Mühendisliği Yol Haritası | 2025 · YouTube | watch?v=NfduR0QV-Gk |
-| Yapay Zeka Mühendisliği Yol Haritası | 2025 · YouTube | watch?v=O3W_QkjI2yw |
-| Python Programlama Eğitimi (Hızlandırılmış) | 2025 · YouTube | watch?v=w9QLH4pQd7o |
-| Uygulamalı Derin Öğrenme (Applied Deep Learning) | 2025 · YouTube | watch?v=Fqa2A-TSI80 |
-| Python ile Fonksiyon/Metot Kullanımı | 2021 · YouTube | watch?v=SbI5UGf8DMw |
+**Component (`src/components/landing/Curriculum.tsx`):**
+- Remove the `Clock` icon import and the `<Clock /> {m.duration}` block inside
+  each accordion panel.
+- Render nested sub-bullets using a second-level `<ul>` under the parent
+  `<li>` so hierarchy (e.g. NLTK → Tokenization/Stemming/…) reads clearly.
+- Section heading already reads `{COURSE.modules} Modül, {COURSE.hours} Saat İçerik`
+  → automatically becomes "5 Modül, 36+ Saat İçerik" once data is updated.
 
-`src/components/landing/FreeLibrary.tsx` needs no structural change — it already
-renders thumbnail cards in a responsive `sm:grid-cols-2 lg:grid-cols-3` grid
-(matches the site's card design and gives the requested consistent sizing).
-This replaces the raw `<iframe>` embeds with themed, click-to-YouTube cards that
-fit the existing layout. If you specifically want inline playable iframes
-instead of thumbnail cards, say so and I'll switch the card to a 16:9 iframe.
+Module titles/outcomes (verbatim from request):
 
-## 3. New page: "Gizlilik Politikası" at `/gizlilik-politikasi`
+```text
+01 Natural Language Processing (NLP)
+02 Large Language Models (LLMs)
+03 Agentic AI (LLMs) ve Agentic Design Patterns
+04 AI Production
+05 AI Security
+```
 
-Create `src/routes/gizlilik-politikasi.tsx` (TanStack file route → URL
-`/gizlilik-politikasi`), following the existing route pattern:
+with the exact sub-bullets (and NLTK nested list under NLP) supplied by the user.
 
-- `head()` with page-specific `title` / `description` / `og:*` meta.
-- Reuse site chrome: `Ticker`, `SiteHeader`, `SiteFooter` (same as other pages),
-  wrapped in `<main>` with the site's `container-page` width and prose spacing.
-- Render the full KVKK text provided (aydınlatma metni + açık rıza metni) as
-  proper JSX headings/paragraphs/lists using existing typography tokens
-  (`display-2`, `text-ink-900/700`, etc.). No `dangerouslySetInnerHTML`.
-- Add a top page heading "Gizlilik Politikası (KVKK)".
+## 3. Social links (`src/lib/home-data.ts`)
 
-Add the sitemap entry in `src/routes/sitemap[.]xml.ts` for the new slug.
+- Twitter entry: label `"Twitter"` → `"Twitter (X)"`, url →
+  `https://x.com/autonomousec`.
+- Vimeo entry: url → `https://vimeo.com/livetrainer`. Label stays `"Vimeo"`.
+- Remove the `// TODO: doğrula` comments on both since URLs are now confirmed.
 
-## 4. Footer link to the privacy page
+## Verification
 
-In `src/components/site/SiteFooter.tsx` (the footer used on every current page),
-add a "Gizlilik Politikası" `<Link to="/gizlilik-politikasi">` alongside the
-copyright line, styled like the existing footer links. (`landing/Footer.tsx`
-is unused, so it's left alone.)
+- Typecheck (`Module` interface no longer has `duration`, so any leftover
+  reference would fail the build).
+- Headless screenshot pass: hero badge position on desktop + mobile, curriculum
+  accordion with nested bullets and no clock row, footer/channel entries
+  showing "Twitter (X)".
 
-## 5. Session-only cookie consent banner (all pages)
+## Files touched
 
-New `src/components/site/CookieConsent.tsx`, mounted once globally in
-`src/routes/__root.tsx`'s `RootComponent` so it appears on every route
-including the masterclass page.
-
-**Behavior**
-- Session-only React state (module-level flag or `sessionState`) — no
-  localStorage, no real cookie logic. Once "Kabul Et" or "Reddet" is clicked,
-  hide for the rest of the session.
-- Appears ~600ms after mount with a calm fade + slight slide-up
-  (reuse `animate-fade-in` / existing motion tokens, no bounce).
-
-**Layout / position**
-- Desktop: compact fixed rectangle in the **bottom-left** corner (to stay clear
-  of the bottom-right `BackToTop` button + `ScrollReadout`). Alternatively keep
-  it bottom-right and push `BackToTop`/`ScrollReadout` up while visible — I'll go
-  with bottom-left as the simpler, non-overlapping option unless you prefer the
-  push-up approach.
-- Mobile: full-width bar anchored to the bottom edge.
-- `z-index` below nothing critical but above page content; doesn't block the
-  page (not a modal overlay).
-
-**Content**
-- Headline: "Çerez Tercihleri"
-- One sentence: site uses cookies to improve experience and analyze traffic,
-  with "Gizlilik Politikası" linking to `/gizlilik-politikasi`.
-- Primary "Kabul Et" button (`variant="brand"`) + secondary "Reddet" button
-  (`variant="brandOutline"`), matching existing CTA styles.
-- Optional single small shield/cookie lucide icon, nothing more.
-
-**Design**
-- Uses `bg-card`, `border-border`, rounded corners, `shadow-lg` — same elevation
-  language as other floating UI. All colors via theme tokens (works in
-  light/dark). Visually quiet.
-
-## Technical notes
-- All work is in `src/routes/`, `src/components/`, and `src/lib/landing-data.ts`.
-- New route file created before any `<Link to="/gizlilik-politikasi">` is added,
-  so the type-safe router/build stays green.
-- Verify light + dark rendering and mobile/desktop banner behavior with a
-  headless screenshot pass.
+- `src/components/landing/Hero.tsx` — add floating badge.
+- `src/lib/landing-data.ts` — `COURSE.modules`, `MODULES[]`, `Module` type.
+- `src/components/landing/Curriculum.tsx` — drop Clock/duration, render nested bullets.
+- `src/lib/home-data.ts` — Twitter label/url, Vimeo url.

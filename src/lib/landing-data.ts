@@ -43,7 +43,7 @@ export const COURSE = {
   title: "Agentic AI Uzmanlık Programı",
   // Headline is intentionally Turkish (primary audience is Türkiye-based).
   hours: "36+",
-  modules: 8,
+  modules: 5,
   format: "Online / Canlı",
   cohortStart: "15 Eylül 2026",
   applicationDeadline: "5 Eylül 2026",
@@ -161,92 +161,102 @@ export const OUTCOMES: Outcome[] = [
   },
 ];
 
+export type ModuleOutcome = string | { text: string; children: string[] };
+
 export interface Module {
   number: string;
   title: string;
-  duration: string;
-  outcomes: string[];
+  outcomes: ModuleOutcome[];
 }
 
 export const MODULES: Module[] = [
   {
     number: "01",
-    title: "Agentic AI'a Giriş ve LLM Temelleri",
-    duration: "~4 saat",
+    title: "Natural Language Processing (NLP)",
     outcomes: [
-      "Agentic AI ile klasik LLM kullanımı arasındaki farkı kavrama",
-      "Token, bağlam penceresi ve maliyet temelleri",
-      "İlk prompt tabanlı asistanı oluşturma",
+      "Doğal Dil İşlemeye Genel Bakış",
+      "Doğal Dil İşleme Uygulama Alanları",
+      "Doğal Dil İşleme Algoritmaları",
+      {
+        text: "Natural Language Toolkit (NLTK)",
+        children: [
+          "Natural Language Toolkit'e Genel Bakış",
+          "Corpus & Corpora",
+          "Tokenization",
+          "Stop Words",
+          "Stemming",
+          "PoST",
+          "Named Entity Recognition",
+          "Lemmatization",
+          "Vectorization : Bag-of-Words, TF-IDF, Word2Vec",
+          "ve dahası…",
+        ],
+      },
+      "NLP vs. LLMs",
     ],
   },
   {
     number: "02",
-    title: "Prompt Engineering ve Yapılandırılmış Çıktılar",
-    duration: "~4 saat",
+    title: "Large Language Models (LLMs)",
     outcomes: [
-      "Güvenilir ve tekrarlanabilir prompt tasarımı",
-      "JSON / şema tabanlı yapılandırılmış çıktı üretimi",
-      "Few-shot ve reasoning teknikleri",
+      "Büyük Dil Modellerine (LLMs) Genel Bakış",
+      "Transformer Mimarisi",
+      "Attention ve Self-Attention",
+      "Encoder-Decoder",
+      "Hugging Face Model Hub",
+      {
+        text: "Prompt Engineering",
+        children: [
+          "Zero-Shot, Few-Shot, Chain-of-Thought Örnekleri",
+          "Prompt Tasarımında Yapılan Tipik Hatalar",
+          "Gelişmiş Prompt Teknikleri",
+        ],
+      },
+      "LLMs vs. AI Agents",
     ],
   },
   {
     number: "03",
-    title: "Tool Use & Function Calling",
-    duration: "~5 saat",
+    title: "Agentic AI (LLMs) ve Agentic Design Patterns",
     outcomes: [
-      "Agent'a araç tanımlama ve çağırma",
-      "Harici API ve veritabanı entegrasyonu",
-      "Hata yönetimi ve güvenli araç kullanımı",
+      "AI Agents vs. Agentic AI",
+      "Prompt Chaining",
+      "Routing",
+      "Parallelization",
+      "Reflection",
+      "Tool Use",
+      "Planning",
+      "Multi-Agent",
+      "Memory Management",
+      "Model Context Protocol (MCP)",
+      "Exception Handling",
+      "Human-in-the-Loop",
+      "Knowledge Retrieval (RAG)",
+      "Inter-Agent Communication (A2A)",
+      "Reasoning Techniques",
+      "Guardrails/Safety Patterns",
+      "Evaluation and Monitoring",
+      "Prioritization",
     ],
   },
   {
     number: "04",
-    title: "RAG ve Hafıza (Memory) Sistemleri",
-    duration: "~5 saat",
+    title: "AI Production",
     outcomes: [
-      "Vektör veritabanları ve embedding mantığı",
-      "Kendi verinizle Retrieval-Augmented Generation",
-      "Kısa ve uzun dönem agent hafızası tasarımı",
+      "MLOps'a Genel Bakış",
+      "LLMOps'a Genel Bakış",
+      "ML System Lifecycle",
+      "MLaaS : Machine Learning as a Services",
+      "LLM Application Deployment",
     ],
   },
   {
     number: "05",
-    title: "Agent Mimarileri ve Planlama",
-    duration: "~5 saat",
+    title: "AI Security",
     outcomes: [
-      "ReAct, planner-executor ve döngü tabanlı mimariler",
-      "Görev ayrıştırma (task decomposition)",
-      "Karar verme ve öz-değerlendirme",
-    ],
-  },
-  {
-    number: "06",
-    title: "Çoklu-Agent Sistemleri (Multi-Agent)",
-    duration: "~5 saat",
-    outcomes: [
-      "Rol tabanlı agent ekipleri kurma",
-      "Agent'lar arası iletişim ve koordinasyon",
-      "Orkestrasyon ve denetim katmanları",
-    ],
-  },
-  {
-    number: "07",
-    title: "Güvenlik, Değerlendirme (Eval) ve Güvenilirlik",
-    duration: "~4 saat",
-    outcomes: [
-      "Prompt injection ve AI güvenlik riskleri",
-      "Otomatik değerlendirme (eval) altyapısı kurma",
-      "Trustworthy & Responsible AI ilkeleri",
-    ],
-  },
-  {
-    number: "08",
-    title: "Üretime Alma (Deployment) ve Ölçekleme",
-    duration: "~4 saat",
-    outcomes: [
-      "Agent'ları servis olarak deploy etme",
-      "İzleme, loglama ve maliyet optimizasyonu",
-      "Bitirme projesi: uçtan uca agentic sistem",
+      "Yapay Zeka Güvenliğine Genel Bakış",
+      "LLM Security",
+      "OWASP LLM Security Top 10 : LLM Uygulamalarındaki Güvenlik Zafiyetleri",
     ],
   },
 ];

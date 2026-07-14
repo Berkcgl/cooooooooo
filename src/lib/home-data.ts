@@ -126,8 +126,8 @@ export const CHANNELS: Channel[] = [
   { label: "LinkedIn", url: "https://www.linkedin.com/in/cihanozhan/" },
   { label: "GitHub", url: "https://github.com/cihanozhan" },
   { label: "Medium", url: "https://medium.com/@cihanozhan" },
-  { label: "Twitter", url: "https://twitter.com/cihanozhan" }, // TODO: doğrula
-  { label: "Vimeo", url: "https://vimeo.com/cihanozhan" }, // TODO: doğrula
+  { label: "Twitter (X)", url: "https://x.com/autonomousec" },
+  { label: "Vimeo", url: "https://vimeo.com/livetrainer" },
 ];
 
 export const CONTACT = {

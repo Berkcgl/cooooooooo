@@ -1,4 +1,4 @@
-import { Clock, Radio } from "lucide-react";
+import { Radio } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -37,17 +37,29 @@ export function Curriculum() {
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="pl-9">
-                    <div className="mb-4 inline-flex items-center gap-1.5 text-xs font-semibold text-ink-500">
-                      <Clock className="h-3.5 w-3.5" />
-                      {m.duration}
-                    </div>
                     <ul className="grid gap-2.5">
-                      {m.outcomes.map((o) => (
-                        <li key={o} className="flex gap-3 text-sm text-ink-700">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-                          {o}
-                        </li>
-                      ))}
+                      {m.outcomes.map((o) => {
+                        const isNested = typeof o !== "string";
+                        const label = isNested ? o.text : o;
+                        return (
+                          <li key={label} className="text-sm text-ink-700">
+                            <div className="flex gap-3">
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                              <span>{label}</span>
+                            </div>
+                            {isNested && (
+                              <ul className="mt-2 ml-5 grid gap-2 border-l border-border pl-4">
+                                {o.children.map((c) => (
+                                  <li key={c} className="flex gap-3 text-sm text-ink-500">
+                                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-ink-300" />
+                                    <span>{c}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </AccordionContent>
