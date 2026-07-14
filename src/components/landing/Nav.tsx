@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { APPLY_ANCHOR } from "@/lib/landing-data";
-import logo from "@/assets/main-website-logo.svg.asset.json";
+import logo from "@/assets/main-website-logo.svg";
 
 const NAV_LINKS = [
   { href: "#neden", label: "Neden Şimdi" },
@@ -32,7 +32,7 @@ export function Nav() {
     >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Ana menü">
         <a href="#top" className="flex items-center" aria-label="Cihan Özhan — ana sayfa">
-          <img src={logo.url} alt="Cihan Özhan" className="h-9 w-auto" />
+          <img src={logo} alt="Cihan Özhan" className="h-9 w-auto" />
         </a>
 
 

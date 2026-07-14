@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { INSTRUCTOR_PROJECTS, INSTRUCTOR_TIMELINE } from "@/lib/landing-data";
-import portrait from "@/assets/cihan-ozhan.svg.asset.json";
+import portrait from "@/assets/cihan-ozhan.svg";
 
 export function Instructor() {
   return (
@@ -9,7 +9,7 @@ export function Instructor() {
         <div className="lg:sticky lg:top-24 lg:self-start">
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-border bg-secondary">
             <img
-              src={portrait.url}
+              src={portrait}
               alt="Cihan Özhan portresi"
               className="absolute inset-0 h-full w-full object-cover"
             />

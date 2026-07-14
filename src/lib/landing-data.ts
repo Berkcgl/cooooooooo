@@ -21,17 +21,17 @@
  * ============================================================================
  */
 
-import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.svg.asset.json";
-import aselsanLogo from "@/assets/logos/aselsan.svg.asset.json";
-import siemensLogo from "@/assets/logos/siemens.svg.asset.json";
-import yemeksepetiLogo from "@/assets/logos/yemeksepeti.svg.asset.json";
-import turkcellLogo from "@/assets/logos/turkcell.svg.asset.json";
-import n11Logo from "@/assets/logos/n11.svg.asset.json";
-import tusasLogo from "@/assets/logos/tusas.svg.asset.json";
-import isbankasiLogo from "@/assets/logos/isbankasi.svg.asset.json";
-import akbankLogo from "@/assets/logos/akbank.svg.asset.json";
-import garantiLogo from "@/assets/logos/garanti.svg.asset.json";
-import turkTelekomLogo from "@/assets/logos/turktelekom.svg.asset.json";
+import cumhurbaskanligiLogo from "@/assets/logos/cumhurbaskanligi.svg";
+import aselsanLogo from "@/assets/logos/aselsan.svg";
+import siemensLogo from "@/assets/logos/siemens.svg";
+import yemeksepetiLogo from "@/assets/logos/yemeksepeti.svg";
+import turkcellLogo from "@/assets/logos/turkcell.svg";
+import n11Logo from "@/assets/logos/n11.svg";
+import tusasLogo from "@/assets/logos/tusas.svg";
+import isbankasiLogo from "@/assets/logos/isbankasi.svg";
+import akbankLogo from "@/assets/logos/akbank.svg";
+import garantiLogo from "@/assets/logos/garanti.svg";
+import turkTelekomLogo from "@/assets/logos/turktelekom.svg";
 
 export const LAST_UPDATED = "Haziran 2026";
 
@@ -310,17 +310,17 @@ export interface Institution {
 }
 
 export const INSTITUTIONS: Institution[] = [
-  { name: "Cumhurbaşkanlığı", logo: cumhurbaskanligiLogo.url, url: "https://www.tccb.gov.tr/" },
-  { name: "Aselsan", logo: aselsanLogo.url, url: "https://www.aselsan.com/tr" },
-  { name: "Siemens", logo: siemensLogo.url, url: "https://www.siemens.com/tr-tr/" },
-  { name: "Yemeksepeti", logo: yemeksepetiLogo.url, url: "https://www.yemeksepeti.com/" },
-  { name: "Turkcell", logo: turkcellLogo.url, url: "https://www.turkcell.com.tr/" },
-  { name: "N11", logo: n11Logo.url, url: "https://www.n11.com/" },
-  { name: "TUSAŞ (TEI)", logo: tusasLogo.url, url: "https://www.tusas.com/" },
-  { name: "İş Bankası", logo: isbankasiLogo.url, url: "https://www.isbank.com.tr/" },
-  { name: "Akbank", logo: akbankLogo.url, url: "https://www.akbank.com/" },
-  { name: "Garanti Bankası", logo: garantiLogo.url, url: "https://www.garantibbva.com.tr/" },
-  { name: "Türk Telekom", logo: turkTelekomLogo.url, url: "https://www.turktelekom.com.tr/" },
+  { name: "Cumhurbaşkanlığı", logo: cumhurbaskanligiLogo, url: "https://www.tccb.gov.tr/" },
+  { name: "Aselsan", logo: aselsanLogo, url: "https://www.aselsan.com/tr" },
+  { name: "Siemens", logo: siemensLogo, url: "https://www.siemens.com/tr-tr/" },
+  { name: "Yemeksepeti", logo: yemeksepetiLogo, url: "https://www.yemeksepeti.com/" },
+  { name: "Turkcell", logo: turkcellLogo, url: "https://www.turkcell.com.tr/" },
+  { name: "N11", logo: n11Logo, url: "https://www.n11.com/" },
+  { name: "TUSAŞ (TEI)", logo: tusasLogo, url: "https://www.tusas.com/" },
+  { name: "İş Bankası", logo: isbankasiLogo, url: "https://www.isbank.com.tr/" },
+  { name: "Akbank", logo: akbankLogo, url: "https://www.akbank.com/" },
+  { name: "Garanti Bankası", logo: garantiLogo, url: "https://www.garantibbva.com.tr/" },
+  { name: "Türk Telekom", logo: turkTelekomLogo, url: "https://www.turktelekom.com.tr/" },
 ];
 
 export interface PresenceCard {

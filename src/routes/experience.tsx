@@ -6,7 +6,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { ABOUT_PARAGRAPHS, EXPERTISE } from "@/lib/home-data";
 import { INSTRUCTOR_TIMELINE } from "@/lib/landing-data";
-import portrait from "@/assets/cihan-ozhan.svg.asset.json";
+import portrait from "@/assets/cihan-ozhan.svg";
 
 const TITLE = "Deneyim & Yetkinlikler | Cihan Özhan";
 const DESC =
@@ -40,7 +40,7 @@ function ExperiencePage() {
             <div>
               <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-2xl border border-border bg-secondary">
                 <img
-                  src={portrait.url}
+                  src={portrait}
                   alt="Cihan Özhan portresi"
                   className="absolute inset-0 h-full w-full object-cover"
                   loading="lazy"
