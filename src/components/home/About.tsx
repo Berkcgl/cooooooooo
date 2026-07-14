@@ -1,6 +1,6 @@
 import { ABOUT_PARAGRAPHS, PERSON } from "@/lib/home-data";
 import { useReveal } from "@/hooks/useReveal";
-import portrait from "@/assets/cihan-ozhan.svg.asset.json";
+import portrait from "@/assets/cihan-ozhan.svg";
 
 export function About() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-about-line]", y: 24, stagger: 0.15 });
@@ -14,7 +14,7 @@ export function About() {
             className="relative mb-8 aspect-[4/5] w-full max-w-xs overflow-hidden rounded-2xl border border-border bg-secondary shadow-[0_0_0_1px_var(--color-border)]"
           >
             <img
-              src={portrait.url}
+              src={portrait}
               alt="Cihan Özhan portresi"
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"

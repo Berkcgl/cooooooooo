@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { CircularArrowButton } from "@/components/site/CircularArrowButton";
 import { useScrollZoom } from "@/hooks/useScrollZoom";
 import { PERSON, MASTERCLASS_ROUTE } from "@/lib/home-data";
-import heroNetwork from "@/assets/hero-network-globe.jpg.asset.json";
+import heroNetwork from "@/assets/hero-network-globe.jpg";
 
 export function ScrollZoomHero() {
   const zoomRef = useScrollZoom<HTMLDivElement>({
@@ -40,7 +40,7 @@ export function ScrollZoomHero() {
         {/* Scroll-scrubbed camera push — wide glowing network globe anchored to the bottom */}
         <img
           data-hero-visual
-          src={heroNetwork.url}
+          src={heroNetwork}
           alt="Soyut yapay zeka sinir ağı görselleştirmesi"
           width={2000}
           height={1125}

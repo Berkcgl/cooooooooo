@@ -1,4 +1,4 @@
-import logo from "@/assets/cihan-ozhan-logo.svg.asset.json";
+import logo from "@/assets/cihan-ozhan-logo.svg";
 
 const SOCIALS = [
   { label: "Udemy", url: "https://udemy.com/user/cihanozhan" },
@@ -13,7 +13,7 @@ export function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="container-page flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
         <div className="flex items-center">
-          <img src={logo.url} alt="Cihan Özhan" className="h-9 w-auto" />
+          <img src={logo} alt="Cihan Özhan" className="h-9 w-auto" />
         </div>
 
 
