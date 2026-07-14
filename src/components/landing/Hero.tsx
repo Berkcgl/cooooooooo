@@ -41,7 +41,10 @@ export function Hero() {
         </div>
 
         <div className="relative">
-          <div className="relative mx-auto aspect-video w-full max-w-lg overflow-hidden rounded-3xl border border-border bg-secondary/40 p-3 lg:mr-0 lg:ml-auto">
+          <div className="relative mx-auto aspect-video w-full max-w-lg overflow-visible rounded-3xl border border-border bg-secondary/40 p-3 lg:mr-0 lg:ml-auto">
+            <span className="pointer-events-none absolute right-6 top-0 -translate-y-1/2 text-xs font-medium text-brand">
+              Genel Katılım - Kurumsal
+            </span>
             <img
               src={heroImg}
               alt="Agentic AI sistem mimarisi: merkezi modeli araçlara bağlayan otonom agent ağı"
