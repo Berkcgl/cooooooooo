@@ -1,4 +1,4 @@
-import { Clock, Radio } from "lucide-react";
+import { Radio } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
