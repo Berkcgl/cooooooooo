@@ -43,7 +43,7 @@ export const COURSE = {
   title: "Agentic AI Uzmanlık Programı",
   // Headline is intentionally Turkish (primary audience is Türkiye-based).
   hours: "36+",
-  modules: 8,
+  modules: 5,
   format: "Online / Canlı",
   cohortStart: "15 Eylül 2026",
   applicationDeadline: "5 Eylül 2026",
