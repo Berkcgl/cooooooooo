@@ -639,8 +639,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Büyük dil modellerini güvenli ve ölçeklenebilir şekilde üretime almak için LLMOps, model serving, optimizasyon ve distributed inference'ı uygulamalı olarak öğrenin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "deployment",
-    curriculumMode: "flat",
-    flatItems: LLM_DEPLOYMENT_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(LLM_DEPLOYMENT_ITEMS),
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -661,6 +661,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "LLMOps, model serving, optimizasyon ve distributed inference ile LLM'leri güvenli ve ölçeklenebilir şekilde üretime alın.",
     },
+    applyFormUrl: "https://forms.gle/4gejKhPf8gChDtoM9",
   },
   "ai-security-in-defense": {
     slug: "ai-security-in-defense",
