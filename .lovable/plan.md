@@ -1,40 +1,81 @@
-## Problem
+## Plan
 
-Images you uploaded (logos, portrait, hero globe, main logo) are stored as `.asset.json` pointer files that reference Lovable's CDN at `/__l5e/assets-v1/...`. Images I generated (e.g. `hero-agentic.jpg`, `cta-dark.jpg`) are real files in `src/assets/`.
+### 1. Small content edits
 
-When you push to GitHub and deploy on Vercel:
-- Real image files work fine (bundled by Vite).
-- `.asset.json` pointers still point at `/__l5e/assets-v1/...`, which only exists on Lovable's infrastructure → 404 on Vercel.
+- **`src/components/landing/FinalCta.tsx`** — set `APPLICATION_FORM_URL = "https://forms.gle/CyWJDGHqTjZt4Ze76"` (button already opens in a new tab).
+- **`src/lib/home-data.ts`**
+  - Replace first entry of `ABOUT_PARAGRAPHS` with the new "20+ yıldır… deeptech girişimcisiyim." text.
+  - Append to `CHANNELS`: `{ label: "Web Arşivi", url: "http://web.archive.org/web/20250512103701/http://cihanozhan.com/" }` (footer already maps `CHANNELS` and opens in new tab with matching styling).
+- **`src/components/home/ContactCta.tsx`** — replace the subline under "Birlikte çalışalım" with: `"Eğitim, proje, danışmanlık veya işbirliği için ulaşın."`
+- **`src/components/home/TeachingMap.tsx`** — replace the `description` under "Sahadan sahaya, kürsüden kürsüye" with: `"Üniversitelerden kamu kurumlarına ve global etkinliklere — eğitim ve konuşma yaptığım kurumlardan bir seçki."`
+- **`src/components/landing/Organizations.tsx`** — change the label text to `"Eğitim, proje ve danışmanlık yaptığı bazı kurumlar"`.
+- **`src/routes/speaking.tsx`** — change `35+` to `250+` in the PageHero description.
 
-## Fix
+### 2. Hero badge on `/agentic-ai-masterclass`
 
-Convert every uploaded `.asset.json` pointer into a real file committed to the repo, then switch imports to standard Vite asset imports.
+In `src/components/landing/Hero.tsx`, change the "Genel Katılım - Kurumsal" span:
+- Bump size to match "KONTENJAN SINIRLIDIR" eyebrow (`text-sm font-semibold uppercase tracking-wider text-brand`).
+- Move it further above the video card top edge (increase upward offset by ~1 line-height) so it visually sits one `<br>` above the image, not overlapping the frame.
+- Implementation: swap classes to `absolute right-6 -top-8 md:-top-10 text-sm font-semibold uppercase tracking-wider text-brand` (keeps it separated from the card border line).
 
-### Files to materialize
+### 3. Add 7 new institution logos
 
-From CDN → into `src/assets/`:
-- `cihan-ozhan-logo.svg`
-- `cihan-ozhan.svg`
-- `main-website-logo.svg`
-- `hero-network-globe.jpg`
+The uploads are SVGs whose visible content is a raster image embedded as base64 inside `<image xlink:href="data:image/…">`. To match the existing pattern (real files under `src/assets/logos/` imported via Vite so Vercel serves them without 404), do the following per logo:
 
-Into `src/assets/logos/`:
-- `akbank.svg`, `aselsan.svg`, `cumhurbaskanligi.svg`, `garanti.svg`, `isbankasi.svg`, `n11.svg`, `siemens.svg`, `turkcell.svg`, `turktelekom.svg`, `tusas.svg`, `yemeksepeti.svg`
+New files to create under `src/assets/logos/`:
+- `roketsan.svg`, `ssb.svg`, `stm.svg`, `havelsan.svg`, `bitaksi.svg`, `fibabanka.svg`, `trendyol.svg`
 
-### Steps
+Method: copy each `/mnt/user-uploads/<name>-logo.svg` directly to `src/assets/logos/<name>.svg` via `code--copy`. They are real SVG files (with base64 raster payloads inside) and will be bundled by Vite as normal assets — this is exactly the pattern used for the existing embedded-raster logos like `turktelekom.svg` / `cumhurbaskanligi.svg`.
 
-1. For each `.asset.json`, `curl` the `url` from the pointer (prefixed with the preview origin) and save the raw bytes to the matching filename in the same directory.
-2. Delete the `.asset.json` pointer files.
-3. Update every import across the codebase:
-   - `@/assets/foo.svg.asset.json` → `@/assets/foo.svg`
-   - Replace `import x from "….asset.json"; …src={x.url}` with `import x from "….svg"; …src={x}`
-   - Affected files include `src/lib/landing-data.ts`, `src/components/landing/Footer.tsx`, `src/components/landing/Instructor.tsx`, `src/components/landing/Nav.tsx`, `src/components/site/SiteHeader.tsx`, `src/components/site/SiteFooter.tsx`, and any other file grep finds.
-4. Run the build to confirm no unresolved imports and preview still renders.
+Then in `src/lib/landing-data.ts`:
+- Add 7 imports at the top with the other logo imports.
+- Append 7 new entries to `INSTITUTIONS` with `name`, `logo`, and `url`:
+  - Roketsan → https://www.roketsan.com.tr/tr
+  - SSB → https://www.ssb.gov.tr/
+  - STM → https://www.stm.com.tr/tr
+  - Havelsan → https://www.havelsan.com/tr
+  - BiTaksi → https://www.bitaksi.com/tr
+  - Fibabanka → https://www.fibabanka.com.tr/
+  - Trendyol → https://www.trendyol.com/
 
-### Result
+The existing marquee (`Organizations.tsx` + `LogoTile.tsx`) automatically picks them up.
 
-After this, the repo contains real SVG/JPG files. Vercel (or any host) serves them from the standard Vite build output — no more 404s. Newly generated images (which land as real files) already work; this only fixes the uploaded ones.
+### 4. New component: Rolling 3-month training calendar
 
-### Note on file size
+**File:** `src/components/trainings/TrainingCalendar.tsx` (new)
 
-`cihan-ozhan.svg` is ~1 MB and `cumhurbaskanligi.svg` ~138 KB. They'll be committed to git as-is. If you prefer, I can convert the large portrait SVG to an optimized JPG/WebP in the same pass — let me know.
+**Data model** — exported config at top of the file:
+```ts
+export type CalendarEvent = { title: string; startDate: string; endDate: string; url: string };
+export const CALENDAR_EVENTS: CalendarEvent[] = [
+  {
+    title: "Agentic AI Masterclass",
+    startDate: "2026-09-15",
+    endDate: "2026-10-10",
+    url: "/agentic-ai-masterclass",
+  },
+];
+```
+
+**Behavior**
+- `windowStart` = first day of `new Date()`'s month, `windowEnd` = last day of the month two months later — recomputed on each render (rolling 3-month window starting from current month).
+- Filter `CALENDAR_EVENTS` to those whose `[startDate, endDate]` intersects the window; clamp each event's rendered range to the window edges.
+- Render header row = 3 month labels (`{month} {year}` in Turkish locale, e.g. "Ekim 2026") each spanning its own days.
+- Grid body = single row of days for the whole window (each day = one CSS grid column, `grid-template-columns: repeat(totalDays, minmax(0,1fr))`). No weekday header labels. Weeks are visually separated with subtle vertical divider lines every 7 days (grid background lines) so it still reads like a calendar without a day-header row.
+- Events render as absolutely-positioned pill cards inside the grid, `grid-column: start / span duration`, stacked vertically when they overlap (simple lane assignment).
+- Each card shows: title (bold), and the date range formatted in Turkish (`"15 Eylül – 10 Ekim 2026"`, or single-day `"15 Eylül 2026"`).
+- Card is a `<Link to={url}>` for internal paths starting with `/`, otherwise `<a href={url}>`, same tab per spec. Hover: `hover:shadow-lg hover:-translate-y-0.5 transition` + border highlight.
+- Theming uses existing tokens (`bg-card`, `border-border`, `text-ink-*`, `bg-brand-soft`, `text-brand`). Cards use `bg-brand text-brand-foreground` in both light and dark themes — the project's Tailwind theme already inverts these tokens per mode via `ThemeProvider`, so the component works in both without extra logic. Container: `rounded-2xl border border-border bg-card p-6 md:p-8`.
+- Empty state: if no events fall in the window, render nothing (component returns `null`) — per spec, past/future events are handled elsewhere.
+
+**Integration** — in `src/routes/trainings.tsx`, import and render `<TrainingCalendar />` inside `<main>` immediately after `<PageHero />` and before the `<section>` that lists Aktif trainings. Wrap it in a `section` with the same `container-page` spacing pattern.
+
+### Verification
+
+After edits: rely on the auto-run build. Spot-check the preview at `/trainings` (calendar visible with Agentic AI Masterclass bar spanning ~Sep 15 – Oct 10), `/agentic-ai-masterclass` (badge repositioned, CTA link updated, new logos in marquee), and the homepage (about paragraph, contact/teaching sublines, Web Arşivi in footer).
+
+### Technical notes
+
+- SVG files with embedded base64 rasters are treated as static asset files by Vite; importing them via `@/assets/logos/foo.svg` yields a URL string that works identically in dev and production. This avoids the previous `.asset.json` CDN 404 issue on Vercel.
+- Date math uses plain `Date` objects and `Intl.DateTimeFormat("tr-TR", { month: "long" })` — no new dependency.
+- Lane packing: sort filtered events by `startDate`, place each in the lowest lane whose last event ends before this one starts (O(n²), fine for a handful of events).
