@@ -175,7 +175,7 @@ export function TrainingCalendar() {
           {/* Calendar body */}
           <div
             className="relative mt-3 overflow-hidden rounded-lg border border-border bg-secondary/20"
-            style={{ height: laneCount * LANE_HEIGHT + 16 }}
+            style={{ height: displayLanes * LANE_HEIGHT + 16 }}
           >
             {/* Week separators every 7 days */}
             <div
