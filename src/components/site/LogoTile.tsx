@@ -15,8 +15,11 @@ export function LogoTile({ org, className = "" }: { org: Institution; className?
     <img
       src={org.logo}
       alt={`${org.name} logosu`}
+      width={144}
+      height={40}
       className="max-h-10 w-auto max-w-full object-contain"
       loading="lazy"
+      decoding="async"
     />
   ) : (
     <span aria-label={`${org.name} logosu`} className="h-6 w-20 rounded bg-ink-300/40" />
