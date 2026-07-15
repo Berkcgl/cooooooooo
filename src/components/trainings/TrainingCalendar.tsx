@@ -93,20 +93,12 @@ function packLanes(events: (Omit<Placed, "lane"> & { lane?: number })[]): Placed
 // ---------- component ----------
 
 const MIN_LANES = 4;
-const LANE_HEIGHT = 60;
+const LANE_HEIGHT = 20;
 
-function EventCard({
-  p,
-  totalDays,
-}: {
-  p: Placed;
-  totalDays: number;
-}) {
+function EventCard({ p, totalDays }: { p: Placed; totalDays: number }) {
   const cardClass =
     "group flex h-[52px] flex-col justify-center overflow-hidden rounded-lg border border-brand/40 bg-brand px-3 py-1.5 text-brand-foreground shadow-sm transition hover:-translate-y-0.5 hover:border-brand hover:shadow-lg";
-  const title = (
-    <span className="truncate text-sm font-semibold leading-tight">{p.event.title}</span>
-  );
+  const title = <span className="truncate text-sm font-semibold leading-tight">{p.event.title}</span>;
   const style = {
     gridColumn: `${p.startCol + 1} / span ${p.span}`,
     gridRow: p.lane + 1,
@@ -179,20 +171,14 @@ function CalendarBody({
 
       <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-lg border border-border bg-secondary/20">
         <div className="absolute inset-0 overflow-y-auto">
-          <div
-            className="relative w-full"
-            style={{ minHeight: "100%", height: displayLanes * LANE_HEIGHT + 16 }}
-          >
+          <div className="relative w-full" style={{ minHeight: "100%", height: displayLanes * LANE_HEIGHT + 16 }}>
             <div
               className="pointer-events-none absolute inset-0 grid"
               style={{ gridTemplateColumns: `repeat(${totalDays}, minmax(0, 1fr))` }}
               aria-hidden="true"
             >
               {Array.from({ length: totalDays }).map((_, i) => (
-                <div
-                  key={i}
-                  className={i > 0 && i % 7 === 0 ? "border-l border-border/60" : ""}
-                />
+                <div key={i} className={i > 0 && i % 7 === 0 ? "border-l border-border/60" : ""} />
               ))}
             </div>
 
@@ -202,8 +188,7 @@ function CalendarBody({
               aria-hidden="true"
             >
               {months.slice(0, -1).map((m, i) => {
-                const col =
-                  months.slice(0, i + 1).reduce((acc, x) => acc + x.span, 0) + 1;
+                const col = months.slice(0, i + 1).reduce((acc, x) => acc + x.span, 0) + 1;
                 return (
                   <div
                     key={`sep-${i}`}
@@ -302,9 +287,7 @@ export function TrainingCalendar() {
       <div className="container-page">
         <div className="rounded-2xl border border-border bg-card p-5 md:p-8">
           <div className="flex items-baseline justify-between gap-4">
-            <h2 className="text-xl font-bold text-ink-900 md:text-2xl">
-              Yaklaşan Eğitim Takvimi
-            </h2>
+            <h2 className="text-xl font-bold text-ink-900 md:text-2xl">Yaklaşan Eğitim Takvimi</h2>
             <span className="text-xs font-medium uppercase tracking-wider text-ink-500">
               {isMobile ? "Aylık Görünüm" : "3 Aylık Görünüm"}
             </span>
@@ -321,9 +304,7 @@ export function TrainingCalendar() {
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
-              <span className="text-base font-semibold capitalize text-ink-900">
-                {months[0].label}
-              </span>
+              <span className="text-base font-semibold capitalize text-ink-900">{months[0].label}</span>
               <button
                 type="button"
                 onClick={() => setMonthOffset((v) => Math.min(2, v + 1))}
