@@ -137,6 +137,8 @@ export function TrainingCalendar() {
 
   const placed = packLanes(preplaced);
   const laneCount = Math.max(...placed.map((p) => p.lane)) + 1;
+  const MIN_LANES = 3; // reserve room for up to 3 overlapping events per row
+  const displayLanes = Math.max(laneCount, MIN_LANES);
   const LANE_HEIGHT = 68; // px per event lane
 
   return (
@@ -173,7 +175,7 @@ export function TrainingCalendar() {
           {/* Calendar body */}
           <div
             className="relative mt-3 overflow-hidden rounded-lg border border-border bg-secondary/20"
-            style={{ height: laneCount * LANE_HEIGHT + 16 }}
+            style={{ height: displayLanes * LANE_HEIGHT + 16 }}
           >
             {/* Week separators every 7 days */}
             <div
@@ -225,7 +227,7 @@ export function TrainingCalendar() {
                       {p.event.title}
                     </span>
                     <span className="truncate text-[11px] font-medium leading-tight opacity-90">
-                      {formatRange(p.labelStart, p.labelEnd)}
+                      {dayMonthYearFmt.format(p.labelStart)}
                     </span>
                   </>
                 );

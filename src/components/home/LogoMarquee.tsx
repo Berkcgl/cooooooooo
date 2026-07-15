@@ -12,7 +12,7 @@ export function LogoMarquee() {
   return (
     <section className="border-t border-border py-16" aria-label="Eğitim verilen kurumlar">
       <p className="container-page text-center font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
-        Eğitim verdiği bazı kurumlar
+        Eğitim, proje ve danışmanlık yaptığı bazı kurumlar
       </p>
       <div className="group relative mt-8 overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-background to-transparent" />

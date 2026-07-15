@@ -44,8 +44,7 @@ export function FreeLibrary() {
                       className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-105"
                     />
                   )}
-                  <span className="absolute inset-0 bg-ink-900/30 transition-colors group-hover:bg-ink-900/20" />
-                  <PlayCircle className="relative h-12 w-12 text-brand-foreground drop-shadow transition-transform group-hover:scale-110" />
+                  <PlayCircle className="relative h-12 w-12 text-white drop-shadow-lg transition-transform group-hover:scale-110" />
                 </div>
                 <div className="p-5">
                   <h3 className="text-sm font-bold leading-snug text-ink-900">{v.title}</h3>
