@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageHero } from "@/components/site/PageHero";
 import { BackToTop } from "@/components/landing/BackToTop";
+import { TrainingCalendar } from "@/components/trainings/TrainingCalendar";
 import { TRAININGS } from "@/lib/home-data";
 import { COURSES, YOUTUBE_CHANNEL, type TabItem } from "@/lib/landing-data";
 
@@ -53,6 +54,8 @@ function TrainingsPage() {
           title="Canlı ve uygulamalı eğitim programları"
           description="Amiral gemisi Agentic AI Masterclass ve diğer bootcamp / programlar, ardından 30+ kurs ve video serisinden oluşan tam arşiv."
         />
+
+        <TrainingCalendar />
 
         <section className="py-16 md:py-24">
           <div className="container-page space-y-12">

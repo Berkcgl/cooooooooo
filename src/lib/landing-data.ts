@@ -32,6 +32,13 @@ import isbankasiLogo from "@/assets/logos/isbankasi.svg";
 import akbankLogo from "@/assets/logos/akbank.svg";
 import garantiLogo from "@/assets/logos/garanti.svg";
 import turkTelekomLogo from "@/assets/logos/turktelekom.svg";
+import roketsanLogo from "@/assets/logos/roketsan.svg";
+import ssbLogo from "@/assets/logos/ssb.svg";
+import stmLogo from "@/assets/logos/stm.svg";
+import havelsanLogo from "@/assets/logos/havelsan.svg";
+import bitaksiLogo from "@/assets/logos/bitaksi.svg";
+import fibabankaLogo from "@/assets/logos/fibabanka.svg";
+import trendyolLogo from "@/assets/logos/trendyol.svg";
 
 export const LAST_UPDATED = "Haziran 2026";
 
@@ -321,6 +328,13 @@ export const INSTITUTIONS: Institution[] = [
   { name: "Akbank", logo: akbankLogo, url: "https://www.akbank.com/" },
   { name: "Garanti Bankası", logo: garantiLogo, url: "https://www.garantibbva.com.tr/" },
   { name: "Türk Telekom", logo: turkTelekomLogo, url: "https://www.turktelekom.com.tr/" },
+  { name: "Trendyol", logo: trendyolLogo, url: "https://www.trendyol.com/" },
+  { name: "Fibabanka", logo: fibabankaLogo, url: "https://www.fibabanka.com.tr/" },
+  { name: "BiTaksi", logo: bitaksiLogo, url: "https://www.bitaksi.com/tr" },
+  { name: "Havelsan", logo: havelsanLogo, url: "https://www.havelsan.com/tr" },
+  { name: "STM", logo: stmLogo, url: "https://www.stm.com.tr/tr" },
+  { name: "SSB", logo: ssbLogo, url: "https://www.ssb.gov.tr/" },
+  { name: "Roketsan", logo: roketsanLogo, url: "https://www.roketsan.com.tr/tr" },
 ];
 
 export interface PresenceCard {

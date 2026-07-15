@@ -18,7 +18,7 @@ export function TeachingMap() {
           kicker="Nerede öğretti / konuştu"
           ghost="MAP"
           title="Sahadan sahaya, kürsüden kürsüye"
-          description="Üniversitelerden kamu kurumlarına ve global etkinliklere — eğitim ve konuşma verilen kurumlardan bir seçki."
+          description="Üniversitelerden kamu kurumlarına ve global etkinliklere — eğitim ve konuşma yaptığım kurumlardan bir seçki."
         />
 
         <div ref={ref} className="mt-14 flex flex-wrap justify-center gap-2.5">

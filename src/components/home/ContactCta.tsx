@@ -66,7 +66,7 @@ export function ContactCta() {
           Birlikte çalışalım
         </h2>
         <p data-cta-reveal className="mx-auto mt-5 max-w-xl text-lg text-brand-foreground/80">
-          Eğitim, danışmanlık veya işbirliği için ulaşın.
+          Eğitim, proje, danışmanlık veya işbirliği için ulaşın.
         </p>
 
         <div data-cta-reveal className="mt-10 flex flex-wrap items-center justify-center gap-3">

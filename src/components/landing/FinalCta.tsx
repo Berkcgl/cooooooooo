@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { COURSE } from "@/lib/landing-data";
 import ctaBg from "@/assets/cta-dark.jpg";
 
-// External application form — replace "/#" with the real form URL once available.
-const APPLICATION_FORM_URL = "/#";
+// External application form.
+const APPLICATION_FORM_URL = "https://forms.gle/CyWJDGHqTjZt4Ze76";
 
 export function FinalCta() {
   return (
