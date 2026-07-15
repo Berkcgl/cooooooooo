@@ -46,7 +46,7 @@ function SpeakingPage() {
           index="02"
           kicker="Konuşmalar & Etkinlikler"
           title="Sahnede ve kürsüde"
-          description="Üniversitelerden kamu kurumlarına ve global etkinliklere — 35+ konuşma, seminer ve topluluk etkinliği."
+          description="Üniversitelerden kamu kurumlarına ve global etkinliklere — 250+ konuşma, seminer ve topluluk etkinliği."
         />
 
         <section className="py-16 md:py-24">

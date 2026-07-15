@@ -19,7 +19,7 @@ export const PERSON = {
 export const MASTERCLASS_ROUTE = "/agentic-ai-masterclass";
 
 export const ABOUT_PARAGRAPHS: string[] = [
-  "20+ yıldır yazılım, siber güvenlik ve yapay zeka alanlarında çalışan; Offensive AI Security, agentic AI ve otonom sistemler üzerine uzmanlaşmış araştırmacı, mühendis ve girişimciyim.",
+  "20+ yıldır yazılım, veritabanı, siber güvenlik ve yapay zeka alanlarında çalışan; Offensive AI Security, Agentic AI ve otonom sistemler üzerine uzmanlaşmış araştırmacı ve deeptech girişimcisiyim.",
   "Yapay zekanın güvenliği ve saldırı yüzeyi üzerine araştırmalar yürütüyor; kamu kurumlarından üniversitelere, savunma sanayiinden global teknoloji şirketlerine kadar yüzlerce kuruma eğitim, danışmanlık ve teknik liderlik sağlıyorum.",
   "İstanbul ve New York arasında; üretim ortamında çalışan agentic AI sistemleri tasarlıyor, güvenliğini sağlıyor ve ölçeklenebilir AI platformları geliştiriyorum.",
 ];
@@ -128,6 +128,7 @@ export const CHANNELS: Channel[] = [
   { label: "Medium", url: "https://medium.com/@cihanozhan" },
   { label: "Twitter (X)", url: "https://x.com/autonomousec" },
   { label: "Vimeo", url: "https://vimeo.com/livetrainer" },
+  { label: "Web Arşivi", url: "http://web.archive.org/web/20250512103701/http://cihanozhan.com/" },
 ];
 
 export const CONTACT = {

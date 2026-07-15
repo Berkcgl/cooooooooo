@@ -42,7 +42,7 @@ export function Hero() {
 
         <div className="relative">
           <div className="relative mx-auto aspect-video w-full max-w-lg overflow-visible rounded-3xl border border-border bg-secondary/40 p-3 lg:mr-0 lg:ml-auto">
-            <span className="pointer-events-none absolute right-6 top-0 -translate-y-1/2 text-xs font-medium text-brand">
+            <span className="pointer-events-none absolute right-6 -top-8 md:-top-10 text-sm font-semibold uppercase tracking-wider text-brand">
               Genel Katılım - Kurumsal
             </span>
             <img

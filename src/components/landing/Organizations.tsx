@@ -8,7 +8,7 @@ export function Organizations() {
     <section className="border-y border-border bg-secondary/40 py-16">
       <div className="container-page">
         <p className="text-center text-sm font-semibold uppercase tracking-wider text-ink-500">
-          Eğitim verdiği bazı kurumlar
+          Eğitim, proje ve danışmanlık yaptığı bazı kurumlar
         </p>
 
       </div>
