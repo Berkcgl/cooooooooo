@@ -68,7 +68,7 @@ export const TRAININGS: Training[] = [
   {
     title: "Agentic AI Masterclass",
     body: "Sıfırdan başlayarak gerçek projeler üzerinde otonom AI agent'ları tasarlama, çoklu-agent sistemleri kurma ve üretime alma. Amiral gemisi program.",
-    meta: "Flagship · Genel Katılım / Kurumsal · 36+ saat · Canlı",
+    meta: "Genel Katılım / Kurumsal · 36+ saat · Canlı",
     url: "/agentic-ai-masterclass",
     internal: true,
     featured: true,
@@ -77,7 +77,7 @@ export const TRAININGS: Training[] = [
   {
     title: "AI Red Teaming Masterclass",
     body: "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın; adversarial saldırılardan multi-agent exploitation'a uçtan uca uygulamalı red teaming.",
-    meta: "Genel Katılım / Kurumsal · 36+ saat · 2 gün",
+    meta: "Genel Katılım / Kurumsal · 36+ saat",
     url: "/ai-red-teaming-masterclass",
     internal: true,
     status: "passive",
