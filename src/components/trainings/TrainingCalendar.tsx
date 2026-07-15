@@ -92,13 +92,13 @@ function packLanes(events: (Omit<Placed, "lane"> & { lane?: number })[]): Placed
 
 // ---------- component ----------
 
-const MIN_LANES = 4;
-const LANE_HEIGHT = 20;
+const MIN_LANES = 3;
+const LANE_HEIGHT = 24;
 
 function EventCard({ p, totalDays }: { p: Placed; totalDays: number }) {
   const cardClass =
-    "group flex h-[52px] flex-col justify-center overflow-hidden rounded-lg border border-brand/40 bg-brand px-3 py-1.5 text-brand-foreground shadow-sm transition hover:-translate-y-0.5 hover:border-brand hover:shadow-lg";
-  const title = <span className="truncate text-sm font-semibold leading-tight">{p.event.title}</span>;
+    "group flex h-7 flex-col justify-center overflow-hidden rounded-lg border border-brand/40 bg-brand px-3 py-1 text-brand-foreground shadow-sm transition hover:-translate-y-0.5 hover:border-brand hover:shadow-lg";
+  const title = <span className="truncate text-xs font-semibold leading-tight">{p.event.title}</span>;
   const style = {
     gridColumn: `${p.startCol + 1} / span ${p.span}`,
     gridRow: p.lane + 1,
@@ -169,7 +169,7 @@ function CalendarBody({
         </div>
       )}
 
-      <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-lg border border-border bg-secondary/20">
+      <div className="relative mt-3 h-24 w-full overflow-hidden rounded-lg border border-border bg-secondary/20">
         <div className="absolute inset-0 overflow-y-auto">
           <div className="relative w-full" style={{ minHeight: "100%", height: displayLanes * LANE_HEIGHT + 16 }}>
             <div
