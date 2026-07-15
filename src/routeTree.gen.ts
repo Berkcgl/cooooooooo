@@ -13,8 +13,14 @@ import { Route as TrainingsRouteImport } from './routes/trainings'
 import { Route as SpeakingRouteImport } from './routes/speaking'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PublicationsRouteImport } from './routes/publications'
+import { Route as MachineLearningDeploymentRouteImport } from './routes/machine-learning-deployment'
+import { Route as LlmSecurityAgenticAiSecurityRouteImport } from './routes/llm-security-agentic-ai-security'
+import { Route as LlmDeploymentRouteImport } from './routes/llm-deployment'
 import { Route as GizlilikPolitikasiRouteImport } from './routes/gizlilik-politikasi'
 import { Route as ExperienceRouteImport } from './routes/experience'
+import { Route as AiSecurityInDefenseRouteImport } from './routes/ai-security-in-defense'
+import { Route as AiRedTeamingMasterclassRouteImport } from './routes/ai-red-teaming-masterclass'
+import { Route as AiMlSecurityRouteImport } from './routes/ai-ml-security'
 import { Route as AgenticAiMasterclassRouteImport } from './routes/agentic-ai-masterclass'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -38,6 +44,23 @@ const PublicationsRoute = PublicationsRouteImport.update({
   path: '/publications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MachineLearningDeploymentRoute =
+  MachineLearningDeploymentRouteImport.update({
+    id: '/machine-learning-deployment',
+    path: '/machine-learning-deployment',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LlmSecurityAgenticAiSecurityRoute =
+  LlmSecurityAgenticAiSecurityRouteImport.update({
+    id: '/llm-security-agentic-ai-security',
+    path: '/llm-security-agentic-ai-security',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LlmDeploymentRoute = LlmDeploymentRouteImport.update({
+  id: '/llm-deployment',
+  path: '/llm-deployment',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GizlilikPolitikasiRoute = GizlilikPolitikasiRouteImport.update({
   id: '/gizlilik-politikasi',
   path: '/gizlilik-politikasi',
@@ -46,6 +69,21 @@ const GizlilikPolitikasiRoute = GizlilikPolitikasiRouteImport.update({
 const ExperienceRoute = ExperienceRouteImport.update({
   id: '/experience',
   path: '/experience',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiSecurityInDefenseRoute = AiSecurityInDefenseRouteImport.update({
+  id: '/ai-security-in-defense',
+  path: '/ai-security-in-defense',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiRedTeamingMasterclassRoute = AiRedTeamingMasterclassRouteImport.update({
+  id: '/ai-red-teaming-masterclass',
+  path: '/ai-red-teaming-masterclass',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiMlSecurityRoute = AiMlSecurityRouteImport.update({
+  id: '/ai-ml-security',
+  path: '/ai-ml-security',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgenticAiMasterclassRoute = AgenticAiMasterclassRouteImport.update({
@@ -62,8 +100,14 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
+  '/ai-ml-security': typeof AiMlSecurityRoute
+  '/ai-red-teaming-masterclass': typeof AiRedTeamingMasterclassRoute
+  '/ai-security-in-defense': typeof AiSecurityInDefenseRoute
   '/experience': typeof ExperienceRoute
   '/gizlilik-politikasi': typeof GizlilikPolitikasiRoute
+  '/llm-deployment': typeof LlmDeploymentRoute
+  '/llm-security-agentic-ai-security': typeof LlmSecurityAgenticAiSecurityRoute
+  '/machine-learning-deployment': typeof MachineLearningDeploymentRoute
   '/publications': typeof PublicationsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
@@ -72,8 +116,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
+  '/ai-ml-security': typeof AiMlSecurityRoute
+  '/ai-red-teaming-masterclass': typeof AiRedTeamingMasterclassRoute
+  '/ai-security-in-defense': typeof AiSecurityInDefenseRoute
   '/experience': typeof ExperienceRoute
   '/gizlilik-politikasi': typeof GizlilikPolitikasiRoute
+  '/llm-deployment': typeof LlmDeploymentRoute
+  '/llm-security-agentic-ai-security': typeof LlmSecurityAgenticAiSecurityRoute
+  '/machine-learning-deployment': typeof MachineLearningDeploymentRoute
   '/publications': typeof PublicationsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
@@ -83,8 +133,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/agentic-ai-masterclass': typeof AgenticAiMasterclassRoute
+  '/ai-ml-security': typeof AiMlSecurityRoute
+  '/ai-red-teaming-masterclass': typeof AiRedTeamingMasterclassRoute
+  '/ai-security-in-defense': typeof AiSecurityInDefenseRoute
   '/experience': typeof ExperienceRoute
   '/gizlilik-politikasi': typeof GizlilikPolitikasiRoute
+  '/llm-deployment': typeof LlmDeploymentRoute
+  '/llm-security-agentic-ai-security': typeof LlmSecurityAgenticAiSecurityRoute
+  '/machine-learning-deployment': typeof MachineLearningDeploymentRoute
   '/publications': typeof PublicationsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/speaking': typeof SpeakingRoute
@@ -95,8 +151,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/agentic-ai-masterclass'
+    | '/ai-ml-security'
+    | '/ai-red-teaming-masterclass'
+    | '/ai-security-in-defense'
     | '/experience'
     | '/gizlilik-politikasi'
+    | '/llm-deployment'
+    | '/llm-security-agentic-ai-security'
+    | '/machine-learning-deployment'
     | '/publications'
     | '/sitemap.xml'
     | '/speaking'
@@ -105,8 +167,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/agentic-ai-masterclass'
+    | '/ai-ml-security'
+    | '/ai-red-teaming-masterclass'
+    | '/ai-security-in-defense'
     | '/experience'
     | '/gizlilik-politikasi'
+    | '/llm-deployment'
+    | '/llm-security-agentic-ai-security'
+    | '/machine-learning-deployment'
     | '/publications'
     | '/sitemap.xml'
     | '/speaking'
@@ -115,8 +183,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/agentic-ai-masterclass'
+    | '/ai-ml-security'
+    | '/ai-red-teaming-masterclass'
+    | '/ai-security-in-defense'
     | '/experience'
     | '/gizlilik-politikasi'
+    | '/llm-deployment'
+    | '/llm-security-agentic-ai-security'
+    | '/machine-learning-deployment'
     | '/publications'
     | '/sitemap.xml'
     | '/speaking'
@@ -126,8 +200,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgenticAiMasterclassRoute: typeof AgenticAiMasterclassRoute
+  AiMlSecurityRoute: typeof AiMlSecurityRoute
+  AiRedTeamingMasterclassRoute: typeof AiRedTeamingMasterclassRoute
+  AiSecurityInDefenseRoute: typeof AiSecurityInDefenseRoute
   ExperienceRoute: typeof ExperienceRoute
   GizlilikPolitikasiRoute: typeof GizlilikPolitikasiRoute
+  LlmDeploymentRoute: typeof LlmDeploymentRoute
+  LlmSecurityAgenticAiSecurityRoute: typeof LlmSecurityAgenticAiSecurityRoute
+  MachineLearningDeploymentRoute: typeof MachineLearningDeploymentRoute
   PublicationsRoute: typeof PublicationsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SpeakingRoute: typeof SpeakingRoute
@@ -164,6 +244,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/machine-learning-deployment': {
+      id: '/machine-learning-deployment'
+      path: '/machine-learning-deployment'
+      fullPath: '/machine-learning-deployment'
+      preLoaderRoute: typeof MachineLearningDeploymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llm-security-agentic-ai-security': {
+      id: '/llm-security-agentic-ai-security'
+      path: '/llm-security-agentic-ai-security'
+      fullPath: '/llm-security-agentic-ai-security'
+      preLoaderRoute: typeof LlmSecurityAgenticAiSecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/llm-deployment': {
+      id: '/llm-deployment'
+      path: '/llm-deployment'
+      fullPath: '/llm-deployment'
+      preLoaderRoute: typeof LlmDeploymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gizlilik-politikasi': {
       id: '/gizlilik-politikasi'
       path: '/gizlilik-politikasi'
@@ -176,6 +277,27 @@ declare module '@tanstack/react-router' {
       path: '/experience'
       fullPath: '/experience'
       preLoaderRoute: typeof ExperienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-security-in-defense': {
+      id: '/ai-security-in-defense'
+      path: '/ai-security-in-defense'
+      fullPath: '/ai-security-in-defense'
+      preLoaderRoute: typeof AiSecurityInDefenseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-red-teaming-masterclass': {
+      id: '/ai-red-teaming-masterclass'
+      path: '/ai-red-teaming-masterclass'
+      fullPath: '/ai-red-teaming-masterclass'
+      preLoaderRoute: typeof AiRedTeamingMasterclassRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-ml-security': {
+      id: '/ai-ml-security'
+      path: '/ai-ml-security'
+      fullPath: '/ai-ml-security'
+      preLoaderRoute: typeof AiMlSecurityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agentic-ai-masterclass': {
@@ -198,8 +320,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgenticAiMasterclassRoute: AgenticAiMasterclassRoute,
+  AiMlSecurityRoute: AiMlSecurityRoute,
+  AiRedTeamingMasterclassRoute: AiRedTeamingMasterclassRoute,
+  AiSecurityInDefenseRoute: AiSecurityInDefenseRoute,
   ExperienceRoute: ExperienceRoute,
   GizlilikPolitikasiRoute: GizlilikPolitikasiRoute,
+  LlmDeploymentRoute: LlmDeploymentRoute,
+  LlmSecurityAgenticAiSecurityRoute: LlmSecurityAgenticAiSecurityRoute,
+  MachineLearningDeploymentRoute: MachineLearningDeploymentRoute,
   PublicationsRoute: PublicationsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SpeakingRoute: SpeakingRoute,
@@ -208,13 +336,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -60,36 +60,91 @@ export interface Training {
   /** Internal route link (opens in same tab). External if false/undefined. */
   internal?: boolean;
   featured?: boolean;
+  /** Section on /trainings. active = Aktif, passive = Pasif, past = Geçmiş. */
+  status?: "active" | "passive" | "past";
 }
 
 export const TRAININGS: Training[] = [
   {
     title: "Agentic AI Masterclass",
     body: "Sıfırdan başlayarak gerçek projeler üzerinde otonom AI agent'ları tasarlama, çoklu-agent sistemleri kurma ve üretime alma. Amiral gemisi program.",
-    meta: "Flagship · 36+ saat · Canlı",
+    meta: "Flagship · Genel Katılım / Kurumsal · 36+ saat · Canlı",
     url: "/agentic-ai-masterclass",
     internal: true,
     featured: true,
+    status: "active",
+  },
+  {
+    title: "AI Red Teaming Masterclass",
+    body: "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın; adversarial saldırılardan multi-agent exploitation'a uçtan uca uygulamalı red teaming.",
+    meta: "Genel Katılım / Kurumsal · 36+ saat · 2 gün",
+    url: "/ai-red-teaming-masterclass",
+    internal: true,
+    status: "passive",
+  },
+  {
+    title: "LLM Security & Agentic AI Security",
+    body: "OWASP LLM Top 10 ve OWASP Agentic AI çerçevesiyle büyük dil modellerinin ve agentic AI sistemlerinin güvenlik zafiyetlerini uygulamalı olarak öğrenin.",
+    meta: "Kurumsal · 2 gün",
+    url: "/llm-security-agentic-ai-security",
+    internal: true,
+    status: "passive",
+  },
+  {
+    title: "AI / ML Security",
+    body: "OWASP Machine Learning Security Top 10 kapsamında klasik ML sistemlerine yönelik adversarial saldırılar, veri zehirlenmesi ve model çalınması tehditleri.",
+    meta: "Kurumsal · 2 gün",
+    url: "/ai-ml-security",
+    internal: true,
+    status: "passive",
+  },
+  {
+    title: "Machine Learning Deployment",
+    body: "MLOps, model serving, optimizasyon ve distributed training ile makine öğrenmesi modellerini uçtan uca üretime alın.",
+    meta: "Kurumsal · 2 gün",
+    url: "/machine-learning-deployment",
+    internal: true,
+    status: "passive",
+  },
+  {
+    title: "LLM Deployment",
+    body: "LLMOps, model serving, optimizasyon ve distributed inference ile büyük dil modellerini güvenli ve ölçeklenebilir şekilde üretime alın.",
+    meta: "Kurumsal · 2 gün",
+    url: "/llm-deployment",
+    internal: true,
+    status: "passive",
+  },
+  {
+    title: "Savunma Sanayiinde Yapay Zeka Güvenliği",
+    body: "Havacılık ve savunma sistemlerinde yapay zeka güvenliği, risk yönetimi ve yönetişimini kapsamlı şekilde ele alan kurumsal program.",
+    meta: "Kurumsal · 3 gün",
+    url: "/ai-security-in-defense",
+    internal: true,
+    status: "passive",
   },
   {
     title: "LLM Engineering Bootcamp",
     body: "LLM tabanlı uygulamalar, RAG ve üretim seviyesinde sistem tasarımı.",
     meta: "Bootcamp",
     url: "https://cihanozhan.com/llms",
+    status: "past",
   },
   {
     title: "Machine Learning Engineer",
     body: "Makine öğrenmesi modellerini uçtan uca geliştirme ve servisleştirme.",
     meta: "Program",
     url: "https://aiseclab.org/courses/machine-learning-engineer/",
+    status: "past",
   },
   {
     title: "AI Security Engineer",
     body: "Offensive & defensive AI güvenliği, red teaming ve güvenli ML sistemleri.",
     meta: "Bootcamp",
     url: "https://aiseclab.org/courses/ai-security-engineer/",
+    status: "past",
   },
 ];
+
 
 export interface ExpertiseGroup {
   category: string;
