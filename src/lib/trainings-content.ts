@@ -1,0 +1,675 @@
+/**
+ * ============================================================================
+ * TRAININGS CONTENT — per-training config for the 6 passive training pages.
+ * ============================================================================
+ * Each config feeds the shared landing sections (HeroCompact, CurriculumFlex,
+ * WhoForVariant, FaqCustom) via the corresponding route file under
+ * src/routes/.
+ * ============================================================================
+ */
+
+import type { Module, ModuleOutcome } from "./landing-data";
+
+export interface TrainingFaqItem {
+  q: string;
+  a: string;
+}
+
+export interface TrainingPageContent {
+  slug: string;
+  title: string;
+  subtitle: string;
+  /** Small type/duration tag rendered next to hero image. */
+  typeTag: string;
+  whoForVariant: "security" | "deployment";
+  /** "modules" = numbered accordion (like main masterclass). "flat" = single flowing list. */
+  curriculumMode: "modules" | "flat";
+  modules?: Module[];
+  flatItems?: ModuleOutcome[];
+  footnote?: string;
+  faq: TrainingFaqItem[];
+  /** Meta for <head> */
+  head: { title: string; description: string };
+}
+
+const PRICE_FAQ: TrainingFaqItem = {
+  q: "Eğitim ücreti nedir?",
+  a: "Eğitim ücreti ve diğer tüm detayları için başvurun.",
+};
+
+// ---------- Page 1: AI Red Teaming Masterclass ----------
+
+const AI_RED_TEAMING_MODULES: Module[] = [
+  {
+    number: "01",
+    title: "Introduction to Red Teaming AI",
+    outcomes: [
+      "What is AI Red Teaming?",
+      "AI Security vs. Security AI",
+      "AI Red Teaming vs. LLM Red Teaming vs. Agentic AI Red Teaming",
+    ],
+  },
+  {
+    number: "02",
+    title: "ML & DL Foundations",
+    outcomes: [
+      "Machine Learning & Deep Learning Foundations",
+      "Machine Learning Model Training",
+      "Simple Model Querying & Inference",
+      "Model Sensitivity: Model Sensitivity Analysis",
+      "FGSM Attack Analysis",
+      "Exercise: MNIST Classifier",
+      "Exercise: Model Queries",
+      "Exercise: Text Generator",
+      "Machine Learning Model Deployment",
+    ],
+  },
+  {
+    number: "03",
+    title: "Introduction to Adversarial AI",
+    outcomes: [
+      "Adversarial AI Overview",
+      "What is Adversarial AI and Adversarial Attacks?",
+      "Physical Adversarial Attacks",
+      "Membership Inference",
+      "Shadow Models",
+      "Vulnerability Reporting",
+      "AI Hacker Mode: Membership Inference Investigation",
+      "AI Hacker Mode: Attack Decision Tree",
+      "AI Hacker Mode: Shadow Model",
+      "AI Hacker Mode: AI security research paper — read, extract, implement!",
+    ],
+  },
+  {
+    number: "04",
+    title: "Evasion & Inference Attacks",
+    outcomes: [
+      "Evasion & Inference Attacks",
+      {
+        text: "WhiteBox Evasion Attacks",
+        children: ["FGSM Attack", "PDG Attack", "C&W Attack"],
+      },
+      {
+        text: "BlackBox Evasion Attacks",
+        children: [
+          "Understand BlackBox Threat Models",
+          "Implement SimBA — Score-Based Attack",
+          "Execute HopSkipJump — Decision-Based Attack",
+        ],
+      },
+      "ART Evasion Attacks (ART library)",
+      "Cleverhans Evasion Attacks (CleverHans library)",
+      "Foolbox Evasion Attacks (Foolbox library)",
+      "Attack Comparison",
+      "Vulnerability Report",
+    ],
+  },
+  {
+    number: "05",
+    title: "Poisoning & Backdoor",
+    outcomes: [
+      {
+        text: "Model & Data Poisoning Overview",
+        children: ["Data Poisoning", "Poisoning Detection"],
+      },
+      "LLM Poisoning",
+      "Backdoor Attack & Backdoor Triggers",
+      "Defense Testing",
+      "Defense Effectiveness",
+    ],
+  },
+  {
+    number: "06",
+    title: "Generative AI Security",
+    outcomes: [
+      "Adversarial NLP",
+      "Certified Defenses against Adversarial Examples",
+      "LLM Architecture",
+      {
+        text: "Prompt Injection",
+        children: [
+          "Prompt Injection Chain",
+          "Direct Injection",
+          "Filter Bypass",
+          "Guardrail Bypass",
+          "Multilayer Bypass",
+        ],
+      },
+      "Custom Garak Probe",
+    ],
+  },
+  {
+    number: "07",
+    title: "Advanced LLM Red Teaming",
+    outcomes: ["Purple Team", "Multi Vector", "Model Comparison", "Research Deepdive"],
+  },
+  {
+    number: "08",
+    title: "Mitigations, Evaluation & Reporting",
+    outcomes: [
+      "Defense Implementation",
+      "Atlas Mapping",
+      "Security Evaluation",
+      "AI Pentest Report",
+    ],
+  },
+  {
+    number: "09",
+    title: "Capstone Project",
+    outcomes: [
+      "Demonstrate complete AI Security workflow: Planning, Reconnaissance, Attack, Defense, Evaluation, and Reporting.",
+    ],
+  },
+  {
+    number: "10",
+    title: "RAG Exploitation",
+    outcomes: [
+      "Build and systematically compromise a Retrieval-Augmented Generation (RAG) application. Poison its knowledge base, hijack retrieval, and exfiltrate sensitive data through the LLM. This lab demonstrates why RAG systems require end-to-end security.",
+    ],
+  },
+  {
+    number: "11",
+    title: "Multi-Agent Attacks",
+    outcomes: [
+      "Attack a multi-agent customer service system where three AI agents collaborate via shared memory to handle customer requests. The agents (Customer Service, Billing, and Technical Support) trust each other implicitly and share a Redis-backed memory store with no access controls.",
+      "Objective: exploit trust relationships between agents, manipulate shared memory, trigger unauthorized actions, and propagate attacks across the entire agent network.",
+      "This section contains 7 vulnerabilities.",
+    ],
+  },
+  {
+    number: "12",
+    title: "Supply Chain Attack",
+    outcomes: [
+      "Supply Chain Attack Overview",
+      "Serialization Attack: Pickle Exploit",
+      "ML Model Registry",
+    ],
+  },
+  {
+    number: "13",
+    title: "Model Extraction",
+    outcomes: [
+      "Model Extraction Overview",
+      "LLM Extraction: LLM Training Data Extraction",
+      "Membership Inference Attack",
+      "Model Extraction Attack (Model Stealing)",
+      "Target API: Model Extraction & Inference Attacks",
+    ],
+  },
+  {
+    number: "14",
+    title: "Automated AI Red Teaming",
+    outcomes: [
+      "This lab deploys three industry-standard red teaming tools (garak, PyRIT, promptfoo) against a deliberately vulnerable chatbot target. Learn to run systematic vulnerability scans, compare tool strengths, and integrate automated red teaming into CI/CD pipelines.",
+    ],
+  },
+  {
+    number: "15",
+    title: "End-to-End AI Red Teaming Project",
+    outcomes: [
+      "Conduct a full red team assessment against an AI-powered enterprise platform, consisting of four interconnected services backed by shared infrastructure.",
+      "This section contains 6 vulnerabilities.",
+    ],
+  },
+];
+
+// ---------- Page 2: LLM Security & Agentic AI Security ----------
+
+const LLM_SECURITY_ITEMS: ModuleOutcome[] = [
+  {
+    text: "Güvenli Yapay Zeka",
+    children: ["Yapay Zeka Hacklenebilir mi?", "Adversarial Attack Nedir?"],
+  },
+  "Blue Teaming vs. Red Teaming",
+  "AI Security vs. Security AI",
+  "Yapay Zeka ile Siber Saldırı ve Savunma",
+  "Yapay Zekaya Siber Saldırı ve Savunma",
+  "Yapay Zekanın Kritik Güvenlik Zafiyetleri",
+  "Explainable AI: Yapay Zekanın Açıklanabilirliği",
+  "Responsible AI",
+  "Demo: Bir Yapay Zeka (Deep Learning) Modelini Hacklemek",
+  "Demo: Bir Yapay Zeka (LLM) Modelini Hacklemek",
+  {
+    text: "OWASP LLM Top 10",
+    children: [
+      "LLM01: Prompt Injection",
+      "LLM02: Sensitive Information Disclosure",
+      "LLM03: Supply Chain",
+      "LLM04: Data and Model Poisoning",
+      "LLM05: Improper Output Handling",
+      "LLM06: Excessive Agency",
+      "LLM07: System Prompt Leakage",
+      "LLM08: Vector and Embedding Weaknesses",
+      "LLM09: Misinformation",
+      "LLM10: Unbounded Consumption",
+    ],
+  },
+  "Agentic AI Security",
+  "OWASP Agentic AI – Threats and Mitigations",
+];
+
+// ---------- Page 3: AI / ML Security ----------
+
+const AI_ML_SECURITY_ITEMS: ModuleOutcome[] = [
+  {
+    text: "Güvenli Yapay Zeka",
+    children: ["Yapay Zeka Hacklenebilir mi?", "Adversarial Attack Nedir?"],
+  },
+  "Blue Teaming vs. Red Teaming",
+  "AI Security vs. Security AI",
+  "Yapay Zeka ile Siber Saldırı ve Savunma",
+  "Yapay Zekaya Siber Saldırı ve Savunma",
+  "Yapay Zekanın Kritik Güvenlik Zafiyetleri",
+  "Explainable AI: Yapay Zekanın Açıklanabilirliği",
+  "Responsible AI",
+  "Demo: Bir Yapay Zeka (Deep Learning) Modelini Hacklemek",
+  "Demo: Bir Yapay Zeka (LLM) Modelini Hacklemek",
+  {
+    text: "OWASP Machine Learning Security Top 10",
+    children: [
+      "ML01: Input Manipulation Attack",
+      "ML02: Data Poisoning Attack",
+      "ML03: Model Inversion Attack",
+      "ML04: Membership Inference Attack",
+      "ML05: Model Theft",
+      "ML06: AI Supply Chain Attacks",
+      "ML07: Transfer Learning Attack",
+      "ML08: Model Skewing",
+      "ML09: Output Integrity Attack",
+      "ML10: Model Poisoning",
+    ],
+  },
+];
+
+// ---------- Page 4: Machine Learning Deployment ----------
+
+const ML_DEPLOYMENT_ITEMS: ModuleOutcome[] = [
+  "MLOps'a Genel Bakış",
+  "Software Engineering",
+  {
+    text: "Donanımsal Hesaplama (Compute Hardware)",
+    children: ["GPU Temelleri", "GPU Cloud", "On-Prem"],
+  },
+  "Kaynak Yönetimi",
+  "ML System Lifecycle",
+  "MLaaS: Machine Learning as a Services",
+  "Model Packaging",
+  "Model Deployment Türleri",
+  "Model Deployment (Web): AI Modelleri için Web Tabanlı Mimari ve Teknolojiler",
+  "Model Sharing: ONNX",
+  {
+    text: "Model Serving Araç ve Library'leri",
+    children: [
+      "TensorFlow Serving: Mimarisi",
+      "TensorFlow Serving: RESTful ve TensorFlow Serving ile Model Prediction",
+      "Proje: TensorFlow Extended (TFX) Pipeline ile Model Deployment",
+      "PyTorch Serve: Mimarisi",
+      "Proje: PyTorch Serve ile Deployment",
+      "Diğer Araçlar",
+    ],
+  },
+  "Cloud Tabanlı ML Deployment",
+  {
+    text: "ML Deployment İçin Model Optimizasyonu",
+    children: ["ML Quantization", "ML Pruning", "ML Distillation"],
+  },
+  {
+    text: "Distributed AI",
+    children: [
+      "Distributed Sistemlere Genel Bakış",
+      "Distributed AI Nedir?",
+      "Distributed AI Kullanım Senaryoları",
+      "Distributed AI Araçları",
+      "Distributed AI Training: Genel Bakış",
+      "Data Parallelism",
+      "Model Parallelism",
+      "Experiment Management",
+      "Hyperparameter Tuning",
+      "Veri Yönetimi",
+      "Machine Learning Parallelism and Scaling",
+    ],
+  },
+  "Secure ML Deployment",
+];
+
+// ---------- Page 5: LLM Deployment ----------
+
+const LLM_DEPLOYMENT_ITEMS: ModuleOutcome[] = [
+  "LLMOps'a Genel Bakış",
+  "Software Engineering",
+  {
+    text: "Donanımsal Hesaplama (Compute Hardware)",
+    children: ["GPU Temelleri", "GPU Cloud", "On-Prem"],
+  },
+  "Kaynak Yönetimi",
+  "ML System Lifecycle",
+  "LLM Lifecycle",
+  "MLaaS: Machine Learning as a Services",
+  "Model Packaging",
+  "Model Deployment Türleri",
+  "Model Deployment (Web): AI Modelleri için Web Tabanlı Mimari ve Teknolojiler",
+  "Model Sharing: ONNX",
+  {
+    text: "Model Serving Araç ve Library'leri",
+    children: [
+      "TensorFlow Serving: Mimarisi",
+      "TensorFlow Serving: RESTful ve TensorFlow Serving ile Model Prediction",
+      "Proje: TensorFlow Extended (TFX) Pipeline ile Model Deployment",
+      "PyTorch Serve: Mimarisi",
+      "Proje: PyTorch Serve ile Deployment",
+      "Diğer Araçlar",
+    ],
+  },
+  "LLM Inference",
+  {
+    text: "LLM Deployment İçin Model Optimizasyonu",
+    children: ["LLM Quantization", "LLM Pruning", "LLM Distillation"],
+  },
+  {
+    text: "LLM Deployment",
+    children: ["Python ile LLM Deployment", "Cloud Tabanlı LLM Deployment"],
+  },
+  {
+    text: "Distributed AI",
+    children: [
+      "Distributed Sistemlere Genel Bakış",
+      "Distributed AI Nedir?",
+      "Distributed AI Kullanım Senaryoları",
+      "Distributed AI Araçları",
+      "Distributed AI Training: Genel Bakış",
+      "Data Parallelism",
+      "Model Parallelism",
+      "Experiment Management",
+      "Hyperparameter Tuning",
+      "Veri Yönetimi",
+      "LLM Parallelism and Scaling",
+    ],
+  },
+  "Secure LLM Deployment",
+];
+
+// ---------- Page 6: Savunma Sanayiinde Yapay Zeka Güvenliği ----------
+
+const AI_SEC_DEFENSE_MODULES: Module[] = [
+  {
+    number: "01",
+    title: "Yapay Zeka Güvenliğine Genel Bakış",
+    outcomes: [
+      "Yapay Zeka Güvenliği: Mantık, Teknik, Taktik",
+      "AI Security vs. Security AI",
+      "Yapay Zeka ile Siber Saldırı ve Savunma",
+      "Proje Demo: Bir Yapay Zeka Modelini Hacklemek (AI Security)",
+      "Proje Demo: Bir Yapay Zeka Modeliyle Hacklemek (Security AI)",
+    ],
+  },
+  {
+    number: "02",
+    title: "Havacılık ve Savunmada Yapay Zeka",
+    outcomes: [
+      "Havacılık ve Uzayda Yapay Zeka Uygulamalarına Genel Bakış",
+      "Mission-Critical AI Kullanım Alanları",
+      "Savunma Sistemlerinde Entegrasyon Zorlukları",
+      "Havacılık ve Uzay Yapay Zekası İçin Risk Ortamları",
+      "Havacılık ve Savunmada AI Deployment Yaşam Döngüsü (lifecycle)",
+      "Ulusal Savunmada Yapay Zeka Etiği",
+    ],
+  },
+  {
+    number: "03",
+    title: "Yapay Zeka Sistemleri için Tehdit Ortamı",
+    outcomes: [
+      "Yapay Zeka Güvenliği Saldırı Yüzeyleri (AI Attack Surfaces)",
+      "Yapay Zekanın Kritik Güvenlik Zafiyetleri",
+      "Yapay Zekânın Bütünlüğüne (Integrity) ve Kullanılabilirliğine (Availability) Yönelik Tehditler",
+      "Veri Zehirlenmesi ve Arka Kapı Saldırıları (Data Poisoning & Backdoor Attacks)",
+      "Model Çıkarma (Extraction) ve Kaçınma (Evasion) Tehditleri",
+      "Yapay Zeka Tedarik Zinciri Güvenliği ve Zorlukları",
+      "Yapay Zeka Kullanarak Gelişmiş Kalıcı Tehditler (Advanced Persistent Threats)",
+    ],
+  },
+  {
+    number: "04",
+    title: "Adversarial Robustness Stratejileri",
+    outcomes: [
+      "Adversarial Attack Temelleri",
+      "Model Sağlamlığını (Robustness) İyileştirme Teknikleri",
+      "AI Red Teaming Temelleri ve Teknikleri",
+      "Havacılık ve Savunmada AI Red Teaming",
+      "Model Sağlamlığı için Adversarial Training Yaklaşımları",
+      "AI Robustness için Evaluation Metrics",
+      "Real-Time Savunma Zorlukları",
+      "Encrypted Machine Learning",
+      "Federated Learning",
+      "XAI: Explainable AI",
+    ],
+  },
+  {
+    number: "05",
+    title: "Agentic AI ve Foundation Model Güvenliği",
+    outcomes: [
+      "Large Language Model (LLM) Mimarisi",
+      "LLM'lerde Fine-tuning Zafiyetleri",
+      "Prompt Injection ve Kötüye Kullanım Senaryoları",
+      "Vector ve Embedding Zafiyetleri",
+      "LLM'lerin Kritik Güvenlik Zafiyetleri",
+      "LLM'ler için Savunma Mekanizmaları",
+      "Güvenli API Deployment Teknikleri",
+      "Yapay Zeka Model Erişim Kontrolü (Access Control) ve Denetimi (Audit)",
+      "Proje Demo: Bir Yapay Zeka (LLM) Modelini Hacklemek",
+      "LLM Security vs. Agentic AI Security",
+    ],
+  },
+  {
+    number: "06",
+    title: "Yapay Zeka Yaşam Döngüsü Güvenliği",
+    outcomes: [
+      "Güvenli Yapay Zeka Modeli Geliştirme Uygulamaları",
+      "Yapay Zeka Sistemleri için Veri Yönetimi",
+      "Güvenli Yapay Zeka Eğitim Ortamları ve Altyapıları",
+      "Yapay Zekanın Doğrulanması (validation) ve Onaylanması (verification)",
+      "Dağıtım Sonrası İzleme (Post-Deployment Monitoring) Araçları",
+      "Yama (Patch) Yönetimi ve Versiyonlama",
+    ],
+  },
+  {
+    number: "07",
+    title: "Havacılık ve Savunmada Yapay Zeka Güvenlik Yönetişimi (Governance)",
+    outcomes: [
+      "Regülasyon ve Uyumluluk Zorunlulukları",
+      "Küresel Yapay Zeka Güvenlik Yönergelerine Genel Bakış",
+      "NATO ve Uluslararası Yapay Zeka Standartları",
+      "Yapay Zeka Risk Yönetimi Framework'leri",
+      "Mevcut Sistemlerle Güvenli Entegrasyon",
+      "Yapay Zeka Denetimine Hazırlık ve Dokümantasyon",
+    ],
+  },
+];
+
+// ---------- Aggregate ----------
+
+export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
+  "ai-red-teaming-masterclass": {
+    slug: "ai-red-teaming-masterclass",
+    title: "AI Red Teaming Masterclass",
+    subtitle:
+      "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın. Adversarial attack'lardan LLM red teaming'e, RAG exploitation'dan multi-agent saldırılarına kadar uçtan uca uygulamalı bir program.",
+    typeTag: "Genel Katılım · Kurumsal · 36+ saat · 2 gün",
+    whoForVariant: "security",
+    curriculumMode: "modules",
+    modules: AI_RED_TEAMING_MODULES,
+    footnote:
+      "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
+    faq: [
+      {
+        q: "Bu eğitim kimler için uygun?",
+        a: "AI/ML mühendisleri, güvenlik uzmanları, red team üyeleri ve kurumsal ekipler için tasarlandı. Temel Python ve ML bilgisi faydalı olur.",
+      },
+      {
+        q: "Eğitim formatı nedir?",
+        a: "Online, canlı ve uygulamalı olarak gerçekleşir. 36+ saatlik içerik, 2 gün yoğun program şeklinde planlanır.",
+      },
+      {
+        q: "Eğitim sırasında hangi araçlar kullanılıyor?",
+        a: "ART, CleverHans, Foolbox, garak, PyRIT, promptfoo gibi red teaming araçları; ayrıca özel geliştirilmiş adversarial lab ortamları.",
+      },
+      PRICE_FAQ,
+    ],
+    head: {
+      title: "AI Red Teaming Masterclass | Cihan Özhan",
+      description:
+        "Adversarial saldırılardan LLM red teaming'e, RAG exploitation ve multi-agent saldırılarına kadar uçtan uca uygulamalı AI red teaming eğitimi.",
+    },
+  },
+  "llm-security-agentic-ai-security": {
+    slug: "llm-security-agentic-ai-security",
+    title: "LLM Security & Agentic AI Security",
+    subtitle:
+      "Büyük dil modellerinin ve agentic AI sistemlerinin güvenlik zafiyetlerini OWASP LLM Top 10 ve OWASP Agentic AI çerçevesi üzerinden uygulamalı olarak öğrenin.",
+    typeTag: "Kurumsal · 2 gün",
+    whoForVariant: "security",
+    curriculumMode: "flat",
+    flatItems: LLM_SECURITY_ITEMS,
+    footnote:
+      "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
+    faq: [
+      {
+        q: "Bu eğitim kimler için uygun?",
+        a: "LLM tabanlı uygulama geliştiren mühendisler, AI güvenliği ile ilgilenen güvenlik uzmanları ve kurumsal AI ekipleri için uygundur.",
+      },
+      {
+        q: "OWASP LLM Top 10 konularının tamamı işleniyor mu?",
+        a: "Evet. LLM01–LLM10 arasındaki tüm başlıklar demo ve uygulama örnekleriyle detaylı olarak ele alınır.",
+      },
+      {
+        q: "Agentic AI Security ne kadar kapsıyor?",
+        a: "OWASP Agentic AI framework'ü, tehditler ve mitigation stratejileri; multi-agent güvenlik senaryolarıyla birlikte işlenir.",
+      },
+      PRICE_FAQ,
+    ],
+    head: {
+      title: "LLM Security & Agentic AI Security | Cihan Özhan",
+      description:
+        "OWASP LLM Top 10 ve OWASP Agentic AI çerçevesiyle LLM ve agentic AI güvenliği kurumsal eğitim programı.",
+    },
+  },
+  "ai-ml-security": {
+    slug: "ai-ml-security",
+    title: "AI / ML Security",
+    subtitle:
+      "Klasik makine öğrenmesi sistemlerine yönelik adversarial saldırılar, veri zehirlenmesi ve model çalınması gibi tehditleri OWASP Machine Learning Security Top 10 kapsamında inceleyin.",
+    typeTag: "Kurumsal · 2 gün",
+    whoForVariant: "security",
+    curriculumMode: "flat",
+    flatItems: AI_ML_SECURITY_ITEMS,
+    faq: [
+      {
+        q: "Bu eğitim kimler için uygun?",
+        a: "Klasik ML ve deep learning sistemleri geliştiren ekipler, güvenlik uzmanları ve model doğrulama sorumluları için uygundur.",
+      },
+      {
+        q: "OWASP ML Security Top 10 tamamı işleniyor mu?",
+        a: "Evet. ML01–ML10 arasındaki tüm saldırı ve savunma başlıkları demo ve uygulama örnekleriyle işlenir.",
+      },
+      {
+        q: "Ön koşul olarak ne bilmeliyim?",
+        a: "Temel makine öğrenmesi kavramları ve Python bilgisi eğitimden en iyi verimi almanızı sağlar.",
+      },
+      PRICE_FAQ,
+    ],
+    head: {
+      title: "AI / ML Security | Cihan Özhan",
+      description:
+        "OWASP Machine Learning Security Top 10 kapsamında adversarial saldırılar, veri zehirlenmesi ve model çalınması eğitimi.",
+    },
+  },
+  "machine-learning-deployment": {
+    slug: "machine-learning-deployment",
+    title: "Machine Learning Deployment",
+    subtitle:
+      "Makine öğrenmesi modellerini üretime almak için MLOps, model serving, optimizasyon ve distributed training'i uçtan uca uygulamalı olarak öğrenin.",
+    typeTag: "Kurumsal · 2 gün",
+    whoForVariant: "deployment",
+    curriculumMode: "flat",
+    flatItems: ML_DEPLOYMENT_ITEMS,
+    faq: [
+      {
+        q: "Bu eğitim kimler için uygun?",
+        a: "Modelleri laboratuvardan üretime taşımak isteyen ML/AI mühendisleri, DevOps/MLOps ekipleri ve kurumsal teknoloji birimleri için tasarlandı.",
+      },
+      {
+        q: "Hangi araç ve platformlar işleniyor?",
+        a: "TensorFlow Serving, TFX, PyTorch Serve, ONNX ve cloud tabanlı deployment yaklaşımları uygulamalı örneklerle işlenir.",
+      },
+      {
+        q: "Distributed training konularını kapsıyor mu?",
+        a: "Evet. Data parallelism, model parallelism, hyperparameter tuning ve ML scaling detaylı olarak ele alınır.",
+      },
+      PRICE_FAQ,
+    ],
+    head: {
+      title: "Machine Learning Deployment | Cihan Özhan",
+      description:
+        "MLOps, model serving, optimizasyon ve distributed training ile makine öğrenmesi modellerini üretime alma eğitimi.",
+    },
+  },
+  "llm-deployment": {
+    slug: "llm-deployment",
+    title: "LLM Deployment",
+    subtitle:
+      "Büyük dil modellerini güvenli ve ölçeklenebilir şekilde üretime almak için LLMOps, model serving, optimizasyon ve distributed inference'ı uygulamalı olarak öğrenin.",
+    typeTag: "Kurumsal · 2 gün",
+    whoForVariant: "deployment",
+    curriculumMode: "flat",
+    flatItems: LLM_DEPLOYMENT_ITEMS,
+    faq: [
+      {
+        q: "Bu eğitim kimler için uygun?",
+        a: "LLM tabanlı ürünleri üretime almak isteyen ML/AI mühendisleri, DevOps/MLOps ekipleri ve kurumsal teknoloji birimleri için uygundur.",
+      },
+      {
+        q: "LLM inference optimizasyonu ne kadar kapsanıyor?",
+        a: "Quantization, pruning ve distillation başta olmak üzere üretim ortamı için LLM optimizasyon teknikleri detaylı işlenir.",
+      },
+      {
+        q: "Cloud ve on-prem senaryoları ele alınıyor mu?",
+        a: "Evet. Hem cloud tabanlı hem on-prem GPU altyapıları üzerinde LLM deployment yaklaşımları uygulamalı olarak gösterilir.",
+      },
+      PRICE_FAQ,
+    ],
+    head: {
+      title: "LLM Deployment | Cihan Özhan",
+      description:
+        "LLMOps, model serving, optimizasyon ve distributed inference ile LLM'leri güvenli ve ölçeklenebilir şekilde üretime alın.",
+    },
+  },
+  "ai-security-in-defense": {
+    slug: "ai-security-in-defense",
+    title: "Savunma Sanayiinde Yapay Zeka Güvenliği",
+    subtitle:
+      "Havacılık ve savunma sistemlerinde yapay zekanın güvenliği, risk yönetimi ve yönetişimini; adversarial robustness'tan agentic AI güvenliğine kadar kapsamlı şekilde ele alan kurumsal program.",
+    typeTag: "Kurumsal · 3 gün",
+    whoForVariant: "security",
+    curriculumMode: "modules",
+    modules: AI_SEC_DEFENSE_MODULES,
+    faq: [
+      {
+        q: "Bu program kimler için tasarlandı?",
+        a: "Havacılık ve savunma sanayii, kamu kurumları ve mission-critical AI sistemleri geliştiren kurumsal ekipler için tasarlanmıştır.",
+      },
+      {
+        q: "NATO ve uluslararası standartlar kapsanıyor mu?",
+        a: "Evet. NATO ve uluslararası AI güvenlik standartları, risk yönetimi framework'leri ve uyumluluk zorunlulukları programın önemli bir bölümüdür.",
+      },
+      {
+        q: "Program süresi ve formatı nedir?",
+        a: "Kurumsal olarak 3 günlük yoğun bir program olarak planlanır ve talebe göre online veya yerinde uygulanabilir.",
+      },
+      PRICE_FAQ,
+    ],
+    head: {
+      title: "Savunma Sanayiinde Yapay Zeka Güvenliği | Cihan Özhan",
+      description:
+        "Havacılık ve savunma sistemlerinde yapay zeka güvenliği, risk yönetimi ve yönetişimini kapsayan kurumsal eğitim programı.",
+    },
+  },
+};
