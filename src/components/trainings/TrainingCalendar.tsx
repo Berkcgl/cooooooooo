@@ -225,7 +225,7 @@ export function TrainingCalendar() {
                       {p.event.title}
                     </span>
                     <span className="truncate text-[11px] font-medium leading-tight opacity-90">
-                      {formatRange(p.labelStart, p.labelEnd)}
+                      {dayMonthYearFmt.format(p.labelStart)}
                     </span>
                   </>
                 );
