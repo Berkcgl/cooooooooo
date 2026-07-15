@@ -32,7 +32,7 @@ export function Nav() {
     >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Ana menü">
         <a href="#top" className="flex items-center" aria-label="Cihan Özhan — ana sayfa">
-          <img src={logo} alt="Cihan Özhan" className="h-9 w-auto" />
+          <img src={logo} alt="Cihan Özhan" width={144} height={36} className="h-9 w-auto" />
         </a>
 
 
