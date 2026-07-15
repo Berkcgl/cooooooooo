@@ -137,6 +137,8 @@ export function TrainingCalendar() {
 
   const placed = packLanes(preplaced);
   const laneCount = Math.max(...placed.map((p) => p.lane)) + 1;
+  const MIN_LANES = 3; // reserve room for up to 3 overlapping events per row
+  const displayLanes = Math.max(laneCount, MIN_LANES);
   const LANE_HEIGHT = 68; // px per event lane
 
   return (
