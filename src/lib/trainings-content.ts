@@ -544,8 +544,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Büyük dil modellerinin ve agentic AI sistemlerinin güvenlik zafiyetlerini OWASP LLM Top 10 ve OWASP Agentic AI çerçevesi üzerinden uygulamalı olarak öğrenin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "security",
-    curriculumMode: "flat",
-    flatItems: LLM_SECURITY_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(LLM_SECURITY_ITEMS),
     footnote:
       "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
     faq: [
