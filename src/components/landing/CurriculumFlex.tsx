@@ -61,7 +61,9 @@ export function CurriculumFlex({ mode, modules, flatItems, footnote }: Curriculu
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className="pl-9">
-                      <ul className="grid gap-2.5">{m.outcomes.map(renderOutcome)}</ul>
+                      {m.outcomes.length > 0 && (
+                        <ul className="grid gap-2.5">{m.outcomes.map(renderOutcome)}</ul>
+                      )}
                     </div>
                   </AccordionContent>
                 </AccordionItem>
