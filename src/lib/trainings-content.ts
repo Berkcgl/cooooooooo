@@ -577,8 +577,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Klasik makine öğrenmesi sistemlerine yönelik adversarial saldırılar, veri zehirlenmesi ve model çalınması gibi tehditleri OWASP Machine Learning Security Top 10 kapsamında inceleyin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "security",
-    curriculumMode: "flat",
-    flatItems: AI_ML_SECURITY_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(AI_ML_SECURITY_ITEMS),
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -599,6 +599,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "OWASP Machine Learning Security Top 10 kapsamında adversarial saldırılar, veri zehirlenmesi ve model çalınması eğitimi.",
     },
+    applyFormUrl: "https://forms.gle/rrS2fhGZWCASJbuA6",
   },
   "machine-learning-deployment": {
     slug: "machine-learning-deployment",
