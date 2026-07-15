@@ -88,7 +88,7 @@
   --popover-foreground: oklch(0.21 0.012 257);
 
   /* Accent blue #0A66FF */
-  --brand: oklch(0.582 0.224 263.5);
+  --brand: oklch(0.52 0.22 263.5);
   --brand-foreground: oklch(0.99 0.003 247);
   --brand-soft: oklch(0.96 0.025 263.5);
 
