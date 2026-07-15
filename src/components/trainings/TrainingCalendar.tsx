@@ -180,51 +180,55 @@ function CalendarBody({
         </div>
       )}
 
-      <div
-        className="relative mt-3 overflow-hidden rounded-lg border border-border bg-secondary/20"
-        style={{ height: displayLanes * LANE_HEIGHT + 16 }}
-      >
-        <div
-          className="pointer-events-none absolute inset-0 grid"
-          style={{ gridTemplateColumns: `repeat(${totalDays}, minmax(0, 1fr))` }}
-          aria-hidden="true"
-        >
-          {Array.from({ length: totalDays }).map((_, i) => (
+      <div className="relative mt-3 aspect-[16/9] w-full overflow-hidden rounded-lg border border-border bg-secondary/20">
+        <div className="absolute inset-0 overflow-y-auto">
+          <div
+            className="relative w-full"
+            style={{ minHeight: "100%", height: displayLanes * LANE_HEIGHT + 16 }}
+          >
             <div
-              key={i}
-              className={i > 0 && i % 7 === 0 ? "border-l border-border/60" : ""}
-            />
-          ))}
-        </div>
+              className="pointer-events-none absolute inset-0 grid"
+              style={{ gridTemplateColumns: `repeat(${totalDays}, minmax(0, 1fr))` }}
+              aria-hidden="true"
+            >
+              {Array.from({ length: totalDays }).map((_, i) => (
+                <div
+                  key={i}
+                  className={i > 0 && i % 7 === 0 ? "border-l border-border/60" : ""}
+                />
+              ))}
+            </div>
 
-        <div
-          className="pointer-events-none absolute inset-0 grid"
-          style={{ gridTemplateColumns: `repeat(${totalDays}, minmax(0, 1fr))` }}
-          aria-hidden="true"
-        >
-          {months.slice(0, -1).map((m, i) => {
-            const col =
-              months.slice(0, i + 1).reduce((acc, x) => acc + x.span, 0) + 1;
-            return (
-              <div
-                key={`sep-${i}`}
-                className="border-l-2 border-border"
-                style={{ gridColumn: `${col} / span 1` }}
-              />
-            );
-          })}
-        </div>
+            <div
+              className="pointer-events-none absolute inset-0 grid"
+              style={{ gridTemplateColumns: `repeat(${totalDays}, minmax(0, 1fr))` }}
+              aria-hidden="true"
+            >
+              {months.slice(0, -1).map((m, i) => {
+                const col =
+                  months.slice(0, i + 1).reduce((acc, x) => acc + x.span, 0) + 1;
+                return (
+                  <div
+                    key={`sep-${i}`}
+                    className="border-l-2 border-border"
+                    style={{ gridColumn: `${col} / span 1` }}
+                  />
+                );
+              })}
+            </div>
 
-        <div
-          className="relative grid p-2"
-          style={{
-            gridTemplateColumns: `repeat(${totalDays}, minmax(0, 1fr))`,
-            gridAutoRows: `${LANE_HEIGHT}px`,
-          }}
-        >
-          {placed.map((p) => (
-            <EventCard key={p.event.title + p.event.startDate} p={p} totalDays={totalDays} />
-          ))}
+            <div
+              className="relative grid p-2"
+              style={{
+                gridTemplateColumns: `repeat(${totalDays}, minmax(0, 1fr))`,
+                gridAutoRows: `${LANE_HEIGHT}px`,
+              }}
+            >
+              {placed.map((p) => (
+                <EventCard key={p.event.title + p.event.startDate} p={p} totalDays={totalDays} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>
