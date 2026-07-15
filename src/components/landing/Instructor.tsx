@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { INSTRUCTOR_PROJECTS, INSTRUCTOR_TIMELINE } from "@/lib/landing-data";
-import portrait from "@/assets/cihan-ozhan.svg";
+import portrait from "@/assets/cihan-ozhan.webp";
 
 export function Instructor() {
   return (
