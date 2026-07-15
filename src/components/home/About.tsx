@@ -1,6 +1,6 @@
 import { ABOUT_PARAGRAPHS, PERSON } from "@/lib/home-data";
 import { useReveal } from "@/hooks/useReveal";
-import portrait from "@/assets/cihan-ozhan.svg";
+import portrait from "@/assets/cihan-ozhan.webp";
 
 export function About() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-about-line]", y: 24, stagger: 0.15 });
@@ -16,8 +16,11 @@ export function About() {
             <img
               src={portrait}
               alt="Cihan Özhan portresi"
+              width={800}
+              height={435}
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
+              decoding="async"
             />
             <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-brand/20" />
           </div>

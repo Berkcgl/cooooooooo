@@ -13,7 +13,7 @@ export function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="container-page flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
         <div className="flex items-center">
-          <img src={logo} alt="Cihan Özhan" className="h-9 w-auto" />
+          <img src={logo} alt="Cihan Özhan" width={144} height={36} className="h-9 w-auto" />
         </div>
 
 

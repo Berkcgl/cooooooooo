@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { INSTRUCTOR_PROJECTS, INSTRUCTOR_TIMELINE } from "@/lib/landing-data";
-import portrait from "@/assets/cihan-ozhan.svg";
+import portrait from "@/assets/cihan-ozhan.webp";
 
 export function Instructor() {
   return (
@@ -11,6 +11,10 @@ export function Instructor() {
             <img
               src={portrait}
               alt="Cihan Özhan portresi"
+              width={800}
+              height={435}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>

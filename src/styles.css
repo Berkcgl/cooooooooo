@@ -1,6 +1,11 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -83,11 +88,11 @@
   --popover-foreground: oklch(0.21 0.012 257);
 
   /* Accent blue #0A66FF */
-  --brand: oklch(0.582 0.224 263.5);
+  --brand: oklch(0.52 0.22 263.5);
   --brand-foreground: oklch(0.99 0.003 247);
   --brand-soft: oklch(0.96 0.025 263.5);
 
-  --primary: oklch(0.582 0.224 263.5);
+  --primary: oklch(0.52 0.22 263.5);
   --primary-foreground: oklch(0.99 0.003 247);
 
   --secondary: oklch(0.97 0.004 257);

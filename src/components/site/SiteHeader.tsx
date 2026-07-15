@@ -83,7 +83,7 @@ export function SiteHeader() {
     >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Ana menü">
         <Link to="/" className="flex items-center" aria-label="Cihan Özhan — ana sayfa">
-          <img src={logo} alt="Cihan Özhan" className="h-8 w-auto md:h-10 dark:brightness-0 dark:invert" />
+          <img src={logo} alt="Cihan Özhan" width={160} height={47} className="h-8 w-auto md:h-10 dark:brightness-0 dark:invert" />
         </Link>
 
         <div className="hidden items-center gap-0.5 lg:flex">
