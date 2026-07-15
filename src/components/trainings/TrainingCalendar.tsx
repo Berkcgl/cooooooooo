@@ -92,8 +92,8 @@ function packLanes(events: (Omit<Placed, "lane"> & { lane?: number })[]): Placed
 
 // ---------- component ----------
 
-const MIN_LANES = 4;
-const LANE_HEIGHT = 20;
+const MIN_LANES = 3;
+const LANE_HEIGHT = 24;
 
 function EventCard({ p, totalDays }: { p: Placed; totalDays: number }) {
   const cardClass =
