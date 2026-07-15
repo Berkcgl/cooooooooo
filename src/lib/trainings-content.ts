@@ -608,8 +608,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Makine öğrenmesi modellerini üretime almak için MLOps, model serving, optimizasyon ve distributed training'i uçtan uca uygulamalı olarak öğrenin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "deployment",
-    curriculumMode: "flat",
-    flatItems: ML_DEPLOYMENT_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(ML_DEPLOYMENT_ITEMS),
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -630,6 +630,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "MLOps, model serving, optimizasyon ve distributed training ile makine öğrenmesi modellerini üretime alma eğitimi.",
     },
+    applyFormUrl: "https://forms.gle/eRq57FPJJZhmjDyN9",
   },
   "llm-deployment": {
     slug: "llm-deployment",
