@@ -6,7 +6,7 @@ import { PageHero } from "@/components/site/PageHero";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { ABOUT_PARAGRAPHS, EXPERTISE } from "@/lib/home-data";
 import { INSTRUCTOR_TIMELINE } from "@/lib/landing-data";
-import portrait from "@/assets/cihan-ozhan.svg";
+import portrait from "@/assets/cihan-ozhan.webp";
 
 const TITLE = "Deneyim & Yetkinlikler | Cihan Özhan";
 const DESC =
