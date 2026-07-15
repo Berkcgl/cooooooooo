@@ -1,85 +1,64 @@
-## Overview
 
-Add a new "Pasif" section to `/trainings` with 6 upcoming trainings, build 6 new detail pages based on the `/agentic-ai-masterclass` template, add participation-type tags on training cards, and make the rolling calendar mobile-friendly.
+## 1. Per-training application form URLs
 
-## 1. Trainings data — `src/lib/home-data.ts`
+Currently every training page uses a single hardcoded Google Form URL in `FinalCtaSimple.tsx`. Make it per-page.
 
-Extend `Training` type with `status: "active" | "passive" | "past"` and add per-training `meta` including participation type. Update all existing entries; add 6 new entries with `status: "passive"`, each linking to its own internal route:
+- Add `applyFormUrl: string` to `TrainingPageContent` in `src/lib/trainings-content.ts` and set it for all 6 configs:
+  - `ai-red-teaming-masterclass` → `https://forms.gle/mW3BLoqTJPYvfZm66`
+  - `llm-security-agentic-ai-security` → `https://forms.gle/JPgYTeSnrgMrkavi7`
+  - `ai-ml-security` → `https://forms.gle/rrS2fhGZWCASJbuA6`
+  - `machine-learning-deployment` → `https://forms.gle/eRq57FPJJZhmjDyN9`
+  - `llm-deployment` → `https://forms.gle/4gejKhPf8gChDtoM9`
+  - `ai-security-in-defense` → `https://forms.gle/Uf7sc6YU51e1at1w5`
+- `FinalCtaSimple` accepts `applyFormUrl` prop; `TrainingLanding` forwards `content.applyFormUrl`. The main `/agentic-ai-masterclass` page keeps its current form URL (unchanged).
 
-```text
-Agentic AI Masterclass   → status: active   · meta: "Flagship · Genel Katılım / Kurumsal · 36+ saat · Canlı"
-AI Red Teaming Masterclass → status: passive · "Genel Katılım / Kurumsal · 36+ saat · 2 gün" → /ai-red-teaming-masterclass
-LLM Security & Agentic AI Security → passive · "Kurumsal · 2 gün" → /llm-security-agentic-ai-security
-AI / ML Security → passive · "Kurumsal · 2 gün" → /ai-ml-security
-Machine Learning Deployment → passive · "Kurumsal · 2 gün" → /machine-learning-deployment
-LLM Deployment → passive · "Kurumsal · 2 gün" → /llm-deployment
-Savunma Sanayiinde Yapay Zeka Güvenliği → passive · "Kurumsal · 3 gün" → /ai-security-in-defense
-LLM Engineering Bootcamp / ML Engineer / AI Security Engineer → status: past (existing)
-```
+## 2. Remove hero image for Kurumsal pages
 
-## 2. `/trainings` route — `src/routes/trainings.tsx`
+`HeroCompact` currently renders a right-column image (`hero-agentic.jpg`) with a floating `typeTag` label.
 
-Split into three groups (`active`, `passive`, `past`) and render sections numbered `01 Aktif`, `02 Pasif`, `03 Geçmiş`. The "Pasif" section reuses the exact Aktif card layout (title, description, meta tags, "Eğitime Başvur" CTA) but swaps the accent styling from brand-teal to a muted gold→amber gradient — a new `.card-passive` class (defined in `src/styles.css`) uses `border-amber-500/40`, `bg-gradient-to-br from-amber-50/60 to-yellow-50/30` (light theme), and a thin `bg-gradient-to-r from-yellow-600/70 via-amber-500/70 to-yellow-500/70` accent bar. Star badge label becomes "Kurumsal Program" for passive cards. Add the participation type tag inline in the meta row for all cards (Aktif + Pasif).
+- Add a `showImage?: boolean` prop (default `true`) to `HeroCompact`.
+- When `false`: drop the image column, switch container from a 2-column grid to a single centered column, and render `typeTag` as an inline eyebrow-style chip above/below the title so it stays visible.
+- `TrainingLanding` passes `showImage={false}` for every "Kurumsal" page (all 6 passive trainings). The primary `/agentic-ai-masterclass` page is unaffected.
 
-## 3. Shared landing page factory — new `src/components/landing/*`
+## 3. Split flat curricula into modules
 
-Rather than duplicating six near-identical route files, extract the current landing sections into config-driven components:
+Four pages currently use `curriculumMode: "flat"` (`llm-security-agentic-ai-security`, `ai-ml-security`, `machine-learning-deployment`, `llm-deployment`) which renders a single unnumbered list. Convert each into `curriculumMode: "modules"` where every top-level `<li>` becomes its own numbered `Module`:
 
-- New `src/lib/trainings/` folder with one file per training (`ai-red-teaming.ts`, `llm-security.ts`, `ai-ml-security.ts`, `ml-deployment.ts`, `llm-deployment.ts`, `ai-security-defense.ts`) exporting a `TrainingPageContent` object: `{ title, subtitle, typeTag, curriculumMode: "modules" | "flat", modules/items, footnote?, whoForVariant: "security" | "deployment", faq }`.
-- New `src/components/landing/` variants:
-  - `HeroCompact.tsx` — hero WITHOUT the video thumbnail block; centers text column on lg (no 2-col split) or shows hero image without the play-button overlay. Uses "EKİPLERE ÖZEL" kicker and per-page `typeTag` in place of "Genel Katılım - Kurumsal".
-  - `WhoForVariant.tsx` — takes a `variant` prop, renders the 3 security or 3 deployment personas listed in Task 3e; `NOT_FOR` list unchanged.
-  - `CurriculumFlex.tsx` — renders either `MODULES`-style numbered accordion (mode "modules") or a single flowing accordion of items (mode "flat"), with optional italic footnote below.
-  - `PricingSimple.tsx` — replaces price table with centered card "Fiyat bilgisi için başvur." + `Başvuru Yap` button pointing to `#basvuru`.
-  - `FinalCtaSimple.tsx` — "Son Adım" eyebrow, single line "Yeni dönem eğitim takvimi planlanıyor. İlgilendiğinizi bildirmek için bize ulaşın.", right-side card unchanged with `Başvuru Formunu Aç` → `https://docs.google.com/forms/d/e/1FAIpQLSeDXpFHBnZJpjyq6Jmk3Sd6ZY3-2dDz9kOlnUOQItvt-ffirg/viewform?usp=publish-editor` (target="_blank").
-  - `FaqCustom.tsx` — accepts an array of `{q,a}` (each page defines its own 4 questions incl. the fixed "Eğitim ücreti nedir?" → "Eğitim ücreti ve diğer tüm detayları için başvurun.").
-- The existing `Metrics`, `WhyNow`, `Instructor` (+ institution strip), `Testimonials`, and `Footer/BackToTop` are reused unchanged.
+- Plain-string bullet → `{ number: "NN", title: bullet, outcomes: [] }` (empty outcomes render as a title-only accordion item with no bullets underneath).
+- Nested bullet (`{ text, children }`) → `{ number: "NN", title: text, outcomes: children }`.
 
-Six new route files (`src/routes/ai-red-teaming-masterclass.tsx`, `.../llm-security-agentic-ai-security.tsx`, `.../ai-ml-security.tsx`, `.../machine-learning-deployment.tsx`, `.../llm-deployment.tsx`, `.../ai-security-in-defense.tsx`) each import the shared content object and render:
+This is a data-shape transformation only; no changes needed to `CurriculumFlex.tsx` since it already supports `modules` mode. Where `outcomes` is empty, `CurriculumFlex` will render the accordion header with no body content — small tweak inside `CurriculumFlex` to skip rendering the `<ul>` when `outcomes.length === 0` so the accordion collapses cleanly.
 
-```text
-Ticker → SiteHeader → ScrollReadout
-main:
-  HeroCompact (title, subtitle, kicker="EKİPLERE ÖZEL", typeTag)
-  Metrics
-  WhyNow
-  WhoForVariant (variant)
-  Outcomes  (kept from template)
-  CurriculumFlex (mode, items, footnote?)
-  Instructor (+ INSTITUTIONS strip w/ "Eğitim, proje ve danışmanlık yaptığı bazı kurumlar")
-  Testimonials
-  FaqCustom (per-page 4 Q&A)
-  PricingSimple
-  FinalCtaSimple
-SiteFooter → BackToTop
-```
+The AI Red Teaming Masterclass and AI Security in Defense pages already use `modules` and are unchanged.
 
-Each route sets its own `head()` with a title/description derived from the training name.
+## 4. Softer yellow for Pasif cards
 
-Curriculum content per page comes verbatim from Task 3g in the request (module structures preserved: Page 1 = 15 numbered modules with nested bullets; Page 6 = 7 numbered modules; Pages 2/3/4/5 = flat item lists with nested detail groups).
+In `src/routes/trainings.tsx` inside `FeaturedTrainingCard`, retune the `passive` tone so the palette matches the softness of the active (blue/brand) card:
 
-## 4. Mobile calendar — `src/components/trainings/TrainingCalendar.tsx`
+- Border: `border-amber-300/50` (was `amber-500/40`)
+- Background: `bg-amber-50/40 dark:bg-amber-500/5` — drop the multi-stop gradient
+- Accent top bar: single soft `bg-amber-300/60` (no gradient)
+- Badge: `bg-amber-100 text-amber-800 dark:bg-amber-500/10 dark:text-amber-200`
+- CTA button: `bg-amber-400 hover:bg-amber-400/90 text-amber-950` (softer than the current saturated `amber-500`)
 
-Add a `useIsMobile()` branch. On mobile:
+Only visual tokens change; layout, sizing, copy and behavior stay identical.
 
-- Render one month at a time from the same rolling 3-month window (`windowStart` + `monthOffset`, default 0).
-- Header shows a single month label centered between chevron-left / chevron-right buttons (lucide `ChevronLeft`, `ChevronRight`).
-- `ChevronLeft` disabled at `monthOffset === 0` (current month), `ChevronRight` disabled at `monthOffset === 2`.
-- Reuse the existing lane-packing and event-card rendering, scoping `totalDays`/`windowStart` to the visible month's start and its `daysBetween(first, last)` days; events partially outside the visible month are clipped by the same clamping used today.
-- Desktop layout unchanged.
+## 5. Calendar 16:9 height on desktop and mobile
 
-## 5. Also (small copy touch-up)
+`TrainingCalendar` currently grows in height as event cards stack. Constrain the events-grid area (not the header/toolbar) to a `aspect-[16/9]` box on both desktop (3-month row) and mobile (single month):
 
-Keep the previous label "Eğitim, proje ve danışmanlık yaptığı bazı kurumlar" on the shared Instructor institution strip so it appears on both existing and new pages.
+- Wrap the month-columns container in a `relative aspect-[16/9]` div.
+- Inner scroll area becomes `absolute inset-0 overflow-y-auto` so extra events scroll inside the fixed-ratio box.
+- Existing 3-columns-desktop / 1-column-mobile logic and navigation chevrons stay.
 
-## Files touched
+I'll verify the ratio renders sensibly at the current widths and adjust to `aspect-[16/7]` only if 16:9 is visually too tall.
 
-- `src/lib/home-data.ts` — Training type + 6 new entries + status field
-- `src/lib/trainings/*.ts` — 6 new content configs
-- `src/routes/trainings.tsx` — 3 groups + tag-row update
-- `src/routes/ai-red-teaming-masterclass.tsx`, `llm-security-agentic-ai-security.tsx`, `ai-ml-security.tsx`, `machine-learning-deployment.tsx`, `llm-deployment.tsx`, `ai-security-in-defense.tsx` — new
-- `src/components/landing/HeroCompact.tsx`, `WhoForVariant.tsx`, `CurriculumFlex.tsx`, `PricingSimple.tsx`, `FinalCtaSimple.tsx`, `FaqCustom.tsx` — new
-- `src/components/trainings/TrainingCalendar.tsx` — mobile single-month view + chevrons
-- `src/styles.css` — passive card accent utility (if needed beyond Tailwind classes)
+## Files to change
 
-No changes to backend, auth, or existing masterclass page content.
+- `src/lib/trainings-content.ts` — add `applyFormUrl`, convert 4 flat configs to module configs.
+- `src/components/landing/FinalCtaSimple.tsx` — accept `applyFormUrl` prop.
+- `src/components/landing/TrainingLanding.tsx` — forward `applyFormUrl` and pass `showImage={false}` to hero.
+- `src/components/landing/HeroCompact.tsx` — support image-less layout.
+- `src/components/landing/CurriculumFlex.tsx` — hide outcomes list when empty.
+- `src/routes/trainings.tsx` — soften passive card palette.
+- `src/components/trainings/TrainingCalendar.tsx` — fix events area to 16:9 with internal scroll.
