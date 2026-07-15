@@ -7,6 +7,7 @@ interface HeroCompactProps {
   subtitle: string;
   typeTag: string;
   kicker?: string;
+  showImage?: boolean;
 }
 
 export function HeroCompact({
@@ -14,7 +15,32 @@ export function HeroCompact({
   subtitle,
   typeTag,
   kicker = "EKİPLERE ÖZEL",
+  showImage = true,
 }: HeroCompactProps) {
+  if (!showImage) {
+    return (
+      <section id="top" className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
+        <div className="container-page mx-auto max-w-3xl text-center">
+          <span className="eyebrow justify-center">{kicker}</span>
+          <h1 className="display-1 mt-5 text-ink-900 text-balance">{title}</h1>
+          <span className="mt-5 inline-flex items-center rounded-full border border-brand/30 bg-brand-soft/50 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand">
+            {typeTag}
+          </span>
+          <p className="lead mt-6 mx-auto max-w-2xl text-pretty">{subtitle}</p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Button asChild variant="brand" size="xl">
+              <a href={APPLY_ANCHOR}>Başvuru Yap</a>
+            </Button>
+            <Button asChild variant="brandOutline" size="xl">
+              <a href={CURRICULUM_ANCHOR}>Müfredatı İncele</a>
+            </Button>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="top" className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-24">
       <div className="container-page grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
