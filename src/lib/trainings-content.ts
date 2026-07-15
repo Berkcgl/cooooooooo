@@ -692,5 +692,6 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "Havacılık ve savunma sistemlerinde yapay zeka güvenliği, risk yönetimi ve yönetişimini kapsayan kurumsal eğitim programı.",
     },
+    applyFormUrl: "https://forms.gle/Uf7sc6YU51e1at1w5",
   },
 };
