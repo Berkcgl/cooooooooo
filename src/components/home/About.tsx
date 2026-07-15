@@ -1,6 +1,6 @@
 import { ABOUT_PARAGRAPHS, PERSON } from "@/lib/home-data";
 import { useReveal } from "@/hooks/useReveal";
-import portrait from "@/assets/cihan-ozhan.svg";
+import portrait from "@/assets/cihan-ozhan.webp";
 
 export function About() {
   const ref = useReveal<HTMLDivElement>({ selector: "[data-about-line]", y: 24, stagger: 0.15 });
