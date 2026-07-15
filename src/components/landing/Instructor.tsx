@@ -11,6 +11,10 @@ export function Instructor() {
             <img
               src={portrait}
               alt="Cihan Özhan portresi"
+              width={800}
+              height={435}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
