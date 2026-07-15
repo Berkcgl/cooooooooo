@@ -48,13 +48,13 @@ function FeaturedTrainingCard({
   const isActive = tone === "active";
   const containerCls = isActive
     ? "relative overflow-hidden rounded-2xl border border-brand/40 bg-brand-soft/50 p-6 md:p-8"
-    : "relative overflow-hidden rounded-2xl border border-amber-500/40 bg-gradient-to-br from-amber-50/70 via-yellow-50/40 to-background p-6 md:p-8 dark:from-amber-500/10 dark:via-yellow-500/5 dark:to-transparent";
+    : "relative overflow-hidden rounded-2xl border border-amber-300/50 bg-amber-50/40 p-6 md:p-8 dark:bg-amber-500/5";
   const accentBarCls = isActive
     ? "absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand/70 via-brand to-brand/70"
-    : "absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-700/70 via-amber-500/80 to-yellow-500/70";
+    : "absolute inset-x-0 top-0 h-1 bg-amber-300/60";
   const badgeCls = isActive
     ? "inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-brand"
-    : "inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300";
+    : "inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-amber-800 dark:bg-amber-500/10 dark:text-amber-200";
   const badgeIcon = isActive ? (
     <Star className="h-3 w-3 fill-current" />
   ) : (
@@ -63,7 +63,7 @@ function FeaturedTrainingCard({
   const badgeText = isActive ? "Online & Live Class" : "Kurumsal Program";
   const ctaCls = isActive
     ? "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
-    : "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-amber-500 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-amber-500/90 dark:bg-amber-500 dark:text-ink-900";
+    : "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-amber-400 px-7 py-4 text-sm font-semibold text-amber-950 transition-colors hover:bg-amber-400/90";
 
   const content = (
     <>
