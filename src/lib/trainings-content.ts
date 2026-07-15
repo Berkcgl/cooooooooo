@@ -568,6 +568,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "OWASP LLM Top 10 ve OWASP Agentic AI çerçevesiyle LLM ve agentic AI güvenliği kurumsal eğitim programı.",
     },
+    applyFormUrl: "https://forms.gle/JPgYTeSnrgMrkavi7",
   },
   "ai-ml-security": {
     slug: "ai-ml-security",
