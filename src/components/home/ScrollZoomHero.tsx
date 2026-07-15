@@ -43,14 +43,28 @@ export function ScrollZoomHero() {
           className="pointer-events-none absolute left-1/2 top-1/2 -z-20 h-[70vh] w-[70vh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/20 blur-3xl"
         />
         {/* Scroll-scrubbed camera push — wide glowing network globe anchored to the bottom */}
-        <img
-          data-hero-visual
-          src={heroNetwork}
-          alt="Soyut yapay zeka sinir ağı görselleştirmesi"
-          width={2000}
-          height={1125}
-          className="pointer-events-none absolute inset-0 -z-10 h-full w-full origin-bottom object-cover object-center opacity-90 will-change-transform md:inset-x-0 md:bottom-0 md:top-auto md:h-auto md:object-bottom"
-        />
+        <picture>
+          <source
+            type="image/webp"
+            srcSet={`${heroNetwork768Webp} 768w, ${heroNetwork1280Webp} 1280w, ${heroNetwork1920Webp} 1920w`}
+            sizes="100vw"
+          />
+          <source
+            type="image/jpeg"
+            srcSet={`${heroNetwork768Jpg} 768w, ${heroNetwork1280Jpg} 1280w, ${heroNetwork1920Jpg} 1920w`}
+            sizes="100vw"
+          />
+          <img
+            data-hero-visual
+            src={heroNetwork1280Jpg}
+            alt="Soyut yapay zeka sinir ağı görselleştirmesi"
+            width={2000}
+            height={1125}
+            fetchPriority="high"
+            decoding="async"
+            className="pointer-events-none absolute inset-0 -z-10 h-full w-full origin-bottom object-cover object-center opacity-90 will-change-transform md:inset-x-0 md:bottom-0 md:top-auto md:h-auto md:object-bottom"
+          />
+        </picture>
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background/70 via-background/40 to-background" />
 
 
