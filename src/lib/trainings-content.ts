@@ -534,8 +534,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       title: "AI Red Teaming Masterclass | Cihan Özhan",
       description:
         "Adversarial saldırılardan LLM red teaming'e, RAG exploitation ve multi-agent saldırılarına kadar uçtan uca uygulamalı AI red teaming eğitimi.",
+    },
     applyFormUrl: "https://forms.gle/mW3BLoqTJPYvfZm66",
-  },
   },
   "llm-security-agentic-ai-security": {
     slug: "llm-security-agentic-ai-security",
