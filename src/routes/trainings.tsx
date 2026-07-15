@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Star } from "lucide-react";
+import { ArrowUpRight, Star, Building2 } from "lucide-react";
 import { Ticker } from "@/components/site/Ticker";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { PageHero } from "@/components/site/PageHero";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { TrainingCalendar } from "@/components/trainings/TrainingCalendar";
-import { TRAININGS } from "@/lib/home-data";
+import { TRAININGS, type Training } from "@/lib/home-data";
 import { COURSES, YOUTUBE_CHANNEL, type TabItem } from "@/lib/landing-data";
 
 const TITLE = "Eğitimler & Programlar | Cihan Özhan";
@@ -27,7 +27,6 @@ export const Route = createFileRoute("/trainings")({
   component: TrainingsPage,
 });
 
-/** Group archive items by year, newest first. */
 function groupByYear(items: TabItem[]): [number, TabItem[]][] {
   const map = new Map<number, TabItem[]>();
   for (const it of items) {
@@ -38,10 +37,67 @@ function groupByYear(items: TabItem[]): [number, TabItem[]][] {
   return [...map.entries()].sort((a, b) => b[0] - a[0]);
 }
 
+/** Featured card layout — reused for Aktif and Pasif with different accent tones. */
+function FeaturedTrainingCard({
+  t,
+  tone,
+}: {
+  t: Training;
+  tone: "active" | "passive";
+}) {
+  const isActive = tone === "active";
+  const containerCls = isActive
+    ? "relative overflow-hidden rounded-2xl border border-brand/40 bg-brand-soft/50 p-6 md:p-8"
+    : "relative overflow-hidden rounded-2xl border border-amber-500/40 bg-gradient-to-br from-amber-50/70 via-yellow-50/40 to-background p-6 md:p-8 dark:from-amber-500/10 dark:via-yellow-500/5 dark:to-transparent";
+  const accentBarCls = isActive
+    ? "absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand/70 via-brand to-brand/70"
+    : "absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-700/70 via-amber-500/80 to-yellow-500/70";
+  const badgeCls = isActive
+    ? "inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-brand"
+    : "inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-300";
+  const badgeIcon = isActive ? (
+    <Star className="h-3 w-3 fill-current" />
+  ) : (
+    <Building2 className="h-3 w-3" />
+  );
+  const badgeText = isActive ? "Online & Live Class" : "Kurumsal Program";
+  const ctaCls = isActive
+    ? "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
+    : "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-amber-500 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-amber-500/90 dark:bg-amber-500 dark:text-ink-900";
+
+  const content = (
+    <>
+      <span className={accentBarCls} aria-hidden="true" />
+      <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center md:gap-8">
+        <div>
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-2xl font-bold text-ink-900 md:text-3xl">{t.title}</h2>
+            <span className={badgeCls}>
+              {badgeIcon}
+              {badgeText}
+            </span>
+          </div>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-700">{t.body}</p>
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-wide text-ink-500">
+            {t.meta}
+          </p>
+        </div>
+        <Link to={t.url} className={ctaCls}>
+          Eğitime Başvur
+          <ArrowUpRight className="h-4 w-4" />
+        </Link>
+      </div>
+    </>
+  );
+
+  return <div className={containerCls}>{content}</div>;
+}
+
 function TrainingsPage() {
   const grouped = groupByYear(COURSES);
-  const activeTrainings = TRAININGS.filter((t) => t.featured);
-  const pastTrainings = TRAININGS.filter((t) => !t.featured);
+  const activeTrainings = TRAININGS.filter((t) => t.status === "active");
+  const passiveTrainings = TRAININGS.filter((t) => t.status === "passive");
+  const pastTrainings = TRAININGS.filter((t) => t.status === "past" || (!t.status && !t.featured));
 
   return (
     <>
@@ -59,7 +115,7 @@ function TrainingsPage() {
 
         <section className="py-16 md:py-24">
           <div className="container-page space-y-12">
-            {/* Aktif eğitimler */}
+            {/* 01 Aktif */}
             <div>
               <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
                 <span>01</span>
@@ -68,43 +124,31 @@ function TrainingsPage() {
               </div>
               <div className="mt-6 space-y-4">
                 {activeTrainings.map((t) => (
-                  <div
-                    key={t.title}
-                    className="rounded-2xl border border-brand/40 bg-brand-soft/50 p-6 md:p-8"
-                  >
-                    <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center md:gap-8">
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h2 className="text-2xl font-bold text-ink-900 md:text-3xl">{t.title}</h2>
-                          <span className="inline-flex items-center gap-1 rounded-full bg-brand/10 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-brand">
-                            <Star className="h-3 w-3 fill-current" />
-                            Online &amp; Live Class
-                          </span>
-                        </div>
-                        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-700">
-                          {t.body}
-                        </p>
-                        <p className="mt-2 font-mono text-[11px] uppercase tracking-wide text-ink-500">
-                          {t.meta}
-                        </p>
-                      </div>
-                      <Link
-                        to={t.url}
-                        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
-                      >
-                        Eğitime Başvur
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  </div>
+                  <FeaturedTrainingCard key={t.title} t={t} tone="active" />
                 ))}
               </div>
             </div>
 
-            {/* Geçmiş eğitimler */}
+            {/* 02 Pasif */}
+            {passiveTrainings.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-amber-700 dark:text-amber-300">
+                  <span>02</span>
+                  <span className="h-px w-8 bg-amber-500/40" />
+                  <span className="text-ink-500">Pasif</span>
+                </div>
+                <div className="mt-6 space-y-4">
+                  {passiveTrainings.map((t) => (
+                    <FeaturedTrainingCard key={t.title} t={t} tone="passive" />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* 03 Geçmiş */}
             <div>
               <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
-                <span>02</span>
+                <span>03</span>
                 <span className="h-px w-8 bg-brand/40" />
                 <span className="text-ink-500">Geçmiş</span>
               </div>
@@ -130,7 +174,8 @@ function TrainingsPage() {
                     </div>
                   );
 
-                  const cls = "card-hover group block rounded-2xl border border-border bg-card p-6 md:p-8";
+                  const cls =
+                    "card-hover group block rounded-2xl border border-border bg-card p-6 md:p-8";
 
                   return t.internal ? (
                     <Link key={t.title} to={t.url} className={cls}>
@@ -158,7 +203,7 @@ function TrainingsPage() {
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <div className="flex items-center gap-3 font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
-                  <span>03</span>
+                  <span>04</span>
                   <span className="h-px w-8 bg-brand/40" />
                   <span className="text-ink-500">Arşiv</span>
                 </div>
@@ -180,7 +225,9 @@ function TrainingsPage() {
             <div className="mt-12 space-y-12">
               {grouped.map(([year, items]) => (
                 <div key={year} className="grid gap-6 lg:grid-cols-[auto_1fr] lg:gap-12">
-                  <div className="font-mono text-2xl font-bold tracking-tight text-brand">{year}</div>
+                  <div className="font-mono text-2xl font-bold tracking-tight text-brand">
+                    {year}
+                  </div>
                   <ol className="border-t border-border">
                     {items.map((c) => (
                       <li key={`${c.title}-${c.meta}`} className="border-b border-border">
