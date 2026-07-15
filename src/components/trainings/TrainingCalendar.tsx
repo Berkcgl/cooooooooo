@@ -92,11 +92,8 @@ function packLanes(events: (Omit<Placed, "lane"> & { lane?: number })[]): Placed
 
 // ---------- component ----------
 
-const MIN_LANES = 3;
-// Increased so up to 3 concurrent classes per lane row are visible without overlap-look;
-// the calendar body itself grows accordingly.
-const LANE_HEIGHT = 68;
-const BODY_LANE_MULTIPLIER = 3;
+const MIN_LANES = 4;
+const LANE_HEIGHT = 60;
 
 function EventCard({
   p,
@@ -157,7 +154,7 @@ function CalendarBody({
   void windowStart;
   void windowEnd;
   const laneCount = placed.length > 0 ? Math.max(...placed.map((p) => p.lane)) + 1 : 0;
-  const displayLanes = Math.max(laneCount, MIN_LANES * BODY_LANE_MULTIPLIER);
+  const displayLanes = Math.max(laneCount, MIN_LANES);
 
   return (
     <>
