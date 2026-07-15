@@ -16,8 +16,11 @@ export function About() {
             <img
               src={portrait}
               alt="Cihan Özhan portresi"
+              width={800}
+              height={435}
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
+              decoding="async"
             />
             <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-brand/20" />
           </div>
