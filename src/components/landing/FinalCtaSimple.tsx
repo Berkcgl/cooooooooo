@@ -2,10 +2,15 @@ import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ctaBg from "@/assets/cta-dark.jpg";
 
-const APPLICATION_FORM_URL =
+const DEFAULT_APPLICATION_FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSeDXpFHBnZJpjyq6Jmk3Sd6ZY3-2dDz9kOlnUOQItvt-ffirg/viewform?usp=publish-editor";
 
-export function FinalCtaSimple() {
+interface FinalCtaSimpleProps {
+  applyFormUrl?: string;
+}
+
+export function FinalCtaSimple({ applyFormUrl }: FinalCtaSimpleProps = {}) {
+  const formUrl = applyFormUrl ?? DEFAULT_APPLICATION_FORM_URL;
   return (
     <section
       id="basvuru"
@@ -40,7 +45,7 @@ export function FinalCtaSimple() {
           </p>
 
           <Button asChild variant="brand" size="xl" className="mt-8 w-full">
-            <a href={APPLICATION_FORM_URL} target="_blank" rel="noopener noreferrer">
+            <a href={formUrl} target="_blank" rel="noopener noreferrer">
               Başvuru Formunu Aç
               <ArrowUpRight className="h-5 w-5" />
             </a>

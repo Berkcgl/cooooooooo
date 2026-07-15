@@ -30,6 +30,22 @@ export interface TrainingPageContent {
   faq: TrainingFaqItem[];
   /** Meta for <head> */
   head: { title: string; description: string };
+  /** Per-training Google Form URL used by the final "Başvuru Formunu Aç" CTA. */
+  applyFormUrl: string;
+}
+
+/**
+ * Turn a flat outcome list into per-item numbered modules. Each top-level bullet
+ * becomes its own module; nested items become that module's outcomes.
+ */
+function outcomesToModules(items: ModuleOutcome[]): Module[] {
+  return items.map((item, i) => {
+    const number = String(i + 1).padStart(2, "0");
+    if (typeof item === "string") {
+      return { number, title: item, outcomes: [] };
+    }
+    return { number, title: item.text, outcomes: item.children };
+  });
 }
 
 const PRICE_FAQ: TrainingFaqItem = {
@@ -519,6 +535,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "Adversarial saldırılardan LLM red teaming'e, RAG exploitation ve multi-agent saldırılarına kadar uçtan uca uygulamalı AI red teaming eğitimi.",
     },
+    applyFormUrl: "https://forms.gle/mW3BLoqTJPYvfZm66",
   },
   "llm-security-agentic-ai-security": {
     slug: "llm-security-agentic-ai-security",
@@ -527,8 +544,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Büyük dil modellerinin ve agentic AI sistemlerinin güvenlik zafiyetlerini OWASP LLM Top 10 ve OWASP Agentic AI çerçevesi üzerinden uygulamalı olarak öğrenin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "security",
-    curriculumMode: "flat",
-    flatItems: LLM_SECURITY_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(LLM_SECURITY_ITEMS),
     footnote:
       "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
     faq: [
@@ -551,6 +568,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "OWASP LLM Top 10 ve OWASP Agentic AI çerçevesiyle LLM ve agentic AI güvenliği kurumsal eğitim programı.",
     },
+    applyFormUrl: "https://forms.gle/JPgYTeSnrgMrkavi7",
   },
   "ai-ml-security": {
     slug: "ai-ml-security",
@@ -559,8 +577,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Klasik makine öğrenmesi sistemlerine yönelik adversarial saldırılar, veri zehirlenmesi ve model çalınması gibi tehditleri OWASP Machine Learning Security Top 10 kapsamında inceleyin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "security",
-    curriculumMode: "flat",
-    flatItems: AI_ML_SECURITY_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(AI_ML_SECURITY_ITEMS),
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -581,6 +599,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "OWASP Machine Learning Security Top 10 kapsamında adversarial saldırılar, veri zehirlenmesi ve model çalınması eğitimi.",
     },
+    applyFormUrl: "https://forms.gle/rrS2fhGZWCASJbuA6",
   },
   "machine-learning-deployment": {
     slug: "machine-learning-deployment",
@@ -589,8 +608,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Makine öğrenmesi modellerini üretime almak için MLOps, model serving, optimizasyon ve distributed training'i uçtan uca uygulamalı olarak öğrenin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "deployment",
-    curriculumMode: "flat",
-    flatItems: ML_DEPLOYMENT_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(ML_DEPLOYMENT_ITEMS),
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -611,6 +630,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "MLOps, model serving, optimizasyon ve distributed training ile makine öğrenmesi modellerini üretime alma eğitimi.",
     },
+    applyFormUrl: "https://forms.gle/eRq57FPJJZhmjDyN9",
   },
   "llm-deployment": {
     slug: "llm-deployment",
@@ -619,8 +639,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Büyük dil modellerini güvenli ve ölçeklenebilir şekilde üretime almak için LLMOps, model serving, optimizasyon ve distributed inference'ı uygulamalı olarak öğrenin.",
     typeTag: "Kurumsal · 2 gün",
     whoForVariant: "deployment",
-    curriculumMode: "flat",
-    flatItems: LLM_DEPLOYMENT_ITEMS,
+    curriculumMode: "modules",
+    modules: outcomesToModules(LLM_DEPLOYMENT_ITEMS),
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -641,6 +661,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "LLMOps, model serving, optimizasyon ve distributed inference ile LLM'leri güvenli ve ölçeklenebilir şekilde üretime alın.",
     },
+    applyFormUrl: "https://forms.gle/4gejKhPf8gChDtoM9",
   },
   "ai-security-in-defense": {
     slug: "ai-security-in-defense",
@@ -671,5 +692,6 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       description:
         "Havacılık ve savunma sistemlerinde yapay zeka güvenliği, risk yönetimi ve yönetişimini kapsayan kurumsal eğitim programı.",
     },
+    applyFormUrl: "https://forms.gle/Uf7sc6YU51e1at1w5",
   },
 };

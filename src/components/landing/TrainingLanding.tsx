@@ -34,6 +34,7 @@ export function TrainingLanding({ content }: { content: TrainingPageContent }) {
           title={content.title}
           subtitle={content.subtitle}
           typeTag={content.typeTag}
+          showImage={false}
         />
         <Metrics />
         <WhyNow />
@@ -50,7 +51,7 @@ export function TrainingLanding({ content }: { content: TrainingPageContent }) {
         <Testimonials />
         <FaqCustom items={content.faq} />
         <PricingSimple />
-        <FinalCtaSimple />
+        <FinalCtaSimple applyFormUrl={content.applyFormUrl} />
       </main>
       <SiteFooter />
       <BackToTop />
