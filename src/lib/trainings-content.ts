@@ -30,6 +30,22 @@ export interface TrainingPageContent {
   faq: TrainingFaqItem[];
   /** Meta for <head> */
   head: { title: string; description: string };
+  /** Per-training Google Form URL used by the final "Başvuru Formunu Aç" CTA. */
+  applyFormUrl: string;
+}
+
+/**
+ * Turn a flat outcome list into per-item numbered modules. Each top-level bullet
+ * becomes its own module; nested items become that module's outcomes.
+ */
+function outcomesToModules(items: ModuleOutcome[]): Module[] {
+  return items.map((item, i) => {
+    const number = String(i + 1).padStart(2, "0");
+    if (typeof item === "string") {
+      return { number, title: item, outcomes: [] };
+    }
+    return { number, title: item.text, outcomes: item.children };
+  });
 }
 
 const PRICE_FAQ: TrainingFaqItem = {
