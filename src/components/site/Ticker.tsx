@@ -10,6 +10,9 @@ const ITEMS = [
   "AI AS A SERVICE (AIAAS)",
   "AI SECURITY",
   "OFFENSIVE AI",
+  "AI AUDIT",
+  "AI RED TEAMING",
+  "MISSION-CRITICAL AI",
 ];
 
 /**
