@@ -43,12 +43,31 @@ export function SiteHeader() {
 
   const renderLink = (l: NavLink, onClick?: () => void, base = "") => {
     const cls = `rounded-md px-3 py-2 text-sm font-medium text-ink-700 transition-colors hover:bg-secondary hover:text-ink-900 ${base}`;
-    return l.to ? (
-      <Link key={l.label} to={l.to} onClick={onClick} className={cls}>
-        {l.label}
-      </Link>
-    ) : (
-      <a key={l.label} href={l.href} onClick={onClick} className={cls}>
+    if (l.to) {
+      return (
+        <Link key={l.label} to={l.to} onClick={onClick} className={cls}>
+          {l.label}
+        </Link>
+      );
+    }
+    // href variants: "/#id" → home + hash, "#id" → in-page hash
+    const href = l.href ?? "";
+    const homeHash = href.match(/^\/#(.+)$/);
+    if (homeHash) {
+      return (
+        <Link
+          key={l.label}
+          to="/"
+          hash={homeHash[1]}
+          onClick={onClick}
+          className={cls}
+        >
+          {l.label}
+        </Link>
+      );
+    }
+    return (
+      <a key={l.label} href={href} onClick={onClick} className={cls}>
         {l.label}
       </a>
     );
