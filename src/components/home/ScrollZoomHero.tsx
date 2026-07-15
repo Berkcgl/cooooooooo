@@ -3,7 +3,12 @@ import { gsap } from "gsap";
 import { CircularArrowButton } from "@/components/site/CircularArrowButton";
 import { useScrollZoom } from "@/hooks/useScrollZoom";
 import { PERSON, MASTERCLASS_ROUTE } from "@/lib/home-data";
-import heroNetwork from "@/assets/hero-network-globe.jpg";
+import heroNetwork768Webp from "@/assets/hero-network-globe-768.webp";
+import heroNetwork1280Webp from "@/assets/hero-network-globe-1280.webp";
+import heroNetwork1920Webp from "@/assets/hero-network-globe-1920.webp";
+import heroNetwork768Jpg from "@/assets/hero-network-globe-768.jpg";
+import heroNetwork1280Jpg from "@/assets/hero-network-globe-1280.jpg";
+import heroNetwork1920Jpg from "@/assets/hero-network-globe-1920.jpg";
 
 export function ScrollZoomHero() {
   const zoomRef = useScrollZoom<HTMLDivElement>({
