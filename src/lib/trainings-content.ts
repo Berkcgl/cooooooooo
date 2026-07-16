@@ -8,11 +8,13 @@
  * ============================================================================
  */
 
-import type { Module, ModuleOutcome } from "./landing-data";
+import type { Module, ModuleOutcome, Outcome } from "./landing-data";
+import type { PricingContent } from "@/components/landing/PricingSimple";
 
 export interface TrainingFaqItem {
   q: string;
-  a: string;
+  /** Plain string, or an array of bullet points rendered as a list. */
+  a: string | string[];
 }
 
 export interface TrainingPageContent {
@@ -27,12 +29,17 @@ export interface TrainingPageContent {
   modules?: Module[];
   flatItems?: ModuleOutcome[];
   footnote?: string;
+  /** Overrides the default "Kazanımlar" (Outcomes) cards. */
+  outcomes?: Outcome[];
+  /** Optional tiered pricing block. When absent, PricingSimple's fallback renders. */
+  pricing?: PricingContent;
   faq: TrainingFaqItem[];
   /** Meta for <head> */
   head: { title: string; description: string };
   /** Per-training Google Form URL used by the final "Başvuru Formunu Aç" CTA. */
   applyFormUrl: string;
 }
+
 
 /**
  * Turn a flat outcome list into per-item numbered modules. Each top-level bullet
