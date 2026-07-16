@@ -827,6 +827,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "deployment",
     curriculumMode: "modules",
     modules: outcomesToModules(ML_DEPLOYMENT_ITEMS),
+    outcomes: ML_DEPLOYMENT_OUTCOMES,
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
