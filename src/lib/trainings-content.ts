@@ -724,20 +724,22 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     title: "AI Red Teaming Masterclass",
     subtitle:
       "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın. Adversarial attack'lardan LLM red teaming'e, RAG exploitation'dan multi-agent saldırılarına kadar uçtan uca uygulamalı bir program.",
-    typeTag: "Genel Katılım · Kurumsal · 36+ saat · 2 gün",
+    typeTag: "Genel Katılım · Kurumsal · 36+ saat",
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: AI_RED_TEAMING_MODULES,
+    outcomes: AI_RED_TEAMING_OUTCOMES,
+    pricing: AI_RED_TEAMING_PRICING,
     footnote:
       "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
     faq: [
       {
-        q: "Bu eğitim kimler için uygun?",
-        a: "AI/ML mühendisleri, güvenlik uzmanları, red team üyeleri ve kurumsal ekipler için tasarlandı. Temel Python ve ML bilgisi faydalı olur.",
+        q: "Bu eğitime katılmak için ön koşullar nelerdir?",
+        a: ["Python", "Machine Learning temelleri", "Siber güvenlik temelleri"],
       },
       {
         q: "Eğitim formatı nedir?",
-        a: "Online, canlı ve uygulamalı olarak gerçekleşir. 36+ saatlik içerik, 2 gün yoğun program şeklinde planlanır.",
+        a: "Online, canlı ve uygulamalı olarak gerçekleşir. 36+ saatlik içerik yoğun program şeklinde planlanır.",
       },
       {
         q: "Eğitim sırasında hangi araçlar kullanılıyor?",
