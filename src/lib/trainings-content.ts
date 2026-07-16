@@ -763,6 +763,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: outcomesToModules(LLM_SECURITY_ITEMS),
+    outcomes: LLM_SECURITY_OUTCOMES,
     footnote:
       "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
     faq: [
