@@ -77,10 +77,10 @@ export const TRAININGS: Training[] = [
   {
     title: "AI Red Teaming Masterclass",
     body: "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın; adversarial saldırılardan multi-agent exploitation'a uçtan uca uygulamalı red teaming.",
-    meta: "Genel Katılım / Kurumsal · 36+ saat",
+    meta: "Genel Katılım / Kurumsal · 36+ saat · Canlı",
     url: "/ai-red-teaming-masterclass",
     internal: true,
-    status: "passive",
+    status: "active",
   },
   {
     title: "LLM Security & Agentic AI Security",
