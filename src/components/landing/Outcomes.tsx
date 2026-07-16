@@ -1,5 +1,22 @@
-import { Bot, Workflow, Plug, Database, ShieldCheck, Rocket, type LucideIcon } from "lucide-react";
-import { OUTCOMES } from "@/lib/landing-data";
+import {
+  Bot,
+  Workflow,
+  Plug,
+  Database,
+  ShieldCheck,
+  ShieldAlert,
+  Rocket,
+  ScanSearch,
+  Crosshair,
+  Award,
+  RefreshCw,
+  Cloud,
+  Gauge,
+  Layers,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
+import { OUTCOMES, type Outcome } from "@/lib/landing-data";
 
 const ICONS: Record<string, LucideIcon> = {
   Bot,
@@ -7,10 +24,20 @@ const ICONS: Record<string, LucideIcon> = {
   Plug,
   Database,
   ShieldCheck,
+  ShieldAlert,
   Rocket,
+  ScanSearch,
+  Crosshair,
+  Award,
+  RefreshCw,
+  Cloud,
+  Gauge,
+  Layers,
+  TrendingUp,
 };
 
-export function Outcomes() {
+export function Outcomes({ items }: { items?: Outcome[] } = {}) {
+  const data = items ?? OUTCOMES;
   return (
     <section className="py-20 md:py-28">
       <div className="container-page">
@@ -22,7 +49,7 @@ export function Outcomes() {
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {OUTCOMES.map((o) => {
+          {data.map((o) => {
             const Icon = ICONS[o.icon] ?? Bot;
             return (
               <article
