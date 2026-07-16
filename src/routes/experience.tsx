@@ -100,7 +100,7 @@ function ExperiencePage() {
             <div className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-ink-500">
               03 / Teknik yetkinlikler
             </div>
-            <div className="grid max-w-3xl gap-6 sm:grid-cols-2">
+            <div className="grid max-w-3xl gap-6 sm:grid-cols-2 xl:grid-cols-3">
               {EXPERTISE.map((g) => (
                 <div key={g.category} className="rounded-2xl border border-border bg-card p-6">
                   <h3 className="text-sm font-semibold uppercase tracking-wider text-brand">
