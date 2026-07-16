@@ -165,7 +165,7 @@ export const EXPERTISE: ExpertiseGroup[] = [
   },
   {
     category: "Programlama Dilleri",
-    items: ["Go", "Python", "Rust", "C#", "C/C++", "TypeScript / JavaScript"],
+    items: ["Go", "Python", "Rust", "C#", "C", "C++", "TypeScript", "JavaScript"],
   },
   {
     category: "Veritabanları",
@@ -191,12 +191,15 @@ export const EXPERTISE: ExpertiseGroup[] = [
   },
   {
     category: "*aaS Mimarileri",
-    items: ["SaaS", "MLaaS / DLaaS", "FaaS"],
+    items: ["SaaS", "MLaaS", "DLaaS", "FaaS"],
   },
   {
     category: "Yazılım, Web ve Veritabanı Güvenliği",
     items: [
-      "Golang, Rust, Python ve C# ile yazılım, web ve veritabanı güvenliği",
+      "Golang ile yazılım web ve veritabanı güvenliği",
+      "Rust ile yazılım web ve veritabanı güvenliği",
+      "Python ile yazılım web ve veritabanı güvenliği",
+      "C# ile yazılım web ve veritabanı güvenliği",
     ],
   },
   {
