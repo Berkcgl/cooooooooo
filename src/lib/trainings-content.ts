@@ -889,6 +889,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: AI_SEC_DEFENSE_MODULES,
+    outcomes: AI_SEC_DEFENSE_OUTCOMES,
     faq: [
       {
         q: "Bu program kimler için tasarlandı?",
