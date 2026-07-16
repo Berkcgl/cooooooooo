@@ -60,7 +60,7 @@ function FeaturedTrainingCard({
   ) : (
     <Building2 className="h-3 w-3" />
   );
-  const badgeText = isActive ? "Online & Live Class" : "Kurumsal Program";
+  const badgeText = isActive ? "Online & Canlı Ders" : "Kurumsal Program";
   const ctaCls = isActive
     ? "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 text-sm font-semibold text-brand-foreground transition-colors hover:bg-brand/90"
     : "inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-amber-400 px-7 py-4 text-sm font-semibold text-amber-950 transition-colors hover:bg-amber-400/90";
