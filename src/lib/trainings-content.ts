@@ -8,11 +8,13 @@
  * ============================================================================
  */
 
-import type { Module, ModuleOutcome } from "./landing-data";
+import type { Module, ModuleOutcome, Outcome } from "./landing-data";
+import type { PricingContent } from "@/components/landing/PricingSimple";
 
 export interface TrainingFaqItem {
   q: string;
-  a: string;
+  /** Plain string, or an array of bullet points rendered as a list. */
+  a: string | string[];
 }
 
 export interface TrainingPageContent {
@@ -27,12 +29,17 @@ export interface TrainingPageContent {
   modules?: Module[];
   flatItems?: ModuleOutcome[];
   footnote?: string;
+  /** Overrides the default "Kazanımlar" (Outcomes) cards. */
+  outcomes?: Outcome[];
+  /** Optional tiered pricing block. When absent, PricingSimple's fallback renders. */
+  pricing?: PricingContent;
   faq: TrainingFaqItem[];
   /** Meta for <head> */
   head: { title: string; description: string };
   /** Per-training Google Form URL used by the final "Başvuru Formunu Aç" CTA. */
   applyFormUrl: string;
 }
+
 
 /**
  * Turn a flat outcome list into per-item numbered modules. Each top-level bullet
@@ -52,6 +59,214 @@ const PRICE_FAQ: TrainingFaqItem = {
   q: "Eğitim ücreti nedir?",
   a: "Eğitim ücreti ve diğer tüm detayları için başvurun.",
 };
+
+// ---------- Shared outcome sets (Kazanımlar) ----------
+
+const SECURITY_ATTACK_SURFACE_ALL: Outcome = {
+  icon: "ScanSearch",
+  title: "Yapay zeka saldırı yüzeylerini anlamak",
+  body: "Geliştirilmiş ML, DL modelleri, LLM ve Agentic AI uygulamalarının saldırı yüzeylerini (attack surfaces) anlayabileceksiniz.",
+};
+
+const SECURITY_ATTACK_SURFACE_LLM: Outcome = {
+  icon: "ScanSearch",
+  title: "Yapay zeka saldırı yüzeylerini anlamak",
+  body: "Geliştirilmiş LLM ve Agentic AI uygulamalarının saldırı yüzeylerini (attack surfaces) anlayabileceksiniz.",
+};
+
+const SECURITY_ATTACK_SURFACE_ML: Outcome = {
+  icon: "ScanSearch",
+  title: "Yapay zeka saldırı yüzeylerini anlamak",
+  body: "Geliştirilmiş ML, DL modellerinin saldırı yüzeylerini (attack surfaces) anlayabileceksiniz.",
+};
+
+const REDTEAM_SPECIALIZE: Outcome = {
+  icon: "Crosshair",
+  title: "AI Red Teaming alanında uzmanlaşmak",
+  body: "Bir ML, DL, LLM ya da Agentic AI modelinin güvenlik zafiyetlerini gerçek bir hacker gibi pentest edebilir, bu zafiyetleri exploit edebilirsiniz.",
+};
+
+const INFRA_SECURITY_APPLIED: Outcome = {
+  icon: "ShieldAlert",
+  title: "Yapay Zeka Altyapı Güvenliği",
+  body: "Yapay zekaların bazı kritik zafiyetleri o yapay zeka sisteminin altyapısından (AI Infrastructure) kaynaklanır. Bu zafiyetleri anlamak, güvenliğini sağlayabilmek ya da exploit edebilmek için gereken teorik ve uygulamalı bilgilere sahip olacaksınız.",
+};
+
+const INFRA_SECURITY_THEORY: Outcome = {
+  icon: "ShieldAlert",
+  title: "Yapay Zeka Altyapı Güvenliği temelleri",
+  body: "Yapay zekaların bazı kritik zafiyetleri o yapay zeka sisteminin altyapısından (AI Infrastructure) kaynaklanır. Bu zafiyetleri anlamak, güvenliğini sağlayabilmek ya da exploit edebilmek için gereken teorik bilgilere sahip olacaksınız.",
+};
+
+const SECURING_AI_GENERAL: Outcome = {
+  icon: "ShieldCheck",
+  title: "Yapay Zekanın güvenliğini sağlamak",
+  body: "Yapay zeka sistemlerini hacklemek bir hacker bakış açısı gerektirir, o altyapıların güvenliğini sağlamak ise bir siber güvenlik uzmanı bakış açısı... Bu eğitimde sadece saldırmayı değil, o zafiyetleri nasıl daha güvenli hale getirebileceğinizi öğrenirsiniz. Hem teorik hem de uygulamalı...",
+};
+
+const SECURING_LLM: Outcome = {
+  icon: "ShieldCheck",
+  title: "LLM/Agentic AI güvenliğini sağlamak",
+  body: "Yapay zeka sistemlerini hacklemek bir hacker bakış açısı gerektirir, o altyapıların güvenliğini sağlamak ise bir siber güvenlik uzmanı bakış açısı... Bu eğitimde sadece saldırmayı değil, o zafiyetleri nasıl daha güvenli hale getirebileceğinizi öğrenirsiniz. Hem teorik hem de uygulamalı...",
+};
+
+const SECURING_ML: Outcome = {
+  icon: "ShieldCheck",
+  title: "ML ve DL güvenliğini sağlamak",
+  body: "Yapay zeka sistemlerini hacklemek bir hacker bakış açısı gerektirir, o altyapıların güvenliğini sağlamak ise bir siber güvenlik uzmanı bakış açısı... Bu eğitimde sadece saldırmayı değil, o zafiyetleri nasıl daha güvenli hale getirebileceğinizi öğrenirsiniz. Hem teorik hem de uygulamalı...",
+};
+
+const RAG_VECTOR_SECURITY: Outcome = {
+  icon: "Database",
+  title: "RAG, Vector DB güvenliği",
+  body: "Yapay zeka güvenliğinde her şey yapay zeka modeli ya da altyapısından ibaret değildir. Altyapıda yazılımın çalışması için uyguladığımız veri mimarisi, veritabanı yapısı ve teknolojileri, vector DB tasarımı, RAG mimarisi de ciddi şekilde güvenlik sorunlarına neden olabilmektedir. Bu başlıkları da bir siber saldırgan ve savunmacı olarak öğreneceksiniz.",
+};
+
+const RAG_VECTOR_SECURITY_LLM: Outcome = {
+  icon: "Database",
+  title: "RAG, Vector DB güvenliği",
+  body: "Yapay zeka güvenliğinde her şey LLM/Agentic AI modeli ya da altyapısından ibaret değildir. Altyapıda yazılımın çalışması için uyguladığımız veri mimarisi, veritabanı yapısı ve teknolojileri, vector DB tasarımı, RAG mimarisi de ciddi şekilde güvenlik sorunlarına neden olabilmektedir. Bu başlıkları da bir siber saldırgan ve savunmacı olarak öğreneceksiniz.",
+};
+
+const AI_DATA_SECURITY: Outcome = {
+  icon: "Database",
+  title: "AI odaklı veri güvenliği",
+  body: "Yapay zeka güvenliğinde her şey ML, DL algoritması, LLM/Agentic AI uygulaması ya da altyapısından ibaret değildir. Altyapıda yazılımın çalışması için uyguladığımız veri mimarisi, veritabanı yapısı ve teknolojileri, veritabanı tasarımı, veri mimarisi de ciddi şekilde güvenlik sorunlarına neden olabilmektedir. Bu başlıkları da bir siber saldırgan ve savunmacı olarak öğreneceksiniz.",
+};
+
+const INTEGRATION_SECURITY: Outcome = {
+  icon: "Plug",
+  title: "Entegrasyon Güvenliği",
+  body: "Her şey model, altyapı ve veritabanın güvenliğinden ibaret değildir. İster bir ML, DL modeli geliştirin, isterseniz de LLM yada Agentic AI, geliştirdiğiniz yapay zekalar farklı API, sistem ya da yapay zekalarla birlikte çalışmak zorunda... Bu entegrasyonlar için geliştirilen protokollerden bazıları: MCP, ACP, A2A ve AP2'dur. Bu eğitimde tüm AI protokollerinin güvenliğini saldırgan ve savunmacı gözünden inceliyoruz.",
+};
+
+const NATO_SPECIALIZE: Outcome = {
+  icon: "Award",
+  title: "NATO AI Security standartlarında uzmanlaşın",
+  body: "Bir ML, DL, LLM ya da Agentic AI modelinin güvenlik zafiyetlerini gerçek bir hacker gibi pentest edebilir, bu zafiyetleri exploit edebilirsiniz. Ayrıca, NATO gibi askeri oluşumların ileri seviye AI Security standartlarında uzmanlaşabileceksiniz.",
+};
+
+// Deployment-track outcomes
+
+const ML_LIFECYCLE: Outcome = {
+  icon: "RefreshCw",
+  title: "ML System Lifecycle",
+  body: "Bir yapay zeka modeli geliştirdiniz ancak sonraki konularda, ihtiyaçlarda yeni bilgilere, uzmanlıklara ihtiyaç duyduğunuzu farkettiğiniz! Bu eğitim sizin için... Bir AI modeli sıradan bir yazılım deployment süreçlerinden farklıdır. Bu eğitimde AI modeli ve altyapısının bakımı, monitor edilmesi, ölçeklenmesi, güvenliğine teorik ve uygulamalı olarak odaklanacağız.",
+};
+
+const LLM_LIFECYCLE: Outcome = {
+  icon: "RefreshCw",
+  title: "LLM System Lifecycle",
+  body: "Bir yapay zeka LLM / Agentic AI projesi ancak sonraki konularda, ihtiyaçlarda yeni bilgilere, uzmanlıklara ihtiyaç duyduğunuzu farkettiğiniz! Bu eğitim sizin için... Bir LLM uygulaması sıradan bir yazılım deployment süreçlerinden farklıdır. Bu eğitimde LLM/Agentic AI uygulama ve altyapısının bakımı, monitor edilmesi, ölçeklenmesi, güvenliğine teorik ve uygulamalı olarak odaklanacağız.",
+};
+
+const MLAAS_ML: Outcome = {
+  icon: "Cloud",
+  title: "MLaaS: Machine Learning as a Services",
+  body: "Servis odaklı geliştirilen yazılımlara SaaS denir. Bu eğitimde bir çok AI altyapısı ve MLaaS geliştiren Cihan Özhan ile SaaS + ML/DL konularına hakim olacaksınız.",
+};
+
+const MLAAS_LLM: Outcome = {
+  icon: "Cloud",
+  title: "MLaaS: Machine Learning as a Services",
+  body: "Servis odaklı geliştirilen yazılımlara SaaS denir. Bu eğitimde bir çok AI altyapısı ve MLaaS geliştiren Cihan Özhan ile SaaS + LLM/Agentic AI konularına hakim olacaksınız.",
+};
+
+const AI_PRODUCTION: Outcome = {
+  icon: "Gauge",
+  title: "AI Production konularında uzmanlaşın",
+  body: "Yazılım, yapay zeka, güvenlik, performans, ölçeklendirme, monitoring ve dahası... Bu eğitimde AI Production temellerini gerçek dünya tecrübeleriyle doğru anlayabileceksiniz.",
+};
+
+const ML_DEPLOYMENT_OUTCOME: Outcome = {
+  icon: "Layers",
+  title: "ML, DL, LLM ve Agentic AI deployment",
+  body: "Algoritmik yapay zeka (ML, DL) ile LLM tabanlı (Agentic AI) sistemler tamamen farklı deployment ve AI Production uzmanlığına ihtiyaç duyar. Bu konuların tamamında gerçek dünya tecrübeleri bulunan Cihan Özhan ile teorik ve uygulamalı deployment süreçleri tasarlayacaksınız.",
+};
+
+const LLM_DEPLOYMENT_OUTCOME: Outcome = {
+  icon: "Layers",
+  title: "LLM ve Agentic AI deployment",
+  body: "LLM tabanlı (Agentic AI) sistemler yazılımdan tamamen farklı deployment ve AI Production uzmanlığına ihtiyaç duyar. Bu konuların tamamında gerçek dünya tecrübeleri bulunan Cihan Özhan ile teorik ve uygulamalı deployment süreçleri tasarlayacaksınız.",
+};
+
+const AI_PROD_SECURITY: Outcome = {
+  icon: "ShieldCheck",
+  title: "AI Production ortamında güvenlik temelleri",
+  body: "Bir kurum ya da kuruluşun altyapısını yapay zekaya emanet etmek büyük bir sorumluluk yüklenmek demektir. İster ML, DL gibi algoritmik, isterseniz de LLM gibi Agentic AI çalışması yapmış olun. Yapay zekalar hacklenebiliyor... Offensive AI ve AI Red Teaming üzerine uzman olan Cihan Özhan ile AI altyapınızı daha güvenli hale getireceksiniz.",
+};
+
+const SCALABLE_AI: Outcome = {
+  icon: "TrendingUp",
+  title: "Ölçeklenebilir yapay zekalar",
+  body: "100 kişiye hizmet verecek bir ML/DL modeli ya da LLM ile 10000 kişiye hizmet verecek bir yapay zekanın altyapı ve mimari ihtiyaçları ciddi oranda değişiklik gösterir. Scalable AI başlığında öğreneceğiniz bir çok konu ile artık siz de ölçeklenebilir yapay zekalar geliştirebileceksiniz.",
+};
+
+const AI_RED_TEAMING_OUTCOMES: Outcome[] = [
+  SECURITY_ATTACK_SURFACE_ALL,
+  REDTEAM_SPECIALIZE,
+  INFRA_SECURITY_APPLIED,
+  SECURING_AI_GENERAL,
+  RAG_VECTOR_SECURITY,
+  INTEGRATION_SECURITY,
+];
+
+const LLM_SECURITY_OUTCOMES: Outcome[] = [
+  SECURITY_ATTACK_SURFACE_LLM,
+  INFRA_SECURITY_THEORY,
+  SECURING_LLM,
+  RAG_VECTOR_SECURITY_LLM,
+  INTEGRATION_SECURITY,
+];
+
+const AI_ML_SECURITY_OUTCOMES: Outcome[] = [
+  SECURITY_ATTACK_SURFACE_ML,
+  INFRA_SECURITY_THEORY,
+  SECURING_ML,
+  AI_DATA_SECURITY,
+  INTEGRATION_SECURITY,
+];
+
+const AI_SEC_DEFENSE_OUTCOMES: Outcome[] = [
+  SECURITY_ATTACK_SURFACE_ALL,
+  NATO_SPECIALIZE,
+  INFRA_SECURITY_APPLIED,
+  SECURING_AI_GENERAL,
+  RAG_VECTOR_SECURITY,
+  INTEGRATION_SECURITY,
+];
+
+const ML_DEPLOYMENT_OUTCOMES: Outcome[] = [
+  ML_LIFECYCLE,
+  MLAAS_ML,
+  AI_PRODUCTION,
+  ML_DEPLOYMENT_OUTCOME,
+  AI_PROD_SECURITY,
+  SCALABLE_AI,
+];
+
+const LLM_DEPLOYMENT_OUTCOMES: Outcome[] = [
+  LLM_LIFECYCLE,
+  MLAAS_LLM,
+  AI_PRODUCTION,
+  LLM_DEPLOYMENT_OUTCOME,
+  AI_PROD_SECURITY,
+  SCALABLE_AI,
+];
+
+const AI_RED_TEAMING_PRICING: PricingContent = {
+  early: {
+    originalPrice: "60.000 TL",
+    price: "50.000 TL",
+    caption: "Erken kayıt döneminde geçerli fiyat.",
+  },
+  student: {
+    price: "40.000 TL",
+    caption: "Öğrenciler için özel fiyat.",
+  },
+};
+
+
 
 // ---------- Page 1: AI Red Teaming Masterclass ----------
 
@@ -509,20 +724,22 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     title: "AI Red Teaming Masterclass",
     subtitle:
       "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın. Adversarial attack'lardan LLM red teaming'e, RAG exploitation'dan multi-agent saldırılarına kadar uçtan uca uygulamalı bir program.",
-    typeTag: "Genel Katılım · Kurumsal · 36+ saat · 2 gün",
+    typeTag: "Genel Katılım · Kurumsal · 36+ saat",
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: AI_RED_TEAMING_MODULES,
+    outcomes: AI_RED_TEAMING_OUTCOMES,
+    pricing: AI_RED_TEAMING_PRICING,
     footnote:
       "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
     faq: [
       {
-        q: "Bu eğitim kimler için uygun?",
-        a: "AI/ML mühendisleri, güvenlik uzmanları, red team üyeleri ve kurumsal ekipler için tasarlandı. Temel Python ve ML bilgisi faydalı olur.",
+        q: "Bu eğitime katılmak için ön koşullar nelerdir?",
+        a: ["Python", "Machine Learning temelleri", "Siber güvenlik temelleri"],
       },
       {
         q: "Eğitim formatı nedir?",
-        a: "Online, canlı ve uygulamalı olarak gerçekleşir. 36+ saatlik içerik, 2 gün yoğun program şeklinde planlanır.",
+        a: "Online, canlı ve uygulamalı olarak gerçekleşir. 36+ saatlik içerik yoğun program şeklinde planlanır.",
       },
       {
         q: "Eğitim sırasında hangi araçlar kullanılıyor?",
@@ -546,6 +763,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: outcomesToModules(LLM_SECURITY_ITEMS),
+    outcomes: LLM_SECURITY_OUTCOMES,
     footnote:
       "Bu eğitim Demo ve 'OWASP LLM Top 10' listesindeki konular için birçok uygulama örneği içerir.",
     faq: [
@@ -579,6 +797,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: outcomesToModules(AI_ML_SECURITY_ITEMS),
+    outcomes: AI_ML_SECURITY_OUTCOMES,
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -610,6 +829,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "deployment",
     curriculumMode: "modules",
     modules: outcomesToModules(ML_DEPLOYMENT_ITEMS),
+    outcomes: ML_DEPLOYMENT_OUTCOMES,
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -641,6 +861,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "deployment",
     curriculumMode: "modules",
     modules: outcomesToModules(LLM_DEPLOYMENT_ITEMS),
+    outcomes: LLM_DEPLOYMENT_OUTCOMES,
     faq: [
       {
         q: "Bu eğitim kimler için uygun?",
@@ -672,6 +893,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: AI_SEC_DEFENSE_MODULES,
+    outcomes: AI_SEC_DEFENSE_OUTCOMES,
     faq: [
       {
         q: "Bu program kimler için tasarlandı?",

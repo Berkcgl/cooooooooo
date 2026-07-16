@@ -39,7 +39,7 @@ export function TrainingLanding({ content }: { content: TrainingPageContent }) {
         <Metrics />
         <WhyNow />
         <WhoForVariant variant={content.whoForVariant} />
-        <Outcomes />
+        <Outcomes items={content.outcomes} />
         <CurriculumFlex
           mode={content.curriculumMode}
           modules={content.modules}
@@ -50,7 +50,7 @@ export function TrainingLanding({ content }: { content: TrainingPageContent }) {
         <Organizations />
         <Testimonials />
         <FaqCustom items={content.faq} />
-        <PricingSimple />
+        <PricingSimple pricing={content.pricing} />
         <FinalCtaSimple applyFormUrl={content.applyFormUrl} />
       </main>
       <SiteFooter />

@@ -25,7 +25,18 @@ export function FaqCustom({ items }: { items: TrainingFaqItem[] }) {
                 {f.q}
               </AccordionTrigger>
               <AccordionContent className="pb-5 text-sm leading-relaxed text-ink-700">
-                {f.a}
+                {Array.isArray(f.a) ? (
+                  <ul className="grid gap-2">
+                    {f.a.map((line) => (
+                      <li key={line} className="flex gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  f.a
+                )}
               </AccordionContent>
             </AccordionItem>
           ))}

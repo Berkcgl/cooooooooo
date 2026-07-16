@@ -77,10 +77,10 @@ export const TRAININGS: Training[] = [
   {
     title: "AI Red Teaming Masterclass",
     body: "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın; adversarial saldırılardan multi-agent exploitation'a uçtan uca uygulamalı red teaming.",
-    meta: "Genel Katılım / Kurumsal · 36+ saat",
+    meta: "Genel Katılım / Kurumsal · 36+ saat · Canlı",
     url: "/ai-red-teaming-masterclass",
     internal: true,
-    status: "passive",
+    status: "active",
   },
   {
     title: "LLM Security & Agentic AI Security",
@@ -153,20 +153,86 @@ export interface ExpertiseGroup {
 
 export const EXPERTISE: ExpertiseGroup[] = [
   {
-    category: "AI / ML",
-    items: ["LLM & Agentic AI", "Deep Learning", "Computer Vision", "RAG & Vector DB", "MLaaS"],
+    category: "Genel",
+    items: [
+      "Araştırmacı & Geliştirici",
+      "Deeptech Girişimci",
+      "Kitap Yazarı",
+      "Programlama/Güvenlik/AI Eğitmeni",
+      "Liderlik",
+      "Koçluk/Mentorluk",
+    ],
   },
   {
-    category: "Güvenlik",
-    items: ["Offensive AI", "AI Red Teaming", "Prompt Injection", "Trustworthy AI", "Mobile Security"],
+    category: "Programlama Dilleri",
+    items: ["Go", "Python", "Rust", "C#", "C/C++", "TypeScript / JavaScript"],
   },
   {
-    category: "Diller",
-    items: ["Python", "Go", "C#", "SQL", "JavaScript"],
+    category: "Veritabanları",
+    items: [
+      "SQL Server",
+      "Oracle",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "SQLite",
+      "Distributed Databases",
+    ],
   },
   {
-    category: "Veri & Altyapı",
-    items: ["PostgreSQL", "Vektör Veritabanları", "Microservices", "Azure AI", "Docker"],
+    category: "Servis Mimarileri",
+    items: [
+      "RESTful",
+      "Microservices",
+      "gRPC & MessagePack",
+      "GraphQL",
+      "XML Web Services",
+    ],
+  },
+  {
+    category: "*aaS Mimarileri",
+    items: ["SaaS", "MLaaS / DLaaS", "FaaS"],
+  },
+  {
+    category: "Yazılım, Web ve Veritabanı Güvenliği",
+    items: [
+      "Golang, Rust, Python ve C# ile yazılım, web ve veritabanı güvenliği",
+    ],
+  },
+  {
+    category: "Blockchain",
+    items: ["Protokol seviyesi", "Uygulama seviyesi (dApp — Solidity ile)"],
+  },
+  {
+    category: "Yapay Zeka",
+    items: [
+      "Kernel-Level Deep Learning Development",
+      "Autonomous Systems",
+      "Autonomous Factories",
+      "Deep Learning (NumPy, PyTorch, TensorFlow/Keras ile)",
+      "Cloud AI",
+      "Mobile AI",
+      "Computer Vision (OpenCV ile)",
+      "AI Security",
+      "AI Safety",
+      "AI Red Teaming (AI Penetration Testing)",
+      "MLSecOps",
+      "Encrypted Machine Learning/Deep Learning",
+      "AI Testing (Model/Infrastructure)",
+      "Trustworthy AI",
+      "Interpretable AI",
+      "Responsible AI",
+    ],
+  },
+  {
+    category: "İleri Düzey Kavramlar",
+    items: [
+      "High-Performance Computing (HPC)",
+      "Parallel Computing and Parallel Programming",
+      "Distributed Systems",
+      "Decentralized Systems",
+      "Decentralized AI",
+    ],
   },
 ];
 
