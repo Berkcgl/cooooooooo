@@ -256,7 +256,7 @@ export const CHANNELS: Channel[] = [
 ];
 
 export const CONTACT = {
-  email: "info@cihanozhan.com", // TODO: gerçek e-posta
+  email: "ai.masterclass.co@gmail.com",
   website: "https://www.cihanozhan.com",
 };
 
