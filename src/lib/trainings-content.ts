@@ -38,7 +38,14 @@ export interface TrainingPageContent {
   head: { title: string; description: string };
   /** Per-training Google Form URL used by the final "Başvuru Formunu Aç" CTA. */
   applyFormUrl: string;
+  /** Overrides the hero kicker (default: "EKİPLERE ÖZEL"). */
+  kicker?: string;
+  /** When set, the hero renders a poster image with a popup video trigger. */
+  heroImage?: string;
+  /** Embed/file URL played inside the hero popup. */
+  promoVideoUrl?: string;
 }
+
 
 
 /**
