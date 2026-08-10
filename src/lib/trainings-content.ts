@@ -10,6 +10,8 @@
 
 import type { Module, ModuleOutcome, Outcome } from "./landing-data";
 import type { PricingContent } from "@/components/landing/PricingSimple";
+import airtThumbnail from "@/assets/ai-red-teaming-thumbnail.png.asset.json";
+
 
 export interface TrainingFaqItem {
   q: string;
