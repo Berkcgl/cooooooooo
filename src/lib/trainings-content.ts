@@ -11,6 +11,7 @@
 import type { Module, ModuleOutcome, Outcome } from "./landing-data";
 import type { PricingContent } from "@/components/landing/PricingSimple";
 import airtThumbnail from "@/assets/ai-red-teaming-thumbnail.png.asset.json";
+import airtPromoVideo from "@/assets/ai-red-teaming-promo.mp4.asset.json";
 
 
 export interface TrainingFaqItem {
