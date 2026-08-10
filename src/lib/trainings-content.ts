@@ -10,8 +10,7 @@
 
 import type { Module, ModuleOutcome, Outcome } from "./landing-data";
 import type { PricingContent } from "@/components/landing/PricingSimple";
-import airtThumbnail from "@/assets/ai-red-teaming-thumbnail.png.asset.json";
-import airtPromoVideo from "@/assets/ai-red-teaming-promo.mp4.asset.json";
+import airtThumbnail from "@/assets/ai-red-teaming-thumbnail.webp";
 
 
 export interface TrainingFaqItem {
@@ -736,8 +735,8 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
       "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın. Adversarial attack'lardan LLM red teaming'e, RAG exploitation'dan multi-agent saldırılarına kadar uçtan uca uygulamalı bir program.",
     typeTag: "Genel Katılım · Kurumsal · 36+ saat",
     kicker: "TÜRKİYE'DE İLK",
-    heroImage: airtThumbnail.url,
-    promoVideoUrl: airtPromoVideo.url,
+    heroImage: airtThumbnail,
+    promoVideoUrl: "/video/ai-red-teaming-promo.mp4",
 
     whoForVariant: "security",
     curriculumMode: "modules",
