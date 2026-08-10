@@ -30,7 +30,8 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const onMasterclass = pathname.startsWith(MASTERCLASS_ROUTE);
+  const onMasterclass =
+    pathname.startsWith(MASTERCLASS_ROUTE) || pathname.startsWith("/ai-red-teaming-masterclass");
 
   const links = onMasterclass ? MASTERCLASS_LINKS : HOME_LINKS;
 

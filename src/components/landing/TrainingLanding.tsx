@@ -34,8 +34,12 @@ export function TrainingLanding({ content }: { content: TrainingPageContent }) {
           title={content.title}
           subtitle={content.subtitle}
           typeTag={content.typeTag}
-          showImage={false}
+          kicker={content.kicker}
+          heroImage={content.heroImage}
+          promoVideoUrl={content.promoVideoUrl}
+          showImage={!!content.heroImage}
         />
+
         <Metrics />
         <WhyNow />
         <WhoForVariant variant={content.whoForVariant} />

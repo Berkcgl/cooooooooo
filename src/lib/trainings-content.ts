@@ -10,6 +10,8 @@
 
 import type { Module, ModuleOutcome, Outcome } from "./landing-data";
 import type { PricingContent } from "@/components/landing/PricingSimple";
+import airtThumbnail from "@/assets/ai-red-teaming-thumbnail.png.asset.json";
+
 
 export interface TrainingFaqItem {
   q: string;
@@ -38,7 +40,14 @@ export interface TrainingPageContent {
   head: { title: string; description: string };
   /** Per-training Google Form URL used by the final "Başvuru Formunu Aç" CTA. */
   applyFormUrl: string;
+  /** Overrides the hero kicker (default: "EKİPLERE ÖZEL"). */
+  kicker?: string;
+  /** When set, the hero renders a poster image with a popup video trigger. */
+  heroImage?: string;
+  /** Embed/file URL played inside the hero popup. */
+  promoVideoUrl?: string;
 }
+
 
 
 /**
@@ -725,6 +734,10 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     subtitle:
       "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın. Adversarial attack'lardan LLM red teaming'e, RAG exploitation'dan multi-agent saldırılarına kadar uçtan uca uygulamalı bir program.",
     typeTag: "Genel Katılım · Kurumsal · 36+ saat",
+    kicker: "TÜRKİYE'DE İLK",
+    heroImage: airtThumbnail.url,
+    promoVideoUrl: "",
+
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: AI_RED_TEAMING_MODULES,
