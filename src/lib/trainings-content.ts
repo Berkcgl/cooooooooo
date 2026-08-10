@@ -732,6 +732,10 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     subtitle:
       "Yapay zeka sistemlerine saldırı ve savunma perspektifinden yaklaşın. Adversarial attack'lardan LLM red teaming'e, RAG exploitation'dan multi-agent saldırılarına kadar uçtan uca uygulamalı bir program.",
     typeTag: "Genel Katılım · Kurumsal · 36+ saat",
+    kicker: "TÜRKİYE'DE İLK",
+    heroImage: airtThumbnail.url,
+    promoVideoUrl: "",
+
     whoForVariant: "security",
     curriculumMode: "modules",
     modules: AI_RED_TEAMING_MODULES,
