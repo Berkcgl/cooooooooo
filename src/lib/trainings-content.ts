@@ -737,7 +737,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     typeTag: "Genel Katılım · Kurumsal · 36+ saat",
     kicker: "TÜRKİYE'DE İLK",
     heroImage: airtThumbnail.url,
-    promoVideoUrl: "",
+    promoVideoUrl: airtPromoVideo.url,
 
     whoForVariant: "security",
     curriculumMode: "modules",
