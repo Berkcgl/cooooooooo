@@ -86,8 +86,8 @@ export function HeroCompact({
         </div>
 
         <div className="relative">
-          <div className="relative mx-auto aspect-video w-full max-w-lg overflow-visible rounded-3xl border border-border bg-secondary/40 p-3 lg:mr-0 lg:ml-auto">
-            <span className="pointer-events-none absolute right-6 -top-8 md:-top-10 text-sm font-semibold uppercase tracking-wider text-brand">
+          <div className="relative mr-auto aspect-video w-full max-w-lg overflow-visible rounded-3xl border border-border bg-secondary/40 p-3 lg:mr-0 lg:ml-auto">
+            <span className="pointer-events-none absolute left-2 -top-8 text-sm font-semibold uppercase tracking-wider text-brand md:-top-10 lg:left-auto lg:right-6">
               {typeTag}
             </span>
             <img
@@ -102,7 +102,7 @@ export function HeroCompact({
               type="button"
               aria-label="Tanıtım videosunu oynat"
               onClick={() => setVideoOpen(true)}
-              className="group absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full border border-border bg-background/90 py-2 pl-2 pr-5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5 hover:-translate-x-1/2"
+              className="group absolute bottom-6 left-4 flex items-center gap-3 rounded-full border border-border bg-background/90 py-2 pl-2 pr-5 shadow-lg backdrop-blur transition-transform hover:-translate-y-0.5 lg:left-1/2 lg:-translate-x-1/2 lg:hover:-translate-x-1/2"
             >
               <span className="grid h-10 w-10 place-items-center rounded-full bg-brand text-brand-foreground">
                 <Play className="h-4 w-4 fill-current" />
@@ -119,33 +119,32 @@ export function HeroCompact({
       <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
         <DialogContent className="max-w-3xl overflow-hidden p-0">
           <DialogHeader className="px-6 pt-6">
-            <DialogTitle>Tanıtım Videosu</DialogTitle>
+            <DialogTitle className="font-display text-base font-semibold tracking-tight text-ink-900">
+              Tanıtım Videosu
+            </DialogTitle>
           </DialogHeader>
           <div className="aspect-video w-full bg-ink-900">
-            {promoVideoUrl ? (
+            {videoOpen && promoVideoUrl ? (
               isFileVideo ? (
-                <video src={promoVideoUrl} controls autoPlay className="h-full w-full" />
+                <video
+                  src={promoVideoUrl}
+                  controls
+                  autoPlay
+                  preload="none"
+                  playsInline
+                  className="h-full w-full"
+                />
               ) : (
                 <iframe
                   src={promoVideoUrl}
                   title={`${title} tanıtım videosu`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
+                  loading="lazy"
                   className="h-full w-full border-0"
                 />
               )
-            ) : (
-              <div className="grid h-full w-full place-items-center px-6 text-center">
-                <div>
-                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-brand text-brand-foreground">
-                    <Play className="h-5 w-5 fill-current" />
-                  </span>
-                  <p className="mt-4 text-sm font-medium text-brand-foreground">
-                    Tanıtım videosu çok yakında.
-                  </p>
-                </div>
-              </div>
-            )}
+            ) : null}
           </div>
         </DialogContent>
       </Dialog>

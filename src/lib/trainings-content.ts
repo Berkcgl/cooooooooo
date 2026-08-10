@@ -11,6 +11,7 @@
 import type { Module, ModuleOutcome, Outcome } from "./landing-data";
 import type { PricingContent } from "@/components/landing/PricingSimple";
 import airtThumbnail from "@/assets/ai-red-teaming-thumbnail.png.asset.json";
+import airtPromoVideo from "@/assets/ai-red-teaming-promo.mp4.asset.json";
 
 
 export interface TrainingFaqItem {
@@ -736,7 +737,7 @@ export const TRAINING_CONTENT: Record<string, TrainingPageContent> = {
     typeTag: "Genel Katılım · Kurumsal · 36+ saat",
     kicker: "TÜRKİYE'DE İLK",
     heroImage: airtThumbnail.url,
-    promoVideoUrl: "",
+    promoVideoUrl: airtPromoVideo.url,
 
     whoForVariant: "security",
     curriculumMode: "modules",
