@@ -185,6 +185,7 @@
 
 
 @layer base {
+  #lovable-badge { display: none !important; }
   * {
     border-color: var(--color-border);
   }
